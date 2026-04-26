@@ -397,6 +397,254 @@
 
   .all-done-link::after { content: ' →'; }
 
+  /* ============= WEEK REVIEW (Sundays) ============= */
+  .week-review {
+    background: linear-gradient(135deg, var(--bg-2) 0%, var(--surface) 100%);
+    border: 1px solid var(--aegean);
+    border-radius: 16px;
+    padding: 22px 20px;
+    margin-bottom: 18px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35), 0 0 0 1px rgba(95, 163, 209, 0.15);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .week-review::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--aegean), transparent);
+  }
+
+  .review-label {
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--aegean);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .review-title {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    color: var(--text);
+    font-weight: 500;
+    margin-bottom: 4px;
+    line-height: 1.2;
+  }
+
+  .review-dates {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: 18px;
+    letter-spacing: 0.02em;
+  }
+
+  /* 7-day grid showing completion shape */
+  .week-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    margin-bottom: 18px;
+  }
+
+  .day-cell {
+    aspect-ratio: 1;
+    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    transition: all 0.3s;
+    position: relative;
+  }
+
+  .day-cell-letter {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .day-cell-mark {
+    font-size: 0.85rem;
+    margin-top: 2px;
+    color: var(--text-faint);
+    line-height: 1;
+  }
+
+  .day-cell.complete {
+    background: var(--gold-soft);
+    border-color: var(--gold);
+  }
+  .day-cell.complete .day-cell-letter { color: var(--gold); }
+  .day-cell.complete .day-cell-mark { color: var(--gold); }
+
+  .day-cell.partial {
+    background: rgba(95, 163, 209, 0.1);
+    border-color: var(--aegean);
+  }
+  .day-cell.partial .day-cell-letter { color: var(--aegean); }
+  .day-cell.partial .day-cell-mark { color: var(--aegean); }
+
+  .day-cell.is-today {
+    box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--gold);
+  }
+
+  .day-cell.future { opacity: 0.4; }
+
+  /* Review stats */
+  .review-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .review-stat {
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+  }
+
+  .review-stat-value {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .review-stat-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+
+  /* Review sections */
+  .review-section {
+    border-top: 1px solid var(--border-soft);
+    padding-top: 14px;
+    margin-top: 14px;
+  }
+
+  .review-section-label {
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--aegean);
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .review-bridge-text {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  .review-bridge-greek {
+    font-style: normal;
+    color: var(--gold);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 4px;
+    font-size: 1.15em;
+  }
+
+  .review-milestone {
+    font-family: var(--serif);
+    font-size: 0.98rem;
+    color: var(--text-soft);
+    font-style: italic;
+    line-height: 1.45;
+    padding: 10px 12px;
+    background: var(--surface);
+    border-left: 2px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+  }
+
+  .review-memory-item {
+    padding: 8px 0;
+    font-size: 0.92rem;
+    color: var(--text-soft);
+    border-bottom: 1px dashed var(--border-soft);
+  }
+
+  .review-memory-item:last-child { border-bottom: none; }
+
+  .review-memory-greek {
+    font-family: var(--serif);
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+
+  .review-memory-en {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+
+  .review-reflection {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.04rem;
+    color: var(--text);
+    line-height: 1.55;
+    padding: 14px 16px;
+    background: rgba(95, 163, 209, 0.08);
+    border-left: 2px solid var(--aegean);
+    border-radius: 0 8px 8px 0;
+  }
+
+  .review-next {
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+
+  .review-next-label {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .review-next-title {
+    font-family: var(--serif);
+    font-size: 1.08rem;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  .review-next-why {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 0.92rem;
+    color: var(--text-soft);
+    line-height: 1.45;
+  }
+
   /* Task counter chip on today card */
   .task-counter {
     display: inline-flex;
@@ -3258,6 +3506,113 @@ function renderDay(idx, isToday) {
 // Today card view offset: 0 = today, +1 = tomorrow preview, -1 = yesterday review
 let todayViewOffset = 0;
 
+// Sunday review: gives the week's shape, stats, bridge, milestone, memory unlocks, reflection, next-week preview
+function renderWeekReview(weekNum, viewIdx) {
+  const week = getWeekData(weekNum);
+  if (!week) return '';
+
+  const phase = getPhaseForWeek(weekNum);
+  const realTodayIdx = getCurrentDayIndex();
+  const weekStartIdx = (weekNum - 1) * 7;
+  const weekStartDate = dateForDayIndex(weekStartIdx);
+  const weekEndDate = dateForDayIndex(weekStartIdx + 6);
+
+  // Build 7-day grid
+  const dayLetters = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+  let totalTasksWeek = 0, completedTasksWeek = 0, daysFullyDone = 0;
+  const cellsHTML = week.days.map((d, i) => {
+    const idx = weekStartIdx + i;
+    const totalDayTasks = d.tasks.length;
+    const completedDayTasks = d.tasks.filter((_, ti) => isTaskComplete(idx, ti)).length;
+    totalTasksWeek += totalDayTasks;
+    completedTasksWeek += completedDayTasks;
+
+    let cellClass = '';
+    let mark = '';
+    if (idx > realTodayIdx) {
+      cellClass = 'future';
+    } else if (completedDayTasks === totalDayTasks && totalDayTasks > 0) {
+      cellClass = 'complete';
+      mark = '✓';
+      daysFullyDone++;
+    } else if (completedDayTasks > 0) {
+      cellClass = 'partial';
+      mark = '·';
+    }
+    if (idx === realTodayIdx) cellClass += ' is-today';
+
+    return `<div class="day-cell ${cellClass}">
+      <div class="day-cell-letter">${dayLetters[i]}</div>
+      <div class="day-cell-mark">${mark}</div>
+    </div>`;
+  }).join('');
+
+  // Milestone section (only if week has one)
+  const milestoneHTML = week.milestone ? `<div class="review-section">
+    <div class="review-section-label">Α  This week's milestone</div>
+    <div class="review-milestone">${week.milestone}</div>
+  </div>` : '';
+
+  // Memory wall additions this week (passages whose week === weekNum)
+  const memoryThisWeek = MEMORY_WALL.filter(m => m.week === weekNum);
+  const memoryHTML = memoryThisWeek.length > 0 ? `<div class="review-section">
+    <div class="review-section-label">Α  Memorized this week</div>
+    ${memoryThisWeek.map(m => `<div class="review-memory-item">
+      <div class="review-memory-greek">${m.greek}</div>
+      <div class="review-memory-en">${m.en} · ${m.label}</div>
+    </div>`).join('')}
+  </div>` : '';
+
+  // Reflection prompt for current phase
+  const promptText = phase ? REFLECTION_PROMPTS[phase.id] : '';
+  const reflectionHTML = promptText ? `<div class="review-section">
+    <div class="review-section-label">Α  Sit with this</div>
+    <div class="review-reflection">${promptText}</div>
+  </div>` : '';
+
+  // Next week preview
+  const nextWeek = getWeekData(weekNum + 1);
+  const nextWeekHTML = nextWeek ? `<div class="review-section">
+    <div class="review-section-label">Α  Next week</div>
+    <div class="review-next">
+      <div class="review-next-label">Week ${weekNum + 1}</div>
+      <div class="review-next-title">${nextWeek.title}</div>
+      ${nextWeek.why ? `<div class="review-next-why">${nextWeek.why}</div>` : ''}
+    </div>
+  </div>` : '';
+
+  // Liturgical bridge for this week
+  const bridgeHTML = week.liturgical ? `<div class="review-section">
+    <div class="review-section-label">Α  This week's bridge</div>
+    <div class="review-bridge-text">
+      <span class="review-bridge-greek">${week.liturgical.greek}</span>
+      ${week.liturgical.en}
+    </div>
+  </div>` : '';
+
+  return `<div class="week-review">
+    <div class="review-label">The Week in Review</div>
+    <div class="review-title">Week ${weekNum} · ${week.title}</div>
+    <div class="review-dates">${formatDateShort(weekStartDate)} – ${formatDateShort(weekEndDate)}</div>
+    <div class="week-grid">${cellsHTML}</div>
+    <div class="review-stats">
+      <div class="review-stat">
+        <div class="review-stat-value">${completedTasksWeek}<span style="color:var(--text-faint);font-size:0.7em">/${totalTasksWeek}</span></div>
+        <div class="review-stat-label">Tasks done</div>
+      </div>
+      <div class="review-stat">
+        <div class="review-stat-value">${daysFullyDone}<span style="color:var(--text-faint);font-size:0.7em">/7</span></div>
+        <div class="review-stat-label">Full days</div>
+      </div>
+    </div>
+    ${bridgeHTML}
+    ${milestoneHTML}
+    ${memoryHTML}
+    ${reflectionHTML}
+    ${nextWeekHTML}
+  </div>`;
+}
+
 function renderTodayCard() {
   const realTodayIdx = getCurrentDayIndex();
   const container = document.getElementById('todayContainer');
@@ -3322,7 +3677,10 @@ function renderTodayCard() {
   const showAllDone = todayViewOffset === 0 && (isCurrentlyComplete || wasCelebrated);
   const allDoneHTML = showAllDone ? `<div class="all-done-banner"><div class="all-done-text">${isCurrentlyComplete ? 'Today is complete. Beautifully done.' : 'You completed today earlier.'}</div>${getDayData(viewIdx + 1) ? '<button class="all-done-link" onclick="shiftTodayView(1)">Preview tomorrow</button>' : ''}</div>` : '';
 
-  container.innerHTML = `<div class="today-card">${navHTML}<div class="today-label">${label === 'Today' ? 'Today' : label}</div><div class="today-date">${formatDate(date)}</div><div class="today-meta">Week <span>${weekNum}</span> · Day <span>${dayInWeek + 1}</span> · <span>${day.dur}</span><br><em>${week.title}</em></div>${counterHTML}${whyHTML}<ul class="tasks">${tasksHTML}</ul>${liturgicalHTML}${milestoneHTML}${allDoneHTML}</div>`;
+  // Sunday week review — appears above today's task card every Sunday
+  const reviewHTML = dayInWeek === 6 ? renderWeekReview(weekNum, viewIdx) : '';
+
+  container.innerHTML = reviewHTML + `<div class="today-card">${navHTML}<div class="today-label">${label === 'Today' ? 'Today' : label}</div><div class="today-date">${formatDate(date)}</div><div class="today-meta">Week <span>${weekNum}</span> · Day <span>${dayInWeek + 1}</span> · <span>${day.dur}</span><br><em>${week.title}</em></div>${counterHTML}${whyHTML}<ul class="tasks">${tasksHTML}</ul>${liturgicalHTML}${milestoneHTML}${allDoneHTML}</div>`;
 }
 
 // Expose for inline onclick handlers
@@ -3562,6 +3920,23 @@ function renderFocusBlock() {
 
   document.getElementById('focusBlock').innerHTML = `<div class="focus-block"><div class="focus-block-label">Week ${currentWeek} · Open These</div>${focusItems.map(item => `<div class="focus-block-text">${item}</div>`).join('')}</div>`;
 }
+
+// Sunday review reflection prompts — one per phase (12 total)
+// Used by renderWeekReview() to surface a phase-appropriate question on Sundays
+const REFLECTION_PROMPTS = {
+  1: 'What still feels foreign about Greek? What now feels familiar?',
+  2: 'Which words from this week have stuck without effort? Which ones keep slipping?',
+  3: 'How did your tutor session land? What did you struggle to express?',
+  4: 'Could you survive a week alone in Greece, with what you have right now?',
+  5: 'Which Mounce concept finally clicked this week? Which still resists you?',
+  6: 'Which verse from John resonated this week? Read it aloud once more, slowly.',
+  7: 'Which Father\'s voice felt closest to you this week — and why?',
+  8: 'Where do Modern and Koine Greek feel different in your mouth now?',
+  9: 'Which Father is calling you forward into deeper reading?',
+  10: 'What did Chrysostom (or your Father this week) show you about Scripture?',
+  11: 'How does the Liturgy feel different now that you read it in original Greek?',
+  12: 'Where will Greek take you in year 4 — when there is no plan but yours?'
+};
 
 // Memory wall: Greek passages memorized across the journey (#5)
 // Each entry has: greek text, English meaning, the week it's first memorized
