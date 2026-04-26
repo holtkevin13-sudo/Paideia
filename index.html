@@ -119,8 +119,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.05rem;
+    font-size: 1.4rem;
+    line-height: 0.5;
+    padding-bottom: 4px;
     transition: all 0.2s;
+    font-family: var(--serif);
+    font-weight: 700;
   }
 
   .settings-btn:active { background: var(--surface); color: var(--gold); transform: scale(0.94); }
@@ -149,6 +153,24 @@
     letter-spacing: 0.03em;
     line-height: 1;
     text-shadow: 0 2px 24px var(--gold-glow);
+    background: linear-gradient(
+      90deg,
+      var(--gold) 0%,
+      #f5d27a 25%,
+      var(--gold) 50%,
+      #f5d27a 75%,
+      var(--gold) 100%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: titleShimmer 6s ease-in-out infinite;
+  }
+
+  @keyframes titleShimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
   }
 
   .subtitle {
@@ -375,6 +397,151 @@
 
   .all-done-link::after { content: ' →'; }
 
+  /* Task counter chip on today card */
+  .task-counter {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 4px 12px;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    margin-top: 12px;
+  }
+
+  .task-counter.complete {
+    background: var(--gold-soft);
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  .task-counter-num {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  /* Memory wall in Library */
+  .memory-wall {
+    background: linear-gradient(135deg, var(--bg-2) 0%, var(--surface) 100%);
+    border: 1px solid var(--gold-soft);
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 14px;
+  }
+
+  .memory-wall-title {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    color: var(--gold);
+    margin-bottom: 6px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .memory-wall-title::before {
+    content: 'Α';
+    font-size: 1em;
+    color: var(--gold);
+    opacity: 0.7;
+  }
+
+  .memory-wall-sub {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+    font-style: italic;
+    font-family: var(--serif);
+  }
+
+  .memory-item {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-soft);
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .memory-item:last-child { border-bottom: none; }
+
+  .memory-marker {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border);
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+    font-family: var(--serif);
+    color: var(--text-faint);
+    font-size: 0.78rem;
+    transition: all 0.3s;
+  }
+
+  .memory-item.unlocked .memory-marker {
+    border-color: var(--gold);
+    background: var(--gold);
+    color: var(--bg);
+    box-shadow: 0 0 10px var(--gold-glow);
+  }
+
+  .memory-content { flex: 1; min-width: 0; }
+
+  .memory-greek {
+    font-family: var(--serif);
+    font-size: 1.02rem;
+    color: var(--text-faint);
+    line-height: 1.35;
+    transition: color 0.3s;
+  }
+
+  .memory-item.unlocked .memory-greek { color: var(--gold); }
+
+  .memory-en {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 3px;
+    line-height: 1.35;
+  }
+
+  .memory-when {
+    font-size: 0.65rem;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-top: 4px;
+    font-weight: 600;
+  }
+
+  .memory-item.unlocked .memory-when { color: var(--success); }
+
+  .memory-summary {
+    text-align: center;
+    padding: 12px 0 0;
+    margin-top: 10px;
+    border-top: 1px solid var(--border-soft);
+    font-family: var(--serif);
+    font-size: 0.92rem;
+    color: var(--text-soft);
+    font-style: italic;
+  }
+
+  .memory-summary strong {
+    color: var(--gold);
+    font-weight: 600;
+    font-style: normal;
+  }
+
   .why-week {
     font-family: var(--serif);
     font-style: italic;
@@ -492,19 +659,20 @@
 
   .liturgical-text {
     font-family: var(--serif);
-    font-size: 1rem;
-    color: var(--text-soft);
+    font-size: 1.08rem;
+    color: var(--text);
     font-style: italic;
-    line-height: 1.4;
+    line-height: 1.5;
   }
 
   .liturgical-greek {
     font-style: normal;
     color: var(--gold);
-    font-weight: 500;
+    font-weight: 600;
     display: block;
-    margin-bottom: 4px;
-    font-size: 1.08em;
+    margin-bottom: 6px;
+    font-size: 1.18em;
+    line-height: 1.3;
   }
 
   .milestone {
@@ -770,9 +938,22 @@
     font-weight: 500;
   }
 
-  .day-name.is-today { color: var(--gold); font-weight: 600; }
+  .day-name.is-today {
+    color: var(--gold);
+    font-weight: 700;
+  }
   .day-name.is-today::after { content: ' Α'; font-size: 0.85em; color: var(--gold); }
   .day-name.is-sunday { color: var(--aegean); font-style: italic; }
+
+  /* Today's day in Plan tab gets a strong visual marker */
+  .day:has(.day-name.is-today) {
+    background: linear-gradient(90deg, var(--gold-soft) 0%, transparent 100%);
+    border-left: 3px solid var(--gold);
+    margin-left: -10px;
+    padding-left: 10px;
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 0 16px rgba(212, 169, 67, 0.12);
+  }
 
   .day-date { font-size: 0.74rem; color: var(--text-muted); }
 
@@ -1096,7 +1277,7 @@
 
 <main class="app">
   <header class="masthead">
-    <button class="settings-btn" id="settingsBtn" aria-label="Settings">⚙</button>
+    <button class="settings-btn" id="settingsBtn" aria-label="Settings">⋯</button>
     <div class="title-cluster">
       <span class="title-symbol">Α</span>
       <h1 class="greek-title">Παιδεία</h1>
@@ -1109,7 +1290,7 @@
   <section class="stats">
     <div class="stat"><div class="stat-value" id="dayCount">—</div><div class="stat-label">Day</div></div>
     <div class="stat"><div class="stat-value" id="streakCount">0</div><div class="stat-label">Streak</div></div>
-    <div class="stat"><div class="stat-value" id="percentDone">0%</div><div class="stat-label">Complete</div></div>
+    <div class="stat"><div class="stat-value" id="percentDone">0%</div><div class="stat-label">Phase</div></div>
   </section>
 
   <section class="progress-section">
@@ -1129,6 +1310,7 @@
   <section class="tab-view" id="view-library">
     <h2 class="section-title">Library</h2>
     <div id="focusBlock"></div>
+    <div id="memoryWall"></div>
     <div id="resourcesContainer"></div>
     <div class="footer-quote">
       <span class="greek">Παιδεία ἐστὶ θησαυρὸς ἀναφαίρετος</span>
@@ -2993,7 +3175,16 @@ function isTaskComplete(d, t) { return !!state.completed[taskKey(d, t)]; }
 function setTaskComplete(d, t, c) {
   const k = taskKey(d, t);
   if (c) state.completed[k] = true; else delete state.completed[k];
+  // Track all-done celebration: once a day was fully complete, remember it (for #6 persistent banner)
+  if (c && isDayComplete(d)) {
+    if (!state.celebrated) state.celebrated = {};
+    state.celebrated[d] = true;
+  }
   saveState();
+  // Haptic feedback (#9): brief vibration on task toggle if supported
+  if (navigator.vibrate) {
+    try { navigator.vibrate(c ? 12 : 6); } catch (e) {}
+  }
 }
 
 function isDayComplete(idx) {
@@ -3096,6 +3287,14 @@ function renderTodayCard() {
   const milestoneHTML = week.milestone && dayInWeek === 6 ? `<div class="milestone"><div class="milestone-label">This week's milestone</div><div class="milestone-text">${week.milestone}</div></div>` : '';
   const whyHTML = week.why ? `<div class="why-week">${week.why}</div>` : '';
 
+  // Task counter (#1)
+  const totalTasksToday = day.tasks.length;
+  const completedToday = day.tasks.filter((_, i) => isTaskComplete(viewIdx, i)).length;
+  const allComplete = completedToday === totalTasksToday;
+  const counterHTML = `<div class="task-counter ${allComplete ? 'complete' : ''}">
+    <span class="task-counter-num">${completedToday}</span> of <span class="task-counter-num">${totalTasksToday}</span> ${allComplete ? '· complete' : 'tasks'}
+  </div>`;
+
   // Determine label based on offset
   let label, labelExtra = '';
   if (todayViewOffset === 0) label = 'Today';
@@ -3117,11 +3316,13 @@ function renderTodayCard() {
     <button class="nav-btn" onclick="shiftTodayView(1)" ${!canGoForward ? 'disabled' : ''} aria-label="Next day">→</button>
   </div>`;
 
-  // All-done banner: if viewing today and all tasks complete, suggest tomorrow
-  const allDone = todayViewOffset === 0 && day.tasks.every((_, i) => isTaskComplete(viewIdx, i));
-  const allDoneHTML = allDone && getDayData(viewIdx + 1) ? `<div class="all-done-banner"><div class="all-done-text">Today is complete. Beautifully done.</div><button class="all-done-link" onclick="shiftTodayView(1)">Preview tomorrow</button></div>` : '';
+  // All-done banner: persistent (#6) — show if currently complete OR if this day was ever celebrated
+  const wasCelebrated = state.celebrated && state.celebrated[viewIdx];
+  const isCurrentlyComplete = day.tasks.every((_, i) => isTaskComplete(viewIdx, i));
+  const showAllDone = todayViewOffset === 0 && (isCurrentlyComplete || wasCelebrated);
+  const allDoneHTML = showAllDone ? `<div class="all-done-banner"><div class="all-done-text">${isCurrentlyComplete ? 'Today is complete. Beautifully done.' : 'You completed today earlier.'}</div>${getDayData(viewIdx + 1) ? '<button class="all-done-link" onclick="shiftTodayView(1)">Preview tomorrow</button>' : ''}</div>` : '';
 
-  container.innerHTML = `<div class="today-card">${navHTML}<div class="today-label">${label === 'Today' ? 'Today' : label}</div><div class="today-date">${formatDate(date)}</div><div class="today-meta">Week <span>${weekNum}</span> · Day <span>${dayInWeek + 1}</span> · <span>${day.dur}</span><br><em>${week.title}</em></div>${whyHTML}<ul class="tasks">${tasksHTML}</ul>${liturgicalHTML}${milestoneHTML}${allDoneHTML}</div>`;
+  container.innerHTML = `<div class="today-card">${navHTML}<div class="today-label">${label === 'Today' ? 'Today' : label}</div><div class="today-date">${formatDate(date)}</div><div class="today-meta">Week <span>${weekNum}</span> · Day <span>${dayInWeek + 1}</span> · <span>${day.dur}</span><br><em>${week.title}</em></div>${counterHTML}${whyHTML}<ul class="tasks">${tasksHTML}</ul>${liturgicalHTML}${milestoneHTML}${allDoneHTML}</div>`;
 }
 
 // Expose for inline onclick handlers
@@ -3362,6 +3563,63 @@ function renderFocusBlock() {
   document.getElementById('focusBlock').innerHTML = `<div class="focus-block"><div class="focus-block-label">Week ${currentWeek} · Open These</div>${focusItems.map(item => `<div class="focus-block-text">${item}</div>`).join('')}</div>`;
 }
 
+// Memory wall: Greek passages memorized across the journey (#5)
+// Each entry has: greek text, English meaning, the week it's first memorized
+const MEMORY_WALL = [
+  { greek: 'Κύριε ἐλέησον', en: 'Lord, have mercy', week: 1, label: 'Trisagion fragment' },
+  { greek: 'Πάτερ ἡμῶν ὁ ἐν τοῖς οὐρανοῖς', en: 'Our Father, who art in heaven', week: 2, label: 'Lord\'s Prayer · line 1' },
+  { greek: 'ἁγιασθήτω τὸ ὄνομά σου', en: 'Hallowed be Thy name', week: 3, label: 'Lord\'s Prayer · line 2' },
+  { greek: 'γενηθήτω τὸ θέλημά σου', en: 'Thy will be done', week: 4, label: 'Lord\'s Prayer · line 3' },
+  { greek: 'τὸν ἄρτον ἡμῶν τὸν ἐπιούσιον δὸς ἡμῖν σήμερον', en: 'Give us this day our daily bread', week: 5, label: 'Lord\'s Prayer · line 4' },
+  { greek: 'καὶ ἄφες ἡμῖν τὰ ὀφειλήματα ἡμῶν', en: 'And forgive us our debts', week: 6, label: 'Lord\'s Prayer · line 5' },
+  { greek: 'καὶ μὴ εἰσενέγκῃς ἡμᾶς εἰς πειρασμόν, ἀλλὰ ῥῦσαι ἡμᾶς ἀπὸ τοῦ πονηροῦ', en: 'Lead us not into temptation, but deliver us from evil', week: 9, label: 'Lord\'s Prayer · lines 7-8' },
+  { greek: 'Ὅτι σοῦ ἐστιν ἡ βασιλεία καὶ ἡ δύναμις καὶ ἡ δόξα εἰς τοὺς αἰῶνας. Ἀμήν.', en: 'For Thine is the Kingdom and the power and the glory, unto ages. Amen.', week: 10, label: 'Lord\'s Prayer · doxology' },
+  { greek: 'Πιστεύω εἰς ἕνα Θεόν, Πατέρα, Παντοκράτορα', en: 'I believe in one God, the Father Almighty', week: 11, label: 'Nicene Creed · opening' },
+  { greek: 'Ἅγιος ὁ Θεός, Ἅγιος Ἰσχυρός, Ἅγιος Ἀθάνατος, ἐλέησον ἡμᾶς', en: 'Holy God, Holy Mighty, Holy Immortal, have mercy on us', week: 41, label: 'Trisagion (full)' },
+  { greek: 'Καὶ ζωὴν τοῦ μέλλοντος αἰῶνος. Ἀμήν.', en: 'And the life of the age to come. Amen.', week: 47, label: 'Nicene Creed · full text' },
+  { greek: 'Ἐν ἀρχῇ ἦν ὁ Λόγος', en: 'In the beginning was the Word', week: 66, label: 'John 1:1' },
+  { greek: 'οὕτως γὰρ ἠγάπησεν ὁ Θεὸς τὸν κόσμον', en: 'For God so loved the world', week: 69, label: 'John 3:16' },
+  { greek: 'ἐγώ εἰμι ὁ ἄρτος τῆς ζωῆς', en: 'I am the bread of life', week: 72, label: 'John 6:35' },
+  { greek: 'ἐγώ εἰμι ἡ ὁδὸς καὶ ἡ ἀλήθεια καὶ ἡ ζωή', en: 'I am the way, the truth, and the life', week: 77, label: 'John 14:6' },
+  { greek: 'ὁ Κύριός μου καὶ ὁ Θεός μου', en: 'My Lord and my God', week: 78, label: 'John 20:28 · Thomas\'s confession' },
+  { greek: 'ὁ Θεὸς ἀγάπη ἐστίν', en: 'God is love', week: 93, label: '1 John 4:8' },
+  { greek: 'πάντα ἰσχύω ἐν τῷ ἐνδυναμοῦντί με', en: 'I can do all things through Him who strengthens me', week: 98, label: 'Philippians 4:13' },
+  { greek: 'Μακάριοι οἱ πτωχοὶ τῷ πνεύματι', en: 'Blessed are the poor in spirit', week: 105, label: 'Beatitudes · 1' },
+  { greek: 'Μακάριοι οἱ καθαροὶ τῇ καρδίᾳ', en: 'Blessed are the pure in heart', week: 120, label: 'Beatitudes · 6 (Chrysostom homily week)' },
+  { greek: 'εἴ τις εὐσεβὴς καὶ φιλόθεος', en: 'If anyone is devout and a lover of God', week: 122, label: 'Paschal Homily · opening' },
+  { greek: 'Τὰ σὰ ἐκ τῶν σῶν σοὶ προσφέρομεν', en: 'Thine own of Thine own we offer Thee', week: 132, label: 'Anaphora prayer' },
+  { greek: 'Μακάριος ἀνήρ, ὃς οὐκ ἐπορεύθη ἐν βουλῇ ἀσεβῶν', en: 'Blessed is the man who has not walked in the counsel of the ungodly', week: 133, label: 'Psalm 1:1 LXX' },
+  { greek: 'Φῶς ἱλαρὸν ἁγίας δόξης', en: 'O joyful light of holy glory', week: 140, label: 'Phos Hilaron · Vespers hymn' },
+  { greek: 'Δόξα τῷ Θεῷ πάντων ἕνεκεν', en: 'Glory to God for all things', week: 156, label: 'Chrysostom\'s last words' }
+];
+
+function renderMemoryWall() {
+  const todayIdx = getCurrentDayIndex();
+  const currentWeek = todayIdx >= 0 ? Math.floor(todayIdx / 7) + 1 : 0;
+
+  const items = MEMORY_WALL.map(m => {
+    const unlocked = currentWeek >= m.week;
+    return `<div class="memory-item ${unlocked ? 'unlocked' : ''}">
+      <div class="memory-marker">${unlocked ? '✓' : ''}</div>
+      <div class="memory-content">
+        <div class="memory-greek">${m.greek}</div>
+        <div class="memory-en">${m.en}</div>
+        <div class="memory-when">${m.label} · Week ${m.week}</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  const unlockedCount = MEMORY_WALL.filter(m => currentWeek >= m.week).length;
+  const total = MEMORY_WALL.length;
+
+  document.getElementById('memoryWall').innerHTML = `<div class="memory-wall">
+    <div class="memory-wall-title">Memory Wall</div>
+    <div class="memory-wall-sub">The Greek you've taken into yourself across three years.</div>
+    ${items}
+    <div class="memory-summary"><strong>${unlockedCount}</strong> of <strong>${total}</strong> passages memorized</div>
+  </div>`;
+}
+
 function renderResources() {
   const html = RESOURCES.map(g => `<div class="res-group"><div class="res-group-title">${g.group}</div>${g.items.map(item => {
     const isRealLink = item.link && item.link !== '#';
@@ -3376,22 +3634,38 @@ function renderResources() {
 function renderStats() {
   const todayIdx = getCurrentDayIndex();
   const dayCount = todayIdx >= 0 ? `${todayIdx + 1}` : '—';
-  const total = getTotalTasks();
-  const done = getCompletedTasksCount();
-  const pct = total ? Math.round((done / total) * 100) : 0;
+  const currentWeek = todayIdx >= 0 ? Math.floor(todayIdx / 7) + 1 : 1;
+  const phase = getPhaseForWeek(currentWeek);
+
+  // Show PHASE progress (not total) — far more motivating across 1,092 days
+  let pct = 0;
+  if (phase) {
+    const [startW, endW] = phase.weekRange;
+    let phaseTotal = 0, phaseDone = 0;
+    for (let w = startW; w <= endW; w++) {
+      const wd = getWeekData(w);
+      if (wd) wd.days.forEach((d, di) => {
+        d.tasks.forEach((_, ti) => {
+          phaseTotal++;
+          const idx = (w - 1) * 7 + di;
+          if (isTaskComplete(idx, ti)) phaseDone++;
+        });
+      });
+    }
+    pct = phaseTotal ? Math.round((phaseDone / phaseTotal) * 100) : 0;
+  }
+
   document.getElementById('dayCount').textContent = dayCount;
   document.getElementById('streakCount').textContent = getStreak();
   document.getElementById('percentDone').textContent = `${pct}%`;
   document.getElementById('overallProgress').style.width = `${pct}%`;
-  const currentWeek = todayIdx >= 0 ? Math.floor(todayIdx / 7) + 1 : 1;
-  const phase = getPhaseForWeek(currentWeek);
   document.getElementById('currentPhaseLabel').innerHTML = phase && todayIdx >= 0
     ? `<strong>Phase ${phase.id}</strong> · ${phase.name} · Week ${currentWeek} of 156`
     : todayIdx < 0 ? `Plan begins Mon, Apr 27, 2026` : `Beyond the structured plan · keep going`;
 }
 
 function renderAll() {
-  renderStats(); renderTodayCard(); renderPhases(); renderFocusBlock(); renderResources(); attachListeners();
+  renderStats(); renderTodayCard(); renderPhases(); renderFocusBlock(); renderMemoryWall(); renderResources(); attachListeners();
 }
 
 // Event delegation: single document-level handler, immune to re-renders
