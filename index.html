@@ -11,8 +11,11 @@
 <meta name="format-detection" content="telephone=no">
 <title>Παιδεία · Greek Formation</title>
 
-<link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect width='180' height='180' fill='%230a1424' rx='40'/><text x='90' y='128' text-anchor='middle' font-family='Garamond,Georgia,serif' font-size='120' font-weight='500' fill='%23d4a943'>Π</text></svg>">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect width='180' height='180' fill='%230a1424' rx='40'/><text x='90' y='128' text-anchor='middle' font-family='Garamond,Georgia,serif' font-size='120' font-weight='500' fill='%23d4a943'>Π</text></svg>">
+<link rel="apple-touch-icon" sizes="180x180" href="icon-180.png">
+<link rel="apple-touch-icon" sizes="512x512" href="icon-512.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+<link rel="icon" type="image/png" sizes="180x180" href="icon-180.png">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect width='180' height='180' fill='%230a1424' rx='40'/><text x='50' y='128' text-anchor='middle' font-family='Garamond,Georgia,serif' font-size='105' font-weight='500' fill='%23d4a943'>Α</text><text x='130' y='128' text-anchor='middle' font-family='Garamond,Georgia,serif' font-size='105' font-weight='500' fill='%23d4a943'>Ω</text></svg>">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1119,7 +1122,7 @@ const DAY_FULL = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','S
 const MONTH_NAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
 const L = {
-  LT: 'https://www.languagetransfer.org/complete-greek',
+  LT: 'https://soundcloud.com/languagetransfer/sets/complete-greek-more-audios',
   easyGreek: 'https://www.youtube.com/@EasyGreek',
   greekPod: 'https://www.youtube.com/@GreekPod101',
   alphabet: 'https://www.youtube.com/results?search_query=greek+alphabet+pronunciation',
@@ -2927,7 +2930,7 @@ function getCompletedTasksCount() { return Object.keys(state.completed).length; 
 
 function renderTask(task, idx, ti) {
   const checked = isTaskComplete(idx, ti);
-  const linkHTML = task.link && task.link !== '#' ? `<a class="task-link" href="${task.link}" target="_blank" rel="noopener">open</a>` : '';
+  const linkHTML = task.link && task.link !== '#' ? `<a class="task-link" href="${task.link}" target="_blank" rel="noopener noreferrer">open</a>` : '';
   return `<li class="task" data-day="${idx}" data-task="${ti}"><input type="checkbox" ${checked ? 'checked' : ''}><div class="task-content"><div class="task-text">${task.t}</div>${linkHTML}</div></li>`;
 }
 
@@ -3048,7 +3051,13 @@ function renderFocusBlock() {
 }
 
 function renderResources() {
-  const html = RESOURCES.map(g => `<div class="res-group"><div class="res-group-title">${g.group}</div>${g.items.map(item => `<a class="res-item" href="${item.link || '#'}" target="${item.link && item.link !== '#' ? '_blank' : '_self'}" rel="noopener"><div class="res-name">${item.name}${item.tag ? `<span class="res-tag ${item.tagClass || ''}">${item.tag}</span>` : ''}</div><div class="res-desc">${item.desc}</div></a>`).join('')}</div>`).join('');
+  const html = RESOURCES.map(g => `<div class="res-group"><div class="res-group-title">${g.group}</div>${g.items.map(item => {
+    const isRealLink = item.link && item.link !== '#';
+    const inner = `<div class="res-name">${item.name}${item.tag ? `<span class="res-tag ${item.tagClass || ''}">${item.tag}</span>` : ''}</div><div class="res-desc">${item.desc}</div>`;
+    return isRealLink
+      ? `<a class="res-item" href="${item.link}" target="_blank" rel="noopener noreferrer">${inner}</a>`
+      : `<div class="res-item" style="cursor:default">${inner}</div>`;
+  }).join('')}</div>`).join('');
   document.getElementById('resourcesContainer').innerHTML = html;
 }
 
