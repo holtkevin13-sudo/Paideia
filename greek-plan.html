@@ -1,0 +1,3179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#0a1424">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Παιδεία">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+<title>Παιδεία · Greek Formation</title>
+
+<link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect width='180' height='180' fill='%230a1424' rx='40'/><text x='90' y='128' text-anchor='middle' font-family='Garamond,Georgia,serif' font-size='120' font-weight='500' fill='%23d4a943'>Π</text></svg>">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect width='180' height='180' fill='%230a1424' rx='40'/><text x='90' y='128' text-anchor='middle' font-family='Garamond,Georgia,serif' font-size='120' font-weight='500' fill='%23d4a943'>Π</text></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #0a1424;
+    --bg-2: #0d1a30;
+    --surface: #142340;
+    --surface-2: #1c2f50;
+    --border: #1f3052;
+    --border-soft: #162540;
+    --text: #f0f4fa;
+    --text-soft: #d6dde9;
+    --text-muted: #8896ad;
+    --text-faint: #5a677e;
+    --gold: #d4a943;
+    --gold-soft: rgba(212, 169, 67, 0.16);
+    --gold-glow: rgba(212, 169, 67, 0.25);
+    --aegean: #5fa3d1;
+    --aegean-soft: rgba(95, 163, 209, 0.14);
+    --success: #7fc77f;
+    --danger: #d47979;
+    --review: #b88fc7;
+    --review-soft: rgba(184, 143, 199, 0.14);
+    --shadow-2: 0 8px 32px rgba(0, 0, 0, 0.5);
+    --serif: 'Cormorant Garamond', 'Garamond', 'Hoefler Text', Georgia, serif;
+    --sans: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --tab-height: 64px;
+    --header-pad: env(safe-area-inset-top, 0px);
+    --bottom-pad: env(safe-area-inset-bottom, 0px);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+    overscroll-behavior-y: none;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(95, 163, 209, 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 50% 100%, rgba(212, 169, 67, 0.05) 0%, transparent 60%);
+    background-attachment: fixed;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.3;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.6 0 0 0 0 0.7 0 0 0 0 0.85 0 0 0 0.04 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    z-index: 0;
+  }
+
+  .app {
+    max-width: 720px;
+    margin: 0 auto;
+    padding-top: var(--header-pad);
+    padding-bottom: calc(var(--tab-height) + var(--bottom-pad));
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+  }
+
+  .masthead {
+    text-align: center;
+    padding: 28px 20px 22px;
+    position: relative;
+    border-bottom: 1px solid var(--border-soft);
+  }
+
+  .masthead::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .settings-btn {
+    position: absolute;
+    top: calc(var(--header-pad) + 18px);
+    right: 18px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.05rem;
+    transition: all 0.2s;
+  }
+
+  .settings-btn:active { background: var(--surface); color: var(--gold); transform: scale(0.94); }
+
+  .title-cluster {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 18px;
+  }
+
+  .title-symbol {
+    font-family: var(--serif);
+    font-size: clamp(1.6rem, 5vw, 2rem);
+    font-weight: 400;
+    color: var(--gold);
+    opacity: 0.6;
+    font-style: italic;
+  }
+
+  .greek-title {
+    font-family: var(--serif);
+    font-size: clamp(2.4rem, 8.5vw, 3.4rem);
+    font-weight: 500;
+    color: var(--gold);
+    letter-spacing: 0.03em;
+    line-height: 1;
+    text-shadow: 0 2px 24px var(--gold-glow);
+  }
+
+  .subtitle {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--text-soft);
+    font-size: 1.02rem;
+    margin-top: 8px;
+  }
+
+  .subtitle-en {
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    color: var(--text-faint);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-top: 4px;
+    font-weight: 500;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    padding: 18px 16px 8px;
+  }
+
+  .stat {
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    border-radius: 12px;
+    padding: 14px 8px;
+    text-align: center;
+  }
+
+  .stat-value {
+    font-family: var(--serif);
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+
+  .progress-section { padding: 8px 18px 12px; }
+
+  .progress-track {
+    height: 4px;
+    background: var(--surface);
+    border-radius: 2px;
+    overflow: hidden;
+    border: 1px solid var(--border-soft);
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--aegean), var(--gold));
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 12px var(--gold-glow);
+  }
+
+  .phase-label {
+    font-size: 0.78rem;
+    color: var(--text-soft);
+    text-align: center;
+    margin-top: 8px;
+  }
+
+  .phase-label strong { color: var(--gold); font-weight: 600; }
+
+  .tab-view {
+    padding: 14px 16px 20px;
+    display: none;
+    animation: fadeIn 0.25s ease-out;
+  }
+
+  .tab-view.active { display: block; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  .today-card {
+    background: linear-gradient(135deg, var(--surface) 0%, var(--surface-2) 100%);
+    border: 1px solid var(--gold-soft);
+    border-radius: 16px;
+    padding: 22px 20px;
+    margin-bottom: 18px;
+    box-shadow: var(--shadow-2), 0 0 0 1px var(--gold-glow);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .today-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .today-label {
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .today-date {
+    font-family: var(--serif);
+    font-size: 1.55rem;
+    color: var(--text);
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+
+  .today-meta {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+    line-height: 1.5;
+  }
+
+  .today-meta span { color: var(--text-soft); }
+  .today-meta em { color: var(--text-soft); font-family: var(--serif); font-style: italic; font-size: 1.05em; }
+
+  .why-week {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--gold);
+    border-left: 2px solid var(--gold-soft);
+    padding-left: 12px;
+    margin: 14px 0 18px;
+    line-height: 1.45;
+  }
+
+  .tasks { list-style: none; }
+
+  .task {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--border-soft);
+    cursor: pointer;
+  }
+
+  .task:last-child { border-bottom: none; }
+  .task:active { opacity: 0.7; }
+
+  .task input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    border: 1.5px solid var(--gold);
+    border-radius: 6px;
+    background: transparent;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-top: 2px;
+    position: relative;
+    transition: all 0.2s;
+  }
+
+  .task input[type="checkbox"]:checked {
+    background: var(--gold);
+    border-color: var(--gold);
+    box-shadow: 0 0 12px var(--gold-glow);
+  }
+
+  .task input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 3px; left: 7px;
+    width: 5px; height: 10px;
+    border: solid var(--bg);
+    border-width: 0 2.5px 2.5px 0;
+    transform: rotate(45deg);
+  }
+
+  .task-content { flex: 1; min-width: 0; }
+
+  .task-text {
+    color: var(--text);
+    font-size: 0.96rem;
+    line-height: 1.45;
+    margin-bottom: 4px;
+  }
+
+  .task input[type="checkbox"]:checked ~ .task-content .task-text {
+    color: var(--text-faint);
+    text-decoration: line-through;
+  }
+
+  .task-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.76rem;
+    color: var(--aegean);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--aegean);
+    padding-bottom: 1px;
+    font-weight: 500;
+  }
+
+  .task-link::after { content: ' →'; font-size: 0.85em; }
+  .task-link:active { color: var(--text); border-color: var(--text); }
+
+  .liturgical {
+    background: var(--gold-soft);
+    border-left: 2px solid var(--gold);
+    padding: 14px 16px;
+    margin-top: 16px;
+    border-radius: 0 10px 10px 0;
+  }
+
+  .liturgical-label {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .liturgical-label::before {
+    content: 'Α';
+    font-family: var(--serif);
+    font-size: 1.25em;
+    font-weight: 600;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .liturgical-text {
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: var(--text-soft);
+    font-style: italic;
+    line-height: 1.4;
+  }
+
+  .liturgical-greek {
+    font-style: normal;
+    color: var(--gold);
+    font-weight: 500;
+    display: block;
+    margin-bottom: 4px;
+    font-size: 1.08em;
+  }
+
+  .milestone {
+    background: linear-gradient(135deg, var(--gold-soft) 0%, var(--aegean-soft) 100%);
+    border: 1px solid var(--gold);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-top: 16px;
+  }
+
+  .milestone-label {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .milestone-text {
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  .review-week-banner {
+    background: var(--review-soft);
+    border: 1px solid var(--review);
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-bottom: 14px;
+    font-size: 0.85rem;
+    color: var(--review);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: 1.45rem;
+    color: var(--text);
+    margin: 8px 0 16px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-title::before, .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    max-width: 80px;
+  }
+
+  .focus-block {
+    background: var(--bg-2);
+    border: 1px solid var(--gold-soft);
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 18px;
+  }
+
+  .focus-block-label {
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .focus-block-text {
+    font-family: var(--serif);
+    font-size: 0.98rem;
+    color: var(--text-soft);
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  .focus-block-text:last-child { margin-bottom: 0; }
+
+  .focus-block-text strong { color: var(--gold); font-weight: 600; }
+
+  .phase {
+    background: var(--bg-2);
+    border: 1px solid var(--border-soft);
+    border-radius: 14px;
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+
+  .phase.current { border-color: var(--gold-soft); }
+
+  .phase-head { padding: 18px; cursor: pointer; user-select: none; }
+  .phase-head:active { background: var(--surface); }
+
+  .phase-title-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .phase-title {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  .phase-num {
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+
+  .phase-subtitle {
+    font-size: 0.88rem;
+    color: var(--text-soft);
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+
+  .phase-quote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 0.92rem;
+    color: var(--gold);
+    margin-bottom: 14px;
+    padding: 8px 0;
+    border-top: 1px solid var(--border-soft);
+    border-bottom: 1px solid var(--border-soft);
+  }
+
+  .phase-quote .greek {
+    font-style: normal;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .phase-quote .source {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    font-style: normal;
+    letter-spacing: 0.05em;
+    margin-top: 4px;
+    display: block;
+  }
+
+  .phase-progress-row { display: flex; align-items: center; gap: 12px; }
+  .phase-progress-row .progress-track { flex: 1; }
+
+  .phase-percent {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    color: var(--gold);
+    font-weight: 500;
+    min-width: 44px;
+    text-align: right;
+  }
+
+  .phase-toggle {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    transition: transform 0.3s;
+    margin-left: 8px;
+  }
+
+  .phase.open .phase-toggle { transform: rotate(180deg); }
+
+  .phase-body { display: none; padding: 4px 14px 16px; border-top: 1px solid var(--border-soft); }
+  .phase.open .phase-body { display: block; }
+
+  .week { border-bottom: 1px solid var(--border-soft); padding: 14px 4px; }
+  .week:last-child { border-bottom: none; }
+  .week.review-week { background: linear-gradient(90deg, var(--review-soft) 0%, transparent 100%); border-radius: 8px; padding-left: 10px; }
+
+  .week-head { display: flex; align-items: center; gap: 10px; cursor: pointer; user-select: none; }
+
+  .week-num {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    color: var(--gold);
+    min-width: 50px;
+    font-weight: 500;
+  }
+
+  .week-info { flex: 1; min-width: 0; }
+
+  .week-title {
+    font-size: 0.95rem;
+    color: var(--text);
+    font-weight: 500;
+    margin-bottom: 2px;
+    line-height: 1.3;
+  }
+
+  .week-dates { font-size: 0.74rem; color: var(--text-muted); }
+
+  .week-status {
+    font-size: 1rem;
+    flex-shrink: 0;
+    font-family: var(--serif);
+    font-weight: 600;
+    min-width: 22px;
+    text-align: center;
+  }
+
+  .week-status.complete { color: var(--success); }
+  .week-status.active { color: var(--gold); animation: pulse 2.5s ease-in-out infinite; }
+  .week-status.future { color: var(--text-faint); }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.92); }
+  }
+
+  .week-body {
+    display: none;
+    margin-top: 14px;
+    padding: 14px;
+    background: var(--surface);
+    border-radius: 10px;
+    border: 1px solid var(--border-soft);
+  }
+
+  .week.open .week-body { display: block; }
+
+  .week-focus {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--text-soft);
+    font-size: 0.96rem;
+    line-height: 1.5;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+
+  .day { padding: 10px 0; border-bottom: 1px solid var(--border-soft); }
+  .day:last-child { border-bottom: none; }
+
+  .day-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    gap: 8px;
+  }
+
+  .day-name {
+    font-family: var(--serif);
+    font-size: 1.04rem;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .day-name.is-today { color: var(--gold); font-weight: 600; }
+  .day-name.is-today::after { content: ' Α'; font-size: 0.85em; color: var(--gold); }
+  .day-name.is-sunday { color: var(--aegean); font-style: italic; }
+
+  .day-date { font-size: 0.74rem; color: var(--text-muted); }
+
+  .day-duration {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .res-group {
+    background: var(--bg-2);
+    border: 1px solid var(--border-soft);
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 14px;
+  }
+
+  .res-group-title {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    color: var(--gold);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+  }
+
+  .res-group-title::before {
+    content: 'Ω';
+    font-size: 1em;
+    color: var(--gold);
+    opacity: 0.7;
+  }
+
+  .res-item {
+    display: block;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    background: var(--surface);
+    border-radius: 10px;
+    border: 1px solid var(--border-soft);
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.2s;
+  }
+
+  .res-item:last-child { margin-bottom: 0; }
+  .res-item:active { background: var(--surface-2); border-color: var(--gold-soft); transform: translateX(3px); }
+
+  .res-name {
+    color: var(--text);
+    font-weight: 500;
+    font-size: 0.95rem;
+    line-height: 1.3;
+  }
+
+  .res-desc {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+
+  .res-tag {
+    display: inline-block;
+    font-size: 0.6rem;
+    color: var(--gold);
+    background: var(--gold-soft);
+    padding: 2px 7px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-left: 6px;
+    font-weight: 700;
+  }
+
+  .res-tag.essential { color: var(--bg); background: var(--gold); }
+  .res-tag.paid { color: var(--aegean); background: var(--aegean-soft); }
+  .res-tag.free { color: var(--success); background: rgba(127, 199, 127, 0.12); }
+  .res-tag.owned { color: var(--review); background: var(--review-soft); }
+
+  .tab-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    height: calc(var(--tab-height) + var(--bottom-pad));
+    padding-bottom: var(--bottom-pad);
+    background: rgba(10, 20, 36, 0.92);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid var(--border);
+    display: flex;
+    z-index: 50;
+  }
+
+  .tab-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 6px 0 8px;
+    transition: color 0.2s;
+    font-family: var(--sans);
+    position: relative;
+  }
+
+  .tab-btn:active { color: var(--text-soft); }
+  .tab-btn.active { color: var(--gold); }
+
+  .tab-btn.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 28px;
+    height: 2px;
+    background: var(--gold);
+    border-radius: 0 0 2px 2px;
+    box-shadow: 0 0 10px var(--gold-glow);
+  }
+
+  .tab-icon {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .tab-label {
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 10, 20, 0.7);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    z-index: 100;
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+    animation: backdropIn 0.25s ease-out;
+  }
+
+  .modal-backdrop.open { display: flex; }
+
+  @keyframes backdropIn { from { opacity: 0; } to { opacity: 1; } }
+
+  .modal {
+    width: 100%;
+    max-width: 720px;
+    background: var(--bg-2);
+    border-radius: 20px 20px 0 0;
+    border-top: 1px solid var(--border);
+    padding: 8px 0 calc(20px + var(--bottom-pad));
+    max-height: 85vh;
+    overflow-y: auto;
+    animation: modalIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @keyframes modalIn { from { transform: translateY(100%); } to { transform: translateY(0); } }
+
+  .modal-handle {
+    width: 40px;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    margin: 8px auto 18px;
+  }
+
+  .modal-title {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+
+  .modal-sub { text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-bottom: 22px; }
+
+  .modal-section {
+    padding: 0 20px 18px;
+    border-bottom: 1px solid var(--border-soft);
+    margin-bottom: 18px;
+  }
+
+  .modal-section:last-of-type { border-bottom: none; }
+
+  .modal-section-title {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .modal-text {
+    font-size: 0.88rem;
+    color: var(--text-soft);
+    line-height: 1.55;
+    margin-bottom: 10px;
+  }
+
+  .modal-text strong { color: var(--gold); font-weight: 600; }
+
+  .btn {
+    display: block;
+    width: 100%;
+    padding: 13px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 0.92rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+    margin-bottom: 8px;
+  }
+
+  .btn:active { background: var(--surface-2); transform: scale(0.98); }
+  .btn.danger { color: var(--danger); border-color: rgba(212, 121, 121, 0.3); }
+  .btn.danger:active { background: rgba(212, 121, 121, 0.1); }
+
+  .close-btn {
+    display: block;
+    width: calc(100% - 40px);
+    margin: 0 20px;
+    padding: 14px;
+    background: var(--gold);
+    color: var(--bg);
+    border: none;
+    border-radius: 12px;
+    font-family: var(--sans);
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .close-btn:active { transform: scale(0.98); }
+
+  .jump-today {
+    position: fixed;
+    bottom: calc(var(--tab-height) + var(--bottom-pad) + 16px);
+    right: 20px;
+    background: var(--gold);
+    color: var(--bg);
+    border: none;
+    border-radius: 28px;
+    padding: 11px 18px;
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    box-shadow: 0 6px 24px rgba(212, 169, 67, 0.4);
+    z-index: 30;
+    opacity: 0;
+    transform: translateY(80px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    pointer-events: none;
+  }
+
+  .jump-today.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+  .footer-quote {
+    text-align: center;
+    margin: 32px 16px 8px;
+    padding: 22px 16px;
+    border-top: 1px solid var(--border-soft);
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .footer-quote .greek {
+    color: var(--gold);
+    display: block;
+    margin-bottom: 6px;
+    font-style: normal;
+    font-size: 1.1em;
+  }
+
+  .footer-quote .author {
+    display: block;
+    margin-top: 8px;
+    font-size: 0.78rem;
+    color: var(--text-faint);
+    letter-spacing: 0.05em;
+    font-style: normal;
+  }
+
+  [hidden] { display: none !important; }
+  ::selection { background: var(--gold-soft); color: var(--gold); }
+</style>
+</head>
+<body>
+
+<main class="app">
+  <header class="masthead">
+    <button class="settings-btn" id="settingsBtn" aria-label="Settings">⚙</button>
+    <div class="title-cluster">
+      <span class="title-symbol">Α</span>
+      <h1 class="greek-title">Παιδεία</h1>
+      <span class="title-symbol">Ω</span>
+    </div>
+    <div class="subtitle">A three-year formation in Greek</div>
+    <div class="subtitle-en">Paideia · Formation of the Soul through Learning</div>
+  </header>
+
+  <section class="stats">
+    <div class="stat"><div class="stat-value" id="dayCount">—</div><div class="stat-label">Day</div></div>
+    <div class="stat"><div class="stat-value" id="streakCount">0</div><div class="stat-label">Streak</div></div>
+    <div class="stat"><div class="stat-value" id="percentDone">0%</div><div class="stat-label">Complete</div></div>
+  </section>
+
+  <section class="progress-section">
+    <div class="progress-track"><div class="progress-fill" id="overallProgress" style="width: 0%"></div></div>
+    <div class="phase-label" id="currentPhaseLabel">—</div>
+  </section>
+
+  <section class="tab-view active" id="view-today">
+    <div id="todayContainer"></div>
+  </section>
+
+  <section class="tab-view" id="view-plan">
+    <h2 class="section-title">The Journey</h2>
+    <div id="phasesContainer"></div>
+  </section>
+
+  <section class="tab-view" id="view-library">
+    <h2 class="section-title">Library</h2>
+    <div id="focusBlock"></div>
+    <div id="resourcesContainer"></div>
+    <div class="footer-quote">
+      <span class="greek">Παιδεία ἐστὶ θησαυρὸς ἀναφαίρετος</span>
+      Education is a treasure that cannot be taken away.
+      <span class="author">— Diogenes Laërtius</span>
+    </div>
+  </section>
+</main>
+
+<nav class="tab-bar">
+  <button class="tab-btn active" data-view="today"><span class="tab-icon">Σ</span><span class="tab-label">Today</span></button>
+  <button class="tab-btn" data-view="plan"><span class="tab-icon">Π</span><span class="tab-label">Plan</span></button>
+  <button class="tab-btn" data-view="library"><span class="tab-icon">Ω</span><span class="tab-label">Library</span></button>
+</nav>
+
+<button class="jump-today" id="jumpBtn">↓ Today</button>
+
+<div class="modal-backdrop" id="settingsModal">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <h2 class="modal-title">Settings</h2>
+    <p class="modal-sub">Manage your formation</p>
+
+    <div class="modal-section">
+      <div class="modal-section-title">About this plan</div>
+      <p class="modal-text">
+        <strong>Παιδεία</strong> is a 156-week formation in Greek across three years —
+        Modern Greek to conversational fluency in Year 1, Koine New Testament and
+        Apostolic Fathers in Year 2, Patristic depth (Chrysostom capstone) in Year 3.
+      </p>
+      <p class="modal-text">
+        At 30–45 minutes weekdays and 60+ minutes weekends, you'll arrive at functional
+        fluency in both Modern and Patristic Greek — able to read the Fathers with a lexicon,
+        follow the Liturgy with comprehension, and converse in Greece.
+      </p>
+    </div>
+
+    <div class="modal-section">
+      <div class="modal-section-title">If you fall off</div>
+      <p class="modal-text">
+        You will miss days. You will miss weeks. This is not failure — it is being human
+        across 1,092 days.
+      </p>
+      <p class="modal-text">
+        <strong>Missed 1–3 days?</strong> Just resume at today. Don't make up missed work.
+        Your streak resets but your progress is intact.
+      </p>
+      <p class="modal-text">
+        <strong>Missed a week?</strong> Don't restart the week. Resume at the current calendar
+        week. Spend Saturday reviewing what you missed.
+      </p>
+      <p class="modal-text">
+        <strong>Missed a month or more?</strong> Go back two weeks from where you stopped and
+        resume there. Re-listen, re-read. Don't restart from week 1 — you haven't lost what
+        you learned.
+      </p>
+      <p class="modal-text">
+        The work you did is still in you. Greek doesn't disappear. Just begin again, today.
+      </p>
+    </div>
+
+    <div class="modal-section">
+      <div class="modal-section-title">Data</div>
+      <button class="btn" id="exportBtn">Export progress (JSON backup)</button>
+      <button class="btn" id="importBtn">Import progress from file</button>
+    </div>
+
+    <div class="modal-section">
+      <div class="modal-section-title">Danger zone</div>
+      <button class="btn danger" id="resetBtn">Reset all progress</button>
+    </div>
+
+    <button class="close-btn" id="closeSettings">Close</button>
+  </div>
+</div>
+
+<input type="file" id="importFile" accept=".json" hidden>
+
+<script>
+const START_DATE = new Date(2026, 3, 27);
+const STORAGE_KEY = 'paideia-progress-v1';
+const DAY_FULL = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const MONTH_NAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+const L = {
+  LT: 'https://www.languagetransfer.org/complete-greek',
+  easyGreek: 'https://www.youtube.com/@EasyGreek',
+  greekPod: 'https://www.youtube.com/@GreekPod101',
+  alphabet: 'https://www.youtube.com/results?search_query=greek+alphabet+pronunciation',
+  anki: 'https://apps.ankiweb.net/',
+  ankiDeck5k: 'https://ankiweb.net/shared/info/2113078064',
+  pimsleur: 'https://www.pimsleur.com/learn-greek',
+  lingq: 'https://www.lingq.com/en/learn/el/web/',
+  italki: 'https://www.italki.com/en/teachers/greek',
+  preply: 'https://preply.com/en/online/greek-tutors',
+  helloTalk: 'https://www.hellotalk.com/',
+  tandem: 'https://www.tandem.net/',
+  goarch: 'https://www.goarch.org/',
+  agesLiturgy: 'https://www.agesinitiatives.com/dcs/public/dcs/dcs.html',
+  glt: 'https://glt.goarch.org/',
+  ellopos: 'https://www.ellopos.net/elpenor/greek-texts/fathers/',
+  mounce: 'https://www.billmounce.com/',
+  philokaliaGreek: 'https://www.imaik.gr/?p=8849',
+  keyboard: 'https://www.lexilogos.com/keyboard/greek_modern.htm',
+  tatoeba: 'https://tatoeba.org/en/sentences/show_all_in/ell/none/none/indifferent',
+  reddit: 'https://www.reddit.com/r/GREEK/',
+  ertflix: 'https://www.ertflix.gr/',
+  kathimerini: 'https://www.kathimerini.gr/',
+  doYouSpeakGreek: 'https://www.youtube.com/@doyouspeakgreek',
+  linguatree: 'https://www.youtube.com/@LinguaTree',
+  forvo: 'https://forvo.com/languages/el/',
+  glosbe: 'https://glosbe.com/en/el',
+  wordreference: 'https://www.wordreference.com/engr/',
+  wiktionary: 'https://en.wiktionary.org/wiki/Wiktionary:Greek_language',
+  greekPodcasts: 'https://www.youtube.com/results?search_query=podcast+%CF%83%CF%84%CE%B1+%CE%B5%CE%BB%CE%BB%CE%B7%CE%BD%CE%B9%CE%BA%CE%AC',
+  greekBible: 'https://www.biblegateway.com/passage/?search=John+1&version=SBLGNT',
+  septuagint: 'https://www.ellopos.net/elpenor/greek-texts/septuagint/',
+  perseus: 'https://www.perseus.tufts.edu/hopper/'
+};
+
+const PHASES = [
+  { id: 1, name: 'Foundation', subtitle: 'Alphabet, sounds, structural intuition.', months: 'Year 1 · Months 1–3', weekRange: [1, 13],
+    quote: { greek: 'Ἀρχὴ ἥμισυ παντός', en: 'The beginning is half of the whole.', source: 'Hesiod' } },
+  { id: 2, name: 'Building Blocks', subtitle: 'Vocabulary, listening, grammar in volume.', months: 'Year 1 · Months 4–6', weekRange: [14, 26],
+    quote: { greek: 'Λίθος ἐπὶ λίθον', en: 'Stone upon stone.', source: 'Greek proverb' } },
+  { id: 3, name: 'Conversation', subtitle: 'Output begins. Bi-weekly tutor + parish partner.', months: 'Year 1 · Months 7–9', weekRange: [27, 39],
+    quote: { greek: 'Λέγειν τὰ λεγόμενα', en: 'To speak the things being said.', source: 'Aristotle' } },
+  { id: 4, name: 'Travel-Ready', subtitle: 'Weekly tutor. Modern Greek B1/B2 lock-in.', months: 'Year 1 · Months 10–12', weekRange: [40, 52],
+    quote: { greek: 'Ἑλλὰς πάντων ἀνθρώπων Ἑλλὰς ἐστίν', en: 'Greece is the Greece of all people.', source: 'Isocrates, paraphrase' } },
+  { id: 5, name: 'Koine Begins', subtitle: 'Mounce textbook. The bridge from Modern to Koine.', months: 'Year 2 · Months 13–15', weekRange: [53, 65],
+    quote: { greek: 'Ἐν ἀρχῇ ἦν ὁ Λόγος', en: 'In the beginning was the Word.', source: 'John 1:1' } },
+  { id: 6, name: 'The Gospel of John', subtitle: 'First sustained NT reading. Theological depth.', months: 'Year 2 · Months 16–18', weekRange: [66, 78],
+    quote: { greek: 'καὶ ὁ Λόγος σὰρξ ἐγένετο', en: 'And the Word became flesh.', source: 'John 1:14' } },
+  { id: 7, name: 'The Apostolic Fathers', subtitle: 'Didache, Polycarp, Ignatius — your Holmes text.', months: 'Year 2 · Months 19–21', weekRange: [79, 91],
+    quote: { greek: 'Ἐγγύς εἰμι τοῦ ξίφους', en: 'I am near the sword.', source: 'St. Ignatius, Letter to the Romans' } },
+  { id: 8, name: 'Consolidation', subtitle: 'Modern Greek C1 push. NT solidified.', months: 'Year 2 · Months 22–24', weekRange: [92, 104],
+    quote: { greek: 'Καιρὸς τοῦ θερίζειν', en: 'A time for harvesting.', source: 'Ecclesiastes 3:2 LXX' } },
+  { id: 9, name: 'Patristic Greek Proper', subtitle: 'First sustained Patristic readings. The Fathers begin.', months: 'Year 3 · Months 25–27', weekRange: [105, 117],
+    quote: { greek: 'Δόξα τῷ Θεῷ πάντων ἕνεκεν', en: 'Glory to God for all things.', source: 'St. John Chrysostom' } },
+  { id: 10, name: 'Chrysostom & The Cappadocians', subtitle: 'The giants. Homiletic gold.', months: 'Year 3 · Months 28–30', weekRange: [118, 130],
+    quote: { greek: 'Ὁ λόγος γὰρ τοῦ Θεοῦ ζῶν', en: 'For the word of God is living.', source: 'Hebrews 4:12' } },
+  { id: 11, name: 'Liturgy & Septuagint', subtitle: 'Full liturgical depth. Psalms in Greek.', months: 'Year 3 · Months 31–33', weekRange: [131, 143],
+    quote: { greek: 'Αἰνεῖτε τὸν Κύριον', en: 'Praise the Lord.', source: 'Psalm 148:1 LXX' } },
+  { id: 12, name: 'The Open Door', subtitle: 'Capstone. The formation continues for life.', months: 'Year 3 · Months 34–36', weekRange: [144, 156],
+    quote: { greek: 'Ἰδοὺ δέδωκα ἐνώπιόν σου θύραν ἀνεῳγμένην', en: 'Behold, I have set before you an open door.', source: 'Revelation 3:8' } }
+];
+
+// ============= YEAR 1 — WEEKS 1-52 (FULL) =============
+const WEEKS = [
+  // PHASE 1 — FOUNDATION (Weeks 1-13)
+  { week: 1, title: 'The Greek Alphabet',
+    why: 'By Sunday, the alphabet that has felt foreign your whole life will feel like yours.',
+    focus: 'Master all 24 letters by name, sound, and hand. Read simple words aloud without hesitation.',
+    liturgical: { greek: 'Κύριε ἐλέησον', en: 'Recognize "Lord, have mercy" by sight by Sunday.' },
+    days: [
+      { d: 'Mon', dur: '30 min', tasks: [
+        { t: 'Watch a Greek alphabet overview video — slow pronunciation', link: L.alphabet },
+        { t: 'Learn Α α, Β β, Γ γ, Δ δ, Ε ε — say each name aloud 10 times' },
+        { t: 'Hand-write each letter (upper + lower) 5 times' }
+      ]},
+      { d: 'Tue', dur: '30 min', tasks: [
+        { t: 'Learn Ζ ζ, Η η, Θ θ, Ι ι, Κ κ — names + sounds' },
+        { t: 'Quick review of yesterday\'s 5 letters' },
+        { t: 'Write 5 family/friend first names in Greek' }
+      ]},
+      { d: 'Wed', dur: '30 min', tasks: [
+        { t: 'Learn Λ λ, Μ μ, Ν ν, Ξ ξ, Ο ο' },
+        { t: 'Review all 15 letters learned so far' },
+        { t: 'Read aloud: όχι, ναι, καλά, μαμά, ναός' }
+      ]},
+      { d: 'Thu', dur: '30 min', tasks: [
+        { t: 'Learn Π π, Ρ ρ, Σ σ/ς, Τ τ, Υ υ — note σ vs final ς' },
+        { t: 'Practice σ/ς distinction (final-position only)' },
+        { t: 'Write your full name in Greek letters' }
+      ]},
+      { d: 'Fri', dur: '60 min', tasks: [
+        { t: 'Learn Φ φ, Χ χ, Ψ ψ, Ω ω — the last four' },
+        { t: 'Diphthongs: αι (e), ει (ee), οι (ee), ου (oo), αυ (av/af), ευ (ev/ef)' },
+        { t: 'Install Greek keyboard on your phone (Settings → Keyboards)' },
+        { t: 'Bookmark Lexilogos online Greek keyboard for desktop', link: L.keyboard }
+      ]},
+      { d: 'Sat', dur: '60 min', tasks: [
+        { t: 'Accent marks: tonos (΄) and the rare diaeresis (¨)' },
+        { t: 'Drill: read aloud the 50 most common Greek words' },
+        { t: 'Watch one Easy Greek video — hear the alphabet in context', link: L.easyGreek },
+        { t: 'Type 10 random Greek words on your phone' }
+      ]},
+      { d: 'Sun', dur: '45 min', tasks: [
+        { t: 'Self-test: write the alphabet from memory, both cases' },
+        { t: 'Recognize on sight: Κύριε ἐλέησον, Δόξα σοι, Ἀμήν' },
+        { t: 'Bookmark Language Transfer Complete Greek for next week', link: L.LT },
+        { t: 'Reflect: 3 sentences on how the week went' }
+      ]}
+    ]
+  },
+  { week: 2, title: 'Language Transfer Begins',
+    why: 'You\'ll feel how Greek thinks, not just memorize what it says.',
+    focus: 'LT Lessons 1–7. Listen and respond aloud. No memorization yet — let intuition build.',
+    liturgical: { greek: 'Πάτερ ἡμῶν ὁ ἐν τοῖς οὐρανοῖς', en: 'First line of the Lord\'s Prayer. Memorize.' },
+    days: [
+      { d: 'Mon', dur: '30 min', tasks: [
+        { t: 'Language Transfer · Lessons 1 + 2', link: L.LT },
+        { t: 'Pause and respond aloud — don\'t just listen' },
+        { t: 'Note 3 surprising structures' }
+      ]},
+      { d: 'Tue', dur: '30 min', tasks: [
+        { t: 'Language Transfer · Lesson 3', link: L.LT },
+        { t: 'Open AnkiMobile · download "Greek 5000 Most Common Words" deck', link: L.ankiDeck5k },
+        { t: 'Configure: 5 new cards/day, 10 min review max, sync to AnkiWeb' }
+      ]},
+      { d: 'Wed', dur: '30 min', tasks: [
+        { t: 'Language Transfer · Lesson 4', link: L.LT },
+        { t: 'Anki review (~10 min)' },
+        { t: 'Write the first line of the Lord\'s Prayer in Greek by hand' }
+      ]},
+      { d: 'Thu', dur: '30 min', tasks: [
+        { t: 'Language Transfer · Lesson 5', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'Listen to a Greek song on Spotify — anything modern' }
+      ]},
+      { d: 'Fri', dur: '60 min', tasks: [
+        { t: 'Language Transfer · Lessons 6 + 7', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'Easy Greek beginner video with Greek + English subtitles', link: L.easyGreek },
+        { t: 'Add 10 personal cards to Anki (family terms, etc.)' }
+      ]},
+      { d: 'Sat', dur: '60 min', tasks: [
+        { t: 'Re-listen to LT Lessons 1–4 in background while doing chores' },
+        { t: 'Anki review' },
+        { t: 'Forvo: hear native pronunciation of 10 words you wrote', link: L.forvo },
+        { t: 'Write 5 simple Greek sentences in present tense' }
+      ]},
+      { d: 'Sun', dur: '45 min', tasks: [
+        { t: 'Re-listen to LT Lessons 5–7' },
+        { t: 'Practice Πάτερ ἡμῶν first line aloud 5 times — feel the rhythm' },
+        { t: 'Read first 3 lines of the Liturgy in Greek from your liturgy book' },
+        { t: 'Confirm next week\'s schedule fits your calendar' }
+      ]}
+    ]
+  },
+  { week: 3, title: 'Language Transfer 8–15',
+    why: 'Verb intuitions kick in. Greetings will flow without you thinking.',
+    focus: 'Articles, gender, basic greetings. Feel the rhythm of Greek conversation.',
+    liturgical: { greek: 'ἁγιασθήτω τὸ ὄνομά σου', en: '"Hallowed be Thy name."' },
+    days: [
+      { d: 'Mon', dur: '35 min', tasks: [
+        { t: 'Language Transfer · Lessons 8 + 9', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'Drill aloud: γεια σου, καλημέρα, καλησπέρα, καληνύχτα' }
+      ]},
+      { d: 'Tue', dur: '30 min', tasks: [
+        { t: 'Language Transfer · Lesson 10', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'Add 5 personal cards (foods you eat regularly)' }
+      ]},
+      { d: 'Wed', dur: '35 min', tasks: [
+        { t: 'Language Transfer · Lesson 11', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'Easy Greek "Super Easy" level video', link: L.easyGreek }
+      ]},
+      { d: 'Thu', dur: '30 min', tasks: [
+        { t: 'Language Transfer · Lesson 12', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'Record yourself repeating today\'s LT content' }
+      ]},
+      { d: 'Fri', dur: '60 min', tasks: [
+        { t: 'Language Transfer · Lessons 13 + 14', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'GreekPod101 video on greetings/introductions', link: L.greekPod },
+        { t: 'Hold a "fake conversation" with yourself in Greek — introduce yourself' }
+      ]},
+      { d: 'Sat', dur: '60 min', tasks: [
+        { t: 'Language Transfer · Lesson 15', link: L.LT },
+        { t: 'Anki review (longer — clear backlog)' },
+        { t: 'Read 3 children\'s sentences from Tatoeba aloud', link: L.tatoeba },
+        { t: 'Read aloud the first 3 lines of the Lord\'s Prayer' }
+      ]},
+      { d: 'Sun', dur: '45 min', tasks: [
+        { t: 'Re-listen to LT 8–15 while doing other things' },
+        { t: 'Anki review' },
+        { t: 'Listen to a Greek Orthodox hymn on YouTube — read the lyrics if you can find them' }
+      ]}
+    ]
+  },
+  { week: 4, title: 'Month 1 · Language Transfer 16–25',
+    why: 'You will look back at week 1 and see a different person.',
+    focus: 'Past tense intuitions begin. Numbers 1–20. Month 1 milestone.',
+    liturgical: { greek: 'γενηθήτω τὸ θέλημά σου', en: '"Thy will be done."' },
+    milestone: 'Speak Greek for 60 seconds about yesterday — record yourself, listen back.',
+    days: [
+      { d: 'Mon', dur: '40 min', tasks: [
+        { t: 'Language Transfer · Lessons 16 + 17', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'Numbers 1–10: drill aloud until automatic' }
+      ]},
+      { d: 'Tue', dur: '35 min', tasks: [
+        { t: 'Language Transfer · Lesson 18', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'Numbers 11–20: drill aloud' }
+      ]},
+      { d: 'Wed', dur: '40 min', tasks: [
+        { t: 'Language Transfer · Lessons 19 + 20', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'Practice telling time on the hour: τι ώρα είναι;' }
+      ]},
+      { d: 'Thu', dur: '35 min', tasks: [
+        { t: 'Language Transfer · Lesson 21', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'Easy Greek "numbers" or "time" video', link: L.easyGreek }
+      ]},
+      { d: 'Fri', dur: '60 min', tasks: [
+        { t: 'Language Transfer · Lessons 22 + 23', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'Watch a 10-min Greek vlog with subtitles', link: L.doYouSpeakGreek },
+        { t: 'Write 5 sentences using numbers and time' }
+      ]},
+      { d: 'Sat', dur: '60 min', tasks: [
+        { t: 'Language Transfer · Lessons 24 + 25', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'Cook from a Greek recipe online — identify 10 known words' },
+        { t: 'Liturgical: full first half of Lord\'s Prayer aloud' }
+      ]},
+      { d: 'Sun', dur: '50 min', tasks: [
+        { t: 'MILESTONE WEEK: re-listen to LT 1–10. Notice the ease.' },
+        { t: 'Anki review' },
+        { t: 'Self-recording: speak Greek for 60 seconds about yesterday' },
+        { t: 'Honor the work. You showed up daily for a month.' }
+      ]}
+    ]
+  },
+  { week: 5, title: 'LT 26–35 · Pimsleur Begins',
+    why: 'Audio reps unlock the parts of fluency that books cannot reach.',
+    focus: 'Future tense, conditionals. Add Pimsleur for drive-time and walk-time.',
+    liturgical: { greek: 'τὸν ἄρτον ἡμῶν τὸν ἐπιούσιον δὸς ἡμῖν σήμερον', en: '"Give us this day our daily bread."' },
+    days: [
+      { d: 'Mon', dur: '40 min', tasks: [
+        { t: 'Language Transfer · Lessons 26 + 27', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'Days of the week aloud: Δευτέρα, Τρίτη, Τετάρτη...' }
+      ]},
+      { d: 'Tue', dur: '40 min', tasks: [
+        { t: 'Language Transfer · Lesson 28', link: L.LT },
+        { t: 'Subscribe to Pimsleur Greek (or take the free first lesson)', link: L.pimsleur },
+        { t: 'Anki review' }
+      ]},
+      { d: 'Wed', dur: '40 min', tasks: [
+        { t: 'Language Transfer · Lessons 29 + 30', link: L.LT },
+        { t: 'Pimsleur Greek · Lesson 1 (audio while walking/driving)', link: L.pimsleur },
+        { t: 'Anki review' }
+      ]},
+      { d: 'Thu', dur: '35 min', tasks: [
+        { t: 'Language Transfer · Lesson 31', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'Add 10 Anki cards: food vocabulary' }
+      ]},
+      { d: 'Fri', dur: '60 min', tasks: [
+        { t: 'Language Transfer · Lessons 32 + 33', link: L.LT },
+        { t: 'Pimsleur · Lesson 2', link: L.pimsleur },
+        { t: 'Anki review' },
+        { t: 'Easy Greek street interview — listen twice (with then without subtitles)', link: L.easyGreek }
+      ]},
+      { d: 'Sat', dur: '60 min', tasks: [
+        { t: 'Language Transfer · Lessons 34 + 35', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'Read a Greek news headline; try to translate without help', link: L.kathimerini },
+        { t: 'Add today\'s line; recite Lord\'s Prayer up to "daily bread"' }
+      ]},
+      { d: 'Sun', dur: '45 min', tasks: [
+        { t: 'Re-listen to LT 26–35 in background' },
+        { t: 'Pimsleur · Lesson 3', link: L.pimsleur },
+        { t: 'Read aloud the Trisagion in Greek — 3 times' }
+      ]}
+    ]
+  },
+  { week: 6, title: 'LT 36–45',
+    why: 'Object pronouns turn statements into conversation.',
+    focus: 'Object pronouns. Pimsleur is your audio companion.',
+    liturgical: { greek: 'καὶ ἄφες ἡμῖν τὰ ὀφειλήματα ἡμῶν', en: '"And forgive us our debts."' },
+    days: [
+      { d: 'Mon', dur: '40 min', tasks: [
+        { t: 'Language Transfer · Lessons 36 + 37', link: L.LT },
+        { t: 'Pimsleur · Lesson 4', link: L.pimsleur },
+        { t: 'Anki review' }
+      ]},
+      { d: 'Tue', dur: '35 min', tasks: [
+        { t: 'Language Transfer · Lesson 38', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'Add 10 daily verbs: eat, drink, go, want, need, have, make, see, say, hear' }
+      ]},
+      { d: 'Wed', dur: '40 min', tasks: [
+        { t: 'Language Transfer · Lessons 39 + 40', link: L.LT },
+        { t: 'Pimsleur · Lesson 5', link: L.pimsleur },
+        { t: 'Anki review' }
+      ]},
+      { d: 'Thu', dur: '35 min', tasks: [
+        { t: 'Language Transfer · Lesson 41', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'Read 3 Tatoeba sentences aloud, click for audio', link: L.tatoeba }
+      ]},
+      { d: 'Fri', dur: '60 min', tasks: [
+        { t: 'Language Transfer · Lessons 42 + 43', link: L.LT },
+        { t: 'Pimsleur · Lesson 6', link: L.pimsleur },
+        { t: 'Anki review' },
+        { t: 'Family vocabulary: siblings, in-laws, godparents (νονός, νονά)' }
+      ]},
+      { d: 'Sat', dur: '60 min', tasks: [
+        { t: 'Language Transfer · Lessons 44 + 45', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'Recite Lord\'s Prayer up to "forgive us our debts" — aloud, from memory' },
+        { t: 'Cook from a Greek recipe — read it as you go' }
+      ]},
+      { d: 'Sun', dur: '50 min', tasks: [
+        { t: 'Re-listen to LT 36–45' },
+        { t: 'Pimsleur · Lesson 7', link: L.pimsleur },
+        { t: 'Find this Sunday\'s Gospel in Greek and English; read both', link: L.glt }
+      ]}
+    ]
+  },
+  { week: 7, title: 'LT 46–55',
+    why: 'Genitive opens up half of how Greek really works.',
+    focus: 'Genitive case. Possession, "of" relationships. Halfway through LT this week.',
+    liturgical: { greek: 'ὡς καὶ ἡμεῖς ἀφίεμεν τοῖς ὀφειλέταις ἡμῶν', en: '"As we forgive our debtors."' },
+    days: [
+      { d: 'Mon', dur: '40 min', tasks: [
+        { t: 'Language Transfer · Lessons 46 + 47', link: L.LT },
+        { t: 'Pimsleur · Lesson 8', link: L.pimsleur },
+        { t: 'Anki review' }
+      ]},
+      { d: 'Tue', dur: '35 min', tasks: [
+        { t: 'Language Transfer · Lesson 48', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'Easy Greek video on Greek culture', link: L.easyGreek }
+      ]},
+      { d: 'Wed', dur: '40 min', tasks: [
+        { t: 'Language Transfer · Lessons 49 + 50', link: L.LT },
+        { t: 'Pimsleur · Lesson 9', link: L.pimsleur },
+        { t: 'HALFWAY THROUGH LT! Reflect: what feels easier than week 1?' }
+      ]},
+      { d: 'Thu', dur: '35 min', tasks: [
+        { t: 'Language Transfer · Lesson 51', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'Add 10 cards for body parts' }
+      ]},
+      { d: 'Fri', dur: '60 min', tasks: [
+        { t: 'Language Transfer · Lessons 52 + 53', link: L.LT },
+        { t: 'Pimsleur · Lesson 10', link: L.pimsleur },
+        { t: 'Anki review' },
+        { t: '15 min of a Greek YouTuber on a topic you like', link: L.linguatree }
+      ]},
+      { d: 'Sat', dur: '60 min', tasks: [
+        { t: 'Language Transfer · Lessons 54 + 55', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'Practice full Lord\'s Prayer through this week\'s line' },
+        { t: 'Watch a Greek news clip; identify 5 known words', link: L.kathimerini }
+      ]},
+      { d: 'Sun', dur: '45 min', tasks: [
+        { t: 'Re-listen to LT 46–55' },
+        { t: 'Read along with Psalm 50/51 in Greek (the Penitential Psalm)' },
+        { t: 'Anki review' }
+      ]}
+    ]
+  },
+  { week: 8, title: 'Month 2 · LT 56–65 · Exchange Begins',
+    why: 'You\'ll send your first message to a real Greek speaker this week.',
+    focus: 'Set up HelloTalk or Tandem. Vocabulary now 300+ words.',
+    liturgical: { greek: 'καὶ μὴ εἰσενέγκῃς ἡμᾶς εἰς πειρασμόν', en: '"And lead us not into temptation."' },
+    milestone: 'Send a real message in Greek to a native speaker — even one sentence counts.',
+    days: [
+      { d: 'Mon', dur: '40 min', tasks: [
+        { t: 'Language Transfer · Lessons 56 + 57', link: L.LT },
+        { t: 'Pimsleur · Lesson 11', link: L.pimsleur },
+        { t: 'Anki review' }
+      ]},
+      { d: 'Tue', dur: '35 min', tasks: [
+        { t: 'Language Transfer · Lesson 58', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'Weather expressions: κάνει κρύο, ζέστη, βρέχει...' }
+      ]},
+      { d: 'Wed', dur: '40 min', tasks: [
+        { t: 'Language Transfer · Lessons 59 + 60', link: L.LT },
+        { t: 'Pimsleur · Lesson 12', link: L.pimsleur },
+        { t: 'Past two-thirds of LT! Reward: Greek coffee or mezze' }
+      ]},
+      { d: 'Thu', dur: '35 min', tasks: [
+        { t: 'Language Transfer · Lesson 61', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'Re-listen to LT 1–5 — should feel almost too easy now' }
+      ]},
+      { d: 'Fri', dur: '60 min', tasks: [
+        { t: 'Language Transfer · Lessons 62 + 63', link: L.LT },
+        { t: 'Install HelloTalk — set up profile but don\'t message yet', link: L.helloTalk },
+        { t: 'Or try Tandem instead', link: L.tandem },
+        { t: 'Read 10 messages from Greek users in your feed' }
+      ]},
+      { d: 'Sat', dur: '60 min', tasks: [
+        { t: 'Language Transfer · Lessons 64 + 65', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'Recite Lord\'s Prayer through "lead us not into temptation"' },
+        { t: 'Write a draft HelloTalk post — 4 sentences about your day' }
+      ]},
+      { d: 'Sun', dur: '50 min', tasks: [
+        { t: 'MILESTONE: Month 2 complete' },
+        { t: 'Re-listen to LT 56–65' },
+        { t: 'Listen to a Greek Liturgy recording — just 10 minutes', link: L.agesLiturgy },
+        { t: 'Notice what you can identify' }
+      ]}
+    ]
+  },
+  { week: 9, title: 'LT 66–75 · First Real Exchange',
+    why: 'A native Greek speaker will respond to something you wrote.',
+    focus: 'Subjunctive: θέλω να... constructions. First HelloTalk message goes out.',
+    liturgical: { greek: 'ἀλλὰ ῥῦσαι ἡμᾶς ἀπὸ τοῦ πονηροῦ', en: '"But deliver us from evil."' },
+    days: [
+      { d: 'Mon', dur: '40 min', tasks: [
+        { t: 'Language Transfer · Lessons 66 + 67', link: L.LT },
+        { t: 'Pimsleur · Lesson 13', link: L.pimsleur },
+        { t: 'Subjunctive practice: θέλω να... (I want to...)' }
+      ]},
+      { d: 'Tue', dur: '35 min', tasks: [
+        { t: 'Language Transfer · Lesson 68', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'Easy Greek video: no subs first, with subs second time', link: L.easyGreek }
+      ]},
+      { d: 'Wed', dur: '40 min', tasks: [
+        { t: 'Language Transfer · Lessons 69 + 70', link: L.LT },
+        { t: 'Pimsleur · Lesson 14', link: L.pimsleur },
+        { t: 'Send your first HelloTalk/Tandem message — keep it simple', link: L.helloTalk }
+      ]},
+      { d: 'Thu', dur: '35 min', tasks: [
+        { t: 'Language Transfer · Lesson 71', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'Reply to whoever messaged you back (or another user)' }
+      ]},
+      { d: 'Fri', dur: '60 min', tasks: [
+        { t: 'Language Transfer · Lessons 72 + 73', link: L.LT },
+        { t: 'Pimsleur · Lesson 15', link: L.pimsleur },
+        { t: '20 min of Greek YouTube vlogs', link: L.doYouSpeakGreek },
+        { t: 'Send a 30-sec voice message in HelloTalk' }
+      ]},
+      { d: 'Sat', dur: '60 min', tasks: [
+        { t: 'Language Transfer · Lessons 74 + 75', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'Recite full Lord\'s Prayer through "deliver us from evil"' },
+        { t: 'Read one Greek news paragraph; look up only nouns', link: L.kathimerini }
+      ]},
+      { d: 'Sun', dur: '50 min', tasks: [
+        { t: 'Re-listen to LT 66–75' },
+        { t: 'Read along with the Beatitudes in Greek (Matthew 5)', link: L.glt },
+        { t: 'Notice cognates with English' }
+      ]}
+    ]
+  },
+  { week: 10, title: 'LT 76–85 · Lord\'s Prayer Complete',
+    why: 'You\'ll recite the prayer Christ taught — in His own language family.',
+    focus: 'Conditionals, hypotheticals. Memorize the full Lord\'s Prayer.',
+    liturgical: { greek: 'Ὅτι σοῦ ἐστιν ἡ βασιλεία καὶ ἡ δύναμις καὶ ἡ δόξα εἰς τοὺς αἰῶνας. Ἀμήν.', en: 'The doxology — "For Thine is the Kingdom..."' },
+    days: [
+      { d: 'Mon', dur: '40 min', tasks: [
+        { t: 'Language Transfer · Lessons 76 + 77', link: L.LT },
+        { t: 'Pimsleur · Lesson 16', link: L.pimsleur },
+        { t: 'If-then practice: write 5 sentences' }
+      ]},
+      { d: 'Tue', dur: '35 min', tasks: [
+        { t: 'Language Transfer · Lesson 78', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'Add 10 abstract words: love, hope, fear, joy, peace...' }
+      ]},
+      { d: 'Wed', dur: '40 min', tasks: [
+        { t: 'Language Transfer · Lessons 79 + 80', link: L.LT },
+        { t: 'Pimsleur · Lesson 17', link: L.pimsleur },
+        { t: 'HelloTalk: have a 5-message exchange' }
+      ]},
+      { d: 'Thu', dur: '35 min', tasks: [
+        { t: 'Language Transfer · Lesson 81', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'Listen to a Greek song with on-screen lyrics; sing along' }
+      ]},
+      { d: 'Fri', dur: '60 min', tasks: [
+        { t: 'Language Transfer · Lessons 82 + 83', link: L.LT },
+        { t: 'Pimsleur · Lesson 18', link: L.pimsleur },
+        { t: 'First 15 min of a Greek movie/series with subtitles', link: L.ertflix },
+        { t: 'Write 3-sentence plot summary in Greek' }
+      ]},
+      { d: 'Sat', dur: '60 min', tasks: [
+        { t: 'Language Transfer · Lessons 84 + 85', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'RECITE THE FULL LORD\'S PRAYER IN GREEK FROM MEMORY' },
+        { t: 'A real milestone. Reward yourself.' }
+      ]},
+      { d: 'Sun', dur: '50 min', tasks: [
+        { t: 'Re-listen to LT 76–85' },
+        { t: 'Pick a hymn (your name day Apolytikion?) and learn the Greek', link: L.glt },
+        { t: 'Write a HelloTalk post about your week — 5+ sentences' }
+      ]}
+    ]
+  },
+  { week: 11, title: 'LT 86–95 · The Creed Begins',
+    why: 'You begin the Symbol of Faith in the language it was written.',
+    focus: 'Refinement. Common irregular verbs. The Nicene Creed begins.',
+    liturgical: { greek: 'Πιστεύω εἰς ἕνα Θεόν', en: '"I believe in one God."' },
+    days: [
+      { d: 'Mon', dur: '40 min', tasks: [
+        { t: 'Language Transfer · Lessons 86 + 87', link: L.LT },
+        { t: 'Pimsleur · Lesson 19', link: L.pimsleur },
+        { t: 'Find the Nicene Creed in Greek; print or save', link: L.glt }
+      ]},
+      { d: 'Tue', dur: '35 min', tasks: [
+        { t: 'Language Transfer · Lesson 88', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'Read first sentence of the Creed aloud 5 times' }
+      ]},
+      { d: 'Wed', dur: '40 min', tasks: [
+        { t: 'Language Transfer · Lessons 89 + 90', link: L.LT },
+        { t: 'Pimsleur · Lesson 20', link: L.pimsleur },
+        { t: 'HelloTalk: aim for 10 messages today' }
+      ]},
+      { d: 'Thu', dur: '35 min', tasks: [
+        { t: 'Language Transfer · Lesson 91', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'Greek cooking video — read the recipe in Greek', link: L.doYouSpeakGreek }
+      ]},
+      { d: 'Fri', dur: '60 min', tasks: [
+        { t: 'Language Transfer · Lessons 92 + 93', link: L.LT },
+        { t: 'Pimsleur · Lesson 21', link: L.pimsleur },
+        { t: 'Continue Greek movie/series — 20 more min', link: L.ertflix },
+        { t: 'Record 60 seconds describing the plot in Greek' }
+      ]},
+      { d: 'Sat', dur: '60 min', tasks: [
+        { t: 'Language Transfer · Lessons 94 + 95', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'Read first 3 lines of the Creed; match to English' },
+        { t: 'Greek journal entry — 7+ sentences about this week' }
+      ]},
+      { d: 'Sun', dur: '50 min', tasks: [
+        { t: 'Re-listen to LT 86–95' },
+        { t: 'Follow along during one section of the Liturgy in Greek', link: L.agesLiturgy },
+        { t: 'Reflect: what did you understand?' }
+      ]}
+    ]
+  },
+  { week: 12, title: 'Month 3 · LT 96–105',
+    why: 'Three months in. The structure of Greek is no longer foreign.',
+    focus: 'Final stretch of LT. Hearing structures naturally.',
+    liturgical: { greek: 'καὶ εἰς ἕνα Κύριον Ἰησοῦν Χριστόν', en: '"And in one Lord Jesus Christ."' },
+    milestone: 'Read 10 lines of Greek news without translating word-by-word in your head.',
+    days: [
+      { d: 'Mon', dur: '40 min', tasks: [
+        { t: 'Language Transfer · Lessons 96 + 97', link: L.LT },
+        { t: 'Pimsleur · Lesson 22', link: L.pimsleur },
+        { t: 'Read 10 lines from Greek news — actually read', link: L.kathimerini }
+      ]},
+      { d: 'Tue', dur: '35 min', tasks: [
+        { t: 'Language Transfer · Lesson 98', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'Vocabulary: feelings and opinions' }
+      ]},
+      { d: 'Wed', dur: '40 min', tasks: [
+        { t: 'Language Transfer · Lessons 99 + 100', link: L.LT },
+        { t: 'Pimsleur · Lesson 23', link: L.pimsleur },
+        { t: 'CELEBRATE LESSON 100. Bake galaktoboureko or koulourakia.' }
+      ]},
+      { d: 'Thu', dur: '35 min', tasks: [
+        { t: 'Language Transfer · Lesson 101', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'HelloTalk voice exchange — record + listen' }
+      ]},
+      { d: 'Fri', dur: '60 min', tasks: [
+        { t: 'Language Transfer · Lessons 102 + 103', link: L.LT },
+        { t: 'Pimsleur · Lesson 24', link: L.pimsleur },
+        { t: 'Finish Greek episode — 20+ more min', link: L.ertflix },
+        { t: 'Write a 1-paragraph review in Greek' }
+      ]},
+      { d: 'Sat', dur: '60 min', tasks: [
+        { t: 'Language Transfer · Lessons 104 + 105', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'Read first paragraph of the Creed in Greek' },
+        { t: 'Forvo: native pronunciation for 10 hard words', link: L.forvo }
+      ]},
+      { d: 'Sun', dur: '50 min', tasks: [
+        { t: 'MILESTONE: Month 3 complete. ⅛ of the journey.' },
+        { t: 'Re-listen to LT 96–105' },
+        { t: 'Read along with this Sunday\'s Gospel in Greek + English', link: L.glt }
+      ]}
+    ]
+  },
+  { week: 13, title: 'LT 106–120 · Foundation Complete',
+    why: 'You will finish what most learners never finish.',
+    focus: 'The final lessons. Phase 1 closes Sunday.',
+    liturgical: { greek: 'τὸν Υἱὸν τοῦ Θεοῦ τὸν Μονογενῆ', en: '"The only-begotten Son of God."' },
+    days: [
+      { d: 'Mon', dur: '40 min', tasks: [
+        { t: 'Language Transfer · Lessons 106 + 107', link: L.LT },
+        { t: 'Pimsleur · Lesson 25', link: L.pimsleur },
+        { t: 'Add 10 travel vocabulary cards (airport, hotel, taxi...)' }
+      ]},
+      { d: 'Tue', dur: '40 min', tasks: [
+        { t: 'Language Transfer · Lessons 108 + 109', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'Practice asking for directions out loud' }
+      ]},
+      { d: 'Wed', dur: '45 min', tasks: [
+        { t: 'Language Transfer · Lessons 110 + 111', link: L.LT },
+        { t: 'Pimsleur · Lesson 26', link: L.pimsleur },
+        { t: 'HelloTalk: ask a Greek about their favorite Greek food' }
+      ]},
+      { d: 'Thu', dur: '40 min', tasks: [
+        { t: 'Language Transfer · Lessons 112 + 113', link: L.LT },
+        { t: 'Anki review' },
+        { t: 'Easy Greek "advanced" video', link: L.easyGreek }
+      ]},
+      { d: 'Fri', dur: '70 min', tasks: [
+        { t: 'Language Transfer · Lessons 114 + 115 + 116', link: L.LT },
+        { t: 'Pimsleur · Lesson 27', link: L.pimsleur },
+        { t: 'Anki review' },
+        { t: 'Bookmark LingQ Greek mini-stories for Phase 2', link: L.lingq }
+      ]},
+      { d: 'Sat', dur: '70 min', tasks: [
+        { t: 'Language Transfer · Lessons 117 + 118', link: L.LT },
+        { t: '250-word reflection in Greek: where you started, where you are' },
+        { t: 'Read Lord\'s Prayer + first paragraph of Creed aloud' }
+      ]},
+      { d: 'Sun', dur: '90 min', tasks: [
+        { t: 'Language Transfer · Lessons 119 + 120 — THE FINAL TWO', link: L.LT },
+        { t: 'YOU HAVE COMPLETED LANGUAGE TRANSFER COMPLETE GREEK.' },
+        { t: 'Read along with Compline or another short service in Greek + English', link: L.agesLiturgy },
+        { t: 'Phase 1 complete. Tonight: Greek wine. A celebration.' }
+      ]}
+    ]
+  }
+];
+
+// PHASE 2 — BUILDING BLOCKS (Weeks 14-26) — themed weekly with daily templates
+const P2_THEMES = [
+  { topic: 'Family & Relationships', why: 'You\'ll describe your family in Greek by Sunday — fluently, warmly.', grammar: 'Present tense review', vocab: 'Extended family terms, friends, neighbors', creedLine: { greek: 'τὸν ἐκ τοῦ Πατρὸς γεννηθέντα', en: '"Begotten of the Father."' } },
+  { topic: 'Food & The Table', why: 'Order anything in any Greek restaurant without English.', grammar: 'Definite & indefinite articles', vocab: 'Foods, restaurants, ordering, mezze', creedLine: { greek: 'πρὸ πάντων τῶν αἰώνων', en: '"Before all ages."' } },
+  { topic: 'The Home', why: 'You\'ll describe a room in Greek as quickly as in English.', grammar: 'Nominative case mastery', vocab: 'Rooms, furniture, household items', creedLine: { greek: 'φῶς ἐκ φωτός', en: '"Light from Light."' } },
+  { topic: 'Month 4 · Work & Daily Routine', why: 'A Greek speaker will know what you do for a living from your own words.', grammar: 'Reflexive verbs', vocab: 'Professions, schedule, daily activities', creedLine: { greek: 'Θεὸν ἀληθινὸν ἐκ Θεοῦ ἀληθινοῦ', en: '"True God of true God."' }, milestone: 'Describe your daily routine in Greek for 90 seconds — recorded.' },
+  { topic: 'Travel & Directions', why: 'You could find your way through Athens, alone, with no English.', grammar: 'Imperatives for directions', vocab: 'Transportation, locations, asking the way', creedLine: { greek: 'γεννηθέντα οὐ ποιηθέντα', en: '"Begotten, not made."' } },
+  { topic: 'REVIEW WEEK · Consolidation', why: 'Cement what you have. Gain nothing new — lose nothing old.', grammar: 'No new grammar — review weeks 14-18', vocab: 'Re-drill the cards you struggle with', creedLine: { greek: 'ὁμοούσιον τῷ Πατρί', en: '"Of one essence with the Father."' }, isReview: true },
+  { topic: 'Weather & Seasons', why: 'Small talk in Greek now lives in you.', grammar: 'Impersonal expressions', vocab: 'Weather, seasons, climate', creedLine: { greek: "δι' οὗ τὰ πάντα ἐγένετο", en: '"By whom all things were made."' } },
+  { topic: 'Month 5 · The Body & Health', why: 'You could describe a symptom to a Greek doctor.', grammar: 'Possessive pronouns', vocab: 'Body parts, symptoms, doctor visit', creedLine: { greek: 'τὸν δι\' ἡμᾶς τοὺς ἀνθρώπους', en: '"Who for us men..."' }, milestone: 'Roleplay a doctor visit in Greek (with HelloTalk partner or alone).' },
+  { topic: 'Shopping & Money', why: 'Bargain in a Greek market without flinching.', grammar: 'Numbers 100+, percentages', vocab: 'Stores, prices, payment, sizes', creedLine: { greek: 'καὶ διὰ τὴν ἡμετέραν σωτηρίαν', en: '"And for our salvation."' } },
+  { topic: 'Past Tense — Aorist', why: 'You begin to tell stories — not just describe states.', grammar: 'Aorist (simple past) regular forms', vocab: 'Common past-tense verbs', creedLine: { greek: 'κατελθόντα ἐκ τῶν οὐρανῶν', en: '"Came down from heaven."' } },
+  { topic: 'Telling Stories', why: 'Past, present, and future weave together in a real narrative.', grammar: 'Aorist + imperfect distinction', vocab: 'Sequence words: μετά, πριν, τότε', creedLine: { greek: 'καὶ σαρκωθέντα ἐκ Πνεύματος Ἁγίου', en: '"And was incarnate of the Holy Spirit."' } },
+  { topic: 'Month 6 · Future Plans', why: 'You can speak about tomorrow as easily as about today.', grammar: 'Future tense forms', vocab: 'Time markers: αύριο, την επόμενη...', creedLine: { greek: 'καὶ Μαρίας τῆς Παρθένου', en: '"And the Virgin Mary."' }, milestone: 'Write 200 Greek words about a future trip you want to take.' },
+  { topic: 'REVIEW WEEK · Phase 2 Synthesis', why: 'Six months. Phase 2 closes.', grammar: 'Comprehensive Phase 2 review', vocab: 'Personal vocabulary audit — what sticks, what doesn\'t', creedLine: { greek: 'καὶ ἐνανθρωπήσαντα', en: '"And became man."' }, isReview: true }
+];
+
+// PHASE 3 — CONVERSATION (Weeks 27-39) — bi-weekly tutor begins
+const P3_THEMES = [
+  { topic: 'Output Begins · Tutor Onboarding', why: 'You hire a tutor this week. Your speaking begins to shape itself.', focus: 'Find italki/Preply tutor. Schedule first session this Friday.', creedLine: { greek: 'σταυρωθέντα τε ὑπὲρ ἡμῶν', en: '"Crucified for us."' }, isTutorWeek: true, tutorFreq: 'first' },
+  { topic: 'Native Listening Push', why: 'Greek podcasts you couldn\'t follow before now make sense.', focus: 'Greek podcasts daily — 15+ min. No subtitles where possible.', creedLine: { greek: 'ἐπὶ Ποντίου Πιλάτου', en: '"Under Pontius Pilate."' }, isTutorWeek: true, tutorFreq: 'biweekly-off' },
+  { topic: 'Tutor Session #2', why: 'The second session always feels easier than the first.', focus: 'Bi-weekly tutor cadence begins. Bring 5 prepared topics.', creedLine: { greek: 'καὶ παθόντα καὶ ταφέντα', en: '"And suffered and was buried."' }, isTutorWeek: true, tutorFreq: 'biweekly' },
+  { topic: 'Month 7 · First Greek Book', why: 'You\'re reading a real book in Greek.', focus: 'Begin a graded reader or LingQ Greek mini-stories.', creedLine: { greek: 'καὶ ἀναστάντα τῇ τρίτῃ ἡμέρᾳ', en: '"And rose on the third day."' }, isTutorWeek: true, tutorFreq: 'biweekly-off', milestone: 'Finish your first short story in Greek without English.' },
+  { topic: 'Pronunciation Audit', why: 'Catch your accent before it calcifies.', focus: 'Record yourself reading Lord\'s Prayer. Compare to native. Drill γ, χ, υ specifically.', creedLine: { greek: 'κατὰ τὰς Γραφάς', en: '"According to the Scriptures."' }, isAudit: true },
+  { topic: 'Tutor Session #3 · Idioms', why: 'Idioms make you sound less like a textbook.', focus: 'Bi-weekly tutor. Learn 10 Greek idioms. Use one in session.', creedLine: { greek: 'καὶ ἀνελθόντα εἰς τοὺς οὐρανούς', en: '"And ascended into heaven."' }, isTutorWeek: true, tutorFreq: 'biweekly' },
+  { topic: 'REVIEW WEEK · Mid-Phase 3', why: 'Pause. Consolidate. Decay is real.', focus: 'Re-watch first 5 Easy Greek videos. Re-read your Greek journal. Drill weak Anki cards.', creedLine: { greek: 'καὶ καθεζόμενον ἐκ δεξιῶν τοῦ Πατρός', en: '"And sits at the right hand of the Father."' }, isReview: true },
+  { topic: 'Month 8 · Greek YouTubers', why: 'Greek voices in your daily life.', focus: 'Subscribe to 3 Greek creators in your interests. Watch daily.', creedLine: { greek: 'καὶ πάλιν ἐρχόμενον μετὰ δόξης', en: '"And shall come again with glory."' }, isTutorWeek: true, tutorFreq: 'biweekly-off', milestone: 'Watch a Greek YouTube video without subtitles, 80%+ comprehension.' },
+  { topic: 'Tutor Session #4 · Writing Push', why: 'Long-form writing exposes everything you don\'t yet know.', focus: 'Bi-weekly tutor. Send 200-word essays for correction.', creedLine: { greek: 'κρῖναι ζῶντας καὶ νεκρούς', en: '"To judge the living and the dead."' }, isTutorWeek: true, tutorFreq: 'biweekly' },
+  { topic: 'Greek Music & Lyrics', why: 'You\'ll memorize songs in a language you\'re becoming.', focus: '3 Greek songs by heart. Folk + modern. Sing along.', creedLine: { greek: 'οὗ τῆς βασιλείας οὐκ ἔσται τέλος', en: '"Whose Kingdom shall have no end."' }, isTutorWeek: true, tutorFreq: 'biweekly-off' },
+  { topic: 'Tutor Session #5 · Voice & Phone', why: 'Speaking without seeing the other person tests real fluency.', focus: 'Bi-weekly tutor. Phone or video — no chat. HelloTalk voice messages daily.', creedLine: { greek: 'Καὶ εἰς τὸ Πνεῦμα τὸ Ἅγιον', en: '"And in the Holy Spirit."' }, isTutorWeek: true, tutorFreq: 'biweekly' },
+  { topic: 'Month 9 · Greek Cinema', why: 'A Greek film with Greek subtitles only. You\'ll follow it.', focus: 'Watch one Greek film. Discuss with tutor next session.', creedLine: { greek: 'τὸ Κύριον, τὸ ζωοποιόν', en: '"The Lord, the Giver of Life."' }, isTutorWeek: true, tutorFreq: 'biweekly-off', milestone: 'Hold a 15-min phone conversation with a Greek native — no English.' },
+  { topic: 'REVIEW WEEK · Phase 3 Capstone', why: 'Phase 3 closes. Phase 4 demands more — prepare.', focus: 'Re-listen to LT favorites. Re-read your best Greek writings. Drill weak vocabulary.', creedLine: { greek: 'τὸ ἐκ τοῦ Πατρὸς ἐκπορευόμενον', en: '"Who proceeds from the Father."' }, isReview: true }
+];
+
+// PHASE 4 — TRAVEL-READY (Weeks 40-52) — weekly tutor
+const P4_THEMES = [
+  { topic: 'Weekly Tutor Begins · Politics & Society', why: 'Reading the news in Greek becomes routine.', focus: 'Weekly tutor cadence locked in. Read Greek news daily.', creedLine: { greek: 'τὸ σὺν Πατρὶ καὶ Υἱῷ συμπροσκυνούμενον', en: '"Worshipped with the Father and Son."' }, isTutorWeek: true, tutorFreq: 'weekly', parishPrompt: true },
+  { topic: 'Religious Vocabulary Deep Dive', why: 'Liturgy will start opening up.', focus: 'Build dedicated Anki deck for Liturgical Greek. Listen to Liturgy weekly.', creedLine: { greek: 'καὶ συνδοξαζόμενον', en: '"And glorified."' }, isTutorWeek: true, tutorFreq: 'weekly' },
+  { topic: 'Month 10 · Reading Speed', why: 'Fluency is reading at the speed of thought.', focus: 'Time yourself reading articles. Track WPM weekly.', creedLine: { greek: 'τὸ λαλῆσαν διὰ τῶν προφητῶν', en: '"Who spoke through the prophets."' }, isTutorWeek: true, tutorFreq: 'weekly', milestone: 'Read 100 Greek words/min comfortably.' },
+  { topic: 'Greek Literature Sample', why: 'Cavafy and Seferis in Greek — even imperfectly — is sacred.', focus: 'Read a Cavafy poem. Memorize favorite lines.', creedLine: { greek: 'Εἰς μίαν ἁγίαν, καθολικὴν καὶ ἀποστολικὴν Ἐκκλησίαν', en: '"In one holy, catholic, and apostolic Church."' }, isTutorWeek: true, tutorFreq: 'weekly' },
+  { topic: 'Roleplay Practice', why: 'Real situations, rehearsed. Real fluency, built.', focus: 'Tutor sessions = restaurant, hotel, taxi roleplays.', creedLine: { greek: 'Ὁμολογῶ ἓν βάπτισμα', en: '"I confess one baptism."' }, isTutorWeek: true, tutorFreq: 'weekly' },
+  { topic: 'REVIEW WEEK · Mid-Phase 4', why: 'Consolidate before the final push.', focus: 'Re-watch tutor session recordings. Drill struggle areas.', creedLine: { greek: 'εἰς ἄφεσιν ἁμαρτιῶν', en: '"For the forgiveness of sins."' }, isReview: true },
+  { topic: 'Argument & Debate', why: 'Defending an opinion in Greek is harder than describing one.', focus: 'Tutor: pick a position, defend it in Greek.', creedLine: { greek: 'Προσδοκῶ ἀνάστασιν νεκρῶν', en: '"I expect the resurrection of the dead."' }, isTutorWeek: true, tutorFreq: 'weekly' },
+  { topic: 'Month 11 · Travel Prep & Pronunciation Audit #2', why: 'Polish what could calcify. Prepare for Greece.', focus: 'Plan a real or imagined Greece trip — research only in Greek. Re-record Lord\'s Prayer; compare to month 7.', creedLine: { greek: 'καὶ ζωὴν τοῦ μέλλοντος αἰῶνος. Ἀμήν.', en: '"And the life of the age to come. Amen." THE FULL CREED.' }, isTutorWeek: true, tutorFreq: 'weekly', isAudit: true, milestone: 'Recite the full Nicene Creed in Greek from memory.' },
+  { topic: 'Cooking from Greek Recipes Only', why: 'Living in Greek, not just studying it.', focus: 'Cook 2 dishes from Greek-language recipes. No translations.', creedLine: { greek: 'Ἅγιος ὁ Θεός', en: 'Trisagion — "Holy God."' }, isTutorWeek: true, tutorFreq: 'weekly' },
+  { topic: 'Long-Form Listening', why: 'A 1-hour Greek podcast: yours.', focus: '60-min Greek podcast. Take notes. Discuss in tutor session.', creedLine: { greek: 'Ἅγιος Ἰσχυρός', en: '"Holy Mighty."' }, isTutorWeek: true, tutorFreq: 'weekly' },
+  { topic: 'Greek Without Subtitles', why: 'Subtitles off — your ear is enough.', focus: 'Daily Greek video with NO subtitles. Track comprehension %.', creedLine: { greek: 'Ἅγιος Ἀθάνατος, ἐλέησον ἡμᾶς', en: '"Holy Immortal, have mercy on us."' }, isTutorWeek: true, tutorFreq: 'weekly' },
+  { topic: 'Month 12 · The Test Week', why: 'Could you survive a week alone in Athens? Find out.', focus: 'Self-assessment week. Long tutor session. Self-test of all skills.', creedLine: { greek: 'Δι\' εὐχῶν τῶν ἁγίων Πατέρων ἡμῶν', en: '"Through the prayers of our holy fathers."' }, isTutorWeek: true, tutorFreq: 'weekly', milestone: 'Hold a 30-min conversation in Greek. Record. Listen back. Year 1 capstone.' },
+  { topic: 'YEAR 1 CAPSTONE · Modern Greek Conversational', why: 'One year. The first Greek is yours.', focus: 'Reflect, celebrate, and look ahead. Year 2 begins next week — Koine.', creedLine: { greek: 'Δόξα Πατρὶ καὶ Υἱῷ καὶ Ἁγίῳ Πνεύματι', en: '"Glory to the Father, and to the Son, and to the Holy Spirit."' }, isCapstone: true, milestone: 'YEAR 1 COMPLETE. B1/B2 Modern Greek achieved.' }
+];
+
+function buildTemplatedWeek(weekNum, theme, phaseId) {
+  const monthMarker = (weekNum - 13) % 4 === 0 && !theme.isReview ? '' : '';
+  let days;
+
+  if (theme.isReview) {
+    days = [
+      { d: 'Mon', dur: '40 min', tasks: [
+        { t: 'Anki: drill cards you marked "hard" — 20 min focus session' },
+        { t: 'Re-listen to Language Transfer lessons that still felt shaky' },
+        { t: 'No new vocabulary today — just reinforce' }
+      ]},
+      { d: 'Tue', dur: '35 min', tasks: [
+        { t: 'Re-read your last 3 Greek journal entries — note errors aloud' },
+        { t: 'Anki review' },
+        { t: 'Pimsleur: redo a lesson that felt hard', link: L.pimsleur }
+      ]},
+      { d: 'Wed', dur: '40 min', tasks: [
+        { t: 'Re-watch 2 Easy Greek videos that gave you trouble', link: L.easyGreek },
+        { t: 'Anki review' },
+        { t: 'Read your earliest HelloTalk messages — see how you\'ve grown' }
+      ]},
+      { d: 'Thu', dur: '35 min', tasks: [
+        { t: 'Anki review — reset any cards that feel off' },
+        { t: 'Re-read this phase\'s liturgical passages aloud' },
+        { t: 'No new content. You\'re building the bedrock.' }
+      ]},
+      { d: 'Fri', dur: '60 min', tasks: [
+        { t: 'Long Anki session — clear the "again" pile entirely' },
+        { t: 'HelloTalk: long voice message reflecting on this phase', link: L.helloTalk },
+        { t: 'Re-read your Greek journal start to finish' }
+      ]},
+      { d: 'Sat', dur: '60 min', tasks: [
+        { t: 'Re-listen to Pimsleur lessons that felt easy now — should be effortless', link: L.pimsleur },
+        { t: 'Anki review' },
+        { t: 'Read your Liturgy book aloud — pages you\'ve covered' },
+        { t: 'Reflect: write 200 words on what feels different' }
+      ]},
+      { d: 'Sun', dur: '45 min', tasks: [
+        { t: 'No tasks today — just attend Liturgy with the Greek service book', link: L.glt },
+        { t: 'Notice what you understood that you didn\'t before' },
+        { t: 'Rest in the work done. Phase resumes next week.' }
+      ]}
+    ];
+  } else if (theme.isAudit) {
+    days = [
+      { d: 'Mon', dur: '40 min', tasks: [
+        { t: 'Record yourself reading the Lord\'s Prayer in Greek' },
+        { t: 'Listen to a native recitation; identify your drift', link: L.forvo },
+        { t: 'Anki review' }
+      ]},
+      { d: 'Tue', dur: '40 min', tasks: [
+        { t: 'Drill the sound that\'s most off — 10 min focused practice' },
+        { t: 'Pimsleur next lesson', link: L.pimsleur },
+        { t: 'Anki review' }
+      ]},
+      { d: 'Wed', dur: '40 min', tasks: [
+        { t: 'Re-record Lord\'s Prayer; compare to Monday\'s recording' },
+        { t: 'Anki review' },
+        { t: 'HelloTalk: ask a native to comment on your accent in voice message' }
+      ]},
+      { d: 'Thu', dur: '40 min', tasks: [
+        { t: 'Easy Greek video: shadow the speaker — repeat exactly as they say it', link: L.easyGreek },
+        { t: 'Anki review' },
+        { t: 'Pimsleur next lesson', link: L.pimsleur }
+      ]},
+      { d: 'Fri', dur: '60 min', tasks: [
+        { t: 'Tutor session OR record yourself reading 1 paragraph of Greek prose', link: L.italki },
+        { t: 'Anki review' },
+        { t: 'Listen back; note 3 specific corrections' }
+      ]},
+      { d: 'Sat', dur: '60 min', tasks: [
+        { t: 'Long Pimsleur session', link: L.pimsleur },
+        { t: 'Re-record the Lord\'s Prayer — should feel different already' },
+        { t: 'Read your liturgy book aloud — pay attention to every sound' },
+        { t: 'Anki review' }
+      ]},
+      { d: 'Sun', dur: '50 min', tasks: [
+        { t: 'Attend Liturgy following the Greek service book — focus on pronunciation', link: L.glt },
+        { t: 'Reflect: which sounds feel natural now? Which still don\'t?' }
+      ]}
+    ];
+  } else if (theme.isTutorWeek) {
+    const tutorDay = theme.tutorFreq === 'weekly' || theme.tutorFreq === 'first';
+    days = [
+      { d: 'Mon', dur: '40 min', tasks: [
+        { t: 'Pimsleur next lesson', link: L.pimsleur },
+        { t: 'Anki review (~10 min)' },
+        { t: theme.parishPrompt ? 'Identify a Greek-speaking parishioner. Ask if they\'ll converse weekly. Be specific: ask for correction.' : `Today\'s focus: ${theme.focus.split('.')[0]}` }
+      ]},
+      { d: 'Tue', dur: '40 min', tasks: [
+        { t: 'Pimsleur next lesson', link: L.pimsleur },
+        { t: 'Anki review' },
+        { t: 'Reading: 1 article from Greek news', link: L.kathimerini }
+      ]},
+      { d: 'Wed', dur: '40 min', tasks: [
+        { t: 'LingQ: import an article you actually want to read', link: L.lingq },
+        { t: 'Anki review' },
+        { t: 'Prepare 5 topics for Friday\'s tutor session' }
+      ]},
+      { d: 'Thu', dur: '40 min', tasks: [
+        { t: 'Easy Greek or Do You Speak Greek video', link: L.easyGreek },
+        { t: 'Anki review' },
+        { t: 'Practice: shadow speech — repeat what you hear immediately' }
+      ]},
+      { d: 'Fri', dur: '75 min', tasks: [
+        { t: tutorDay ? 'TUTOR SESSION (60 min) on italki or Preply' : 'No tutor this week — extended HelloTalk voice exchange instead', link: tutorDay ? L.italki : L.helloTalk },
+        { t: 'Bring your prepared topics' },
+        { t: 'After: write 3 things you learned + 3 you struggled with' }
+      ]},
+      { d: 'Sat', dur: '60 min', tasks: [
+        { t: 'Anki review (longer)' },
+        { t: 'Watch a Greek movie/show — Greek subtitles only', link: L.ertflix },
+        { t: 'Long-form writing: 250-word essay on this week\'s theme' }
+      ]},
+      { d: 'Sun', dur: '50 min', tasks: [
+        { t: 'Parish conversation partner — 20-30 min in Greek' },
+        { t: 'Liturgy with Greek service book', link: L.glt },
+        { t: 'Recite this week\'s liturgical line from memory' }
+      ]}
+    ];
+  } else if (theme.isCapstone) {
+    days = [
+      { d: 'Mon', dur: '40 min', tasks: [
+        { t: 'Re-listen to Language Transfer Lessons 1, 30, 60, 90, 120 — feel the year' },
+        { t: 'Anki review' },
+        { t: 'Write a 500-word reflection in Greek on Year 1' }
+      ]},
+      { d: 'Tue', dur: '40 min', tasks: [
+        { t: 'Read your earliest journal entry. Then your most recent. Notice the gap.' },
+        { t: 'Anki review' },
+        { t: 'Pimsleur next lesson', link: L.pimsleur }
+      ]},
+      { d: 'Wed', dur: '40 min', tasks: [
+        { t: 'Long HelloTalk voice message — describe your year in Greek', link: L.helloTalk },
+        { t: 'Anki review' },
+        { t: 'Read along with the Liturgy in Greek — note what you understand', link: L.agesLiturgy }
+      ]},
+      { d: 'Thu', dur: '40 min', tasks: [
+        { t: 'Recite from memory: Lord\'s Prayer, Trisagion, full Nicene Creed' },
+        { t: 'Anki review' },
+        { t: 'Order Mounce\'s "Basics of Biblical Greek" — Year 2 begins next week', link: L.mounce }
+      ]},
+      { d: 'Fri', dur: '90 min', tasks: [
+        { t: 'TUTOR SESSION — Year 1 capstone conversation', link: L.italki },
+        { t: 'Tell your tutor what you want for Year 2' },
+        { t: 'Set Koine expectations together' }
+      ]},
+      { d: 'Sat', dur: '90 min', tasks: [
+        { t: 'Hold a 30-min conversation with your parish partner in Greek' },
+        { t: 'Record it. Listen back. Note your fluency.' },
+        { t: 'Browse your Holmes Apostolic Fathers; preview what\'s ahead in Phase 7' }
+      ]},
+      { d: 'Sun', dur: '60 min', tasks: [
+        { t: 'YEAR 1 COMPLETE. You speak Greek.' },
+        { t: 'Liturgy with the Greek service book', link: L.glt },
+        { t: 'Tonight: a real celebration. You earned it.' },
+        { t: 'Year 2 begins Monday. The Bridge to Koine opens.' }
+      ]}
+    ];
+  } else {
+    // Standard Phase 2 themed week (defensive fallback uses safe defaults)
+    const grammar = theme.grammar || theme.focus || 'Mixed review';
+    const vocab = theme.vocab || 'theme-related vocabulary';
+    const topic = theme.topic || 'this week\'s theme';
+    days = [
+      { d: 'Mon', dur: '40 min', tasks: [
+        { t: 'Pimsleur next lesson (~25 min)', link: L.pimsleur },
+        { t: 'Anki review (~10 min)' },
+        { t: `Add 10 cards: ${vocab}` }
+      ]},
+      { d: 'Tue', dur: '40 min', tasks: [
+        { t: 'Pimsleur next lesson', link: L.pimsleur },
+        { t: 'Anki review' },
+        { t: `Grammar focus: ${grammar} — find a video or article` }
+      ]},
+      { d: 'Wed', dur: '40 min', tasks: [
+        { t: 'LingQ Greek mini-story or imported article (~20 min)', link: L.lingq },
+        { t: 'Anki review' },
+        { t: `Easy Greek video on: ${topic}`, link: L.easyGreek }
+      ]},
+      { d: 'Thu', dur: '40 min', tasks: [
+        { t: 'Pimsleur next lesson', link: L.pimsleur },
+        { t: 'Anki review' },
+        { t: `Write 5 sentences using ${grammar.toLowerCase()}` }
+      ]},
+      { d: 'Fri', dur: '60 min', tasks: [
+        { t: 'Pimsleur next lesson', link: L.pimsleur },
+        { t: 'Anki review' },
+        { t: `15-min Greek podcast or vlog on ${topic.toLowerCase()}`, link: L.greekPodcasts },
+        { t: 'HelloTalk/Tandem: voice message about your week', link: L.helloTalk }
+      ]},
+      { d: 'Sat', dur: '60 min', tasks: [
+        { t: 'Pimsleur next lesson', link: L.pimsleur },
+        { t: 'Anki review' },
+        { t: 'Read a Greek news article — full article', link: L.kathimerini },
+        { t: `Greek journal entry (10+ sentences) on ${topic.toLowerCase()}` }
+      ]},
+      { d: 'Sun', dur: '50 min', tasks: [
+        { t: 'Attend Liturgy with Greek service book', link: L.glt },
+        { t: 'Anki review (lighter)' },
+        { t: 'Recite this week\'s Creed line from memory' },
+        { t: 'Parish partner conversation if available' }
+      ]}
+    ];
+  }
+
+  return {
+    week: weekNum,
+    title: theme.topic,
+    why: theme.why,
+    focus: theme.focus || `${theme.grammar}. Vocabulary: ${theme.vocab}.`,
+    liturgical: theme.creedLine,
+    milestone: theme.milestone || null,
+    isReview: !!theme.isReview,
+    isCapstone: !!theme.isCapstone,
+    days
+  };
+}
+
+// Build all of Phase 2, 3, 4 (weeks 14-52)
+P2_THEMES.forEach((theme, i) => WEEKS.push(buildTemplatedWeek(14 + i, theme, 2)));
+P3_THEMES.forEach((theme, i) => WEEKS.push(buildTemplatedWeek(27 + i, theme, 3)));
+P4_THEMES.forEach((theme, i) => WEEKS.push(buildTemplatedWeek(40 + i, theme, 4)));
+
+// ============= YEAR 2 — WEEKS 53-104 =============
+// Phase 5: Koine Begins (53-65) · Phase 6: Gospel of John (66-78)
+// Phase 7: Apostolic Fathers (79-91) · Phase 8: Consolidation (92-104)
+
+// PHASE 5 — KOINE BEGINS · Mounce textbook (Weeks 53-65)
+const P5_THEMES = [
+  { topic: 'Year 2 Begins · Mounce Ch. 1-2', why: 'You begin Koine. The Greek of your Greek New Testament opens.', focus: 'Mounce ch. 1 (alphabet review) + ch. 2 (pronunciation differences from Modern). Your alphabet knowledge transfers — you already know it.', creedLine: { greek: 'Ἐν ἀρχῇ ἦν ὁ Λόγος', en: 'John 1:1 — "In the beginning was the Word."' }, isMounce: true, mounceCh: '1-2', maintainModern: true },
+  { topic: 'Mounce Ch. 3 · The Greek Verb Overview', why: 'See the Greek verb system whole, before diving into pieces.', focus: 'Mounce ch. 3. Big-picture overview of tense/voice/mood. Don\'t memorize yet — just see the shape.', creedLine: { greek: 'καὶ ὁ Λόγος ἦν πρὸς τὸν Θεόν', en: '"And the Word was with God."' }, isMounce: true, mounceCh: '3', maintainModern: true },
+  { topic: 'Mounce Ch. 4-5 · Nouns & The Article', why: 'Greek nouns have endings that carry meaning — the engine of the language.', focus: 'Mounce ch. 4-5. Cases (nominative, genitive, dative, accusative, vocative). Compare with what you know from Modern.', creedLine: { greek: 'καὶ Θεὸς ἦν ὁ Λόγος', en: '"And the Word was God."' }, isMounce: true, mounceCh: '4-5', maintainModern: true },
+  { topic: 'Month 14 · Mounce Ch. 6 · Prepositions', why: 'Prepositions are where Greek precision lives. Most you\'ll already half-know.', focus: 'Mounce ch. 6. Prepositions and the cases they take. Many overlap with Modern.', creedLine: { greek: 'οὗτος ἦν ἐν ἀρχῇ πρὸς τὸν Θεόν', en: '"He was in the beginning with God."' }, isMounce: true, mounceCh: '6', maintainModern: true, milestone: 'Read John 1:1-3 in your Greek NT — see how much you can parse.' },
+  { topic: 'Mounce Ch. 7 · Adjectives', why: 'Agreement patterns are familiar — same intuitions as Modern Greek.', focus: 'Mounce ch. 7. Adjective forms and uses. Practice attributive vs predicative position.', creedLine: { greek: 'πάντα δι\' αὐτοῦ ἐγένετο', en: '"All things were made through Him."' }, isMounce: true, mounceCh: '7', maintainModern: true },
+  { topic: 'REVIEW WEEK · Koine Foundation', why: 'Pause before the verbs come fast. Cement what you have.', focus: 'No new Mounce. Re-read ch. 1-7. Drill paradigms aloud. Re-read John 1:1-5 in Greek.', creedLine: { greek: 'καὶ χωρὶς αὐτοῦ ἐγένετο οὐδὲ ἕν', en: '"And without Him nothing was made."' }, isReview: true, maintainModern: true },
+  { topic: 'Mounce Ch. 8-9 · Pronouns & Present Verbs', why: 'You begin to read sentences, not just identify forms.', focus: 'Mounce ch. 8 (pronouns) + ch. 9 (present active indicative). Real verb conjugation begins.', creedLine: { greek: 'ὃ γέγονεν ἐν αὐτῷ ζωὴ ἦν', en: '"That which was made in Him was life."' }, isMounce: true, mounceCh: '8-9', maintainModern: true },
+  { topic: 'Month 15 · Mounce Ch. 10 · Contract Verbs', why: 'The most common Greek verbs hide here.', focus: 'Mounce ch. 10. Contract verbs (-έω, -άω, -όω). Hugely common in NT.', creedLine: { greek: 'καὶ ἡ ζωὴ ἦν τὸ φῶς τῶν ἀνθρώπων', en: '"And the life was the light of men."' }, isMounce: true, mounceCh: '10', maintainModern: true, milestone: 'Parse 5 Greek NT verses without help — even imperfectly.' },
+  { topic: 'Mounce Ch. 11 · Future Active/Middle', why: 'Future tense in Koine — close cousin to Modern future.', focus: 'Mounce ch. 11. Future tense formation. The σ marker.', creedLine: { greek: 'καὶ τὸ φῶς ἐν τῇ σκοτίᾳ φαίνει', en: '"And the light shines in the darkness."' }, isMounce: true, mounceCh: '11', maintainModern: true },
+  { topic: 'Mounce Ch. 12 · Verbal Roots', why: 'Greek verbs are systematic — once you see the roots, the chaos resolves.', focus: 'Mounce ch. 12. Verbal roots and how tense stems form.', creedLine: { greek: 'καὶ ἡ σκοτία αὐτὸ οὐ κατέλαβεν', en: '"And the darkness did not overcome it."' }, isMounce: true, mounceCh: '12', maintainModern: true },
+  { topic: 'Mounce Ch. 13 · Imperfect Indicative', why: 'Past tense in Greek begins. The augment makes it visible.', focus: 'Mounce ch. 13. Imperfect tense — past continuous. Note the augment.', creedLine: { greek: 'Ἐγένετο ἄνθρωπος ἀπεσταλμένος παρὰ Θεοῦ', en: '"There was a man sent from God."' }, isMounce: true, mounceCh: '13', maintainModern: true },
+  { topic: 'Month 16 · Mounce Ch. 14 · Second Aorist', why: 'Storytelling Greek — the Gospel narratives use this constantly.', focus: 'Mounce ch. 14. Second aorist active/middle. Irregular but high-frequency.', creedLine: { greek: 'ὄνομα αὐτῷ Ἰωάννης', en: '"Whose name was John."' }, isMounce: true, mounceCh: '14', maintainModern: true, milestone: 'Read John 1:1-14 (the Prologue) in Greek with parallel English. Note structures you recognize.' },
+  { topic: 'REVIEW WEEK · Phase 5 Capstone', why: 'Six months into Year 2. Phase 5 closes; Gospel of John opens next week.', focus: 'No new Mounce. Re-read ch. 8-14. Recite all paradigms aloud. Read John 1:1-14 three times.', creedLine: { greek: 'οὗτος ἦλθεν εἰς μαρτυρίαν', en: '"He came as a witness."' }, isReview: true, maintainModern: true }
+];
+
+// PHASE 6 — THE GOSPEL OF JOHN (Weeks 66-78)
+const P6_THEMES = [
+  { topic: 'John 1 · The Prologue', why: 'The most theologically charged Greek you\'ll read all year.', focus: 'Read John 1:1-18 verse by verse. Mounce ch. 15 (1st aorist) alongside.', creedLine: { greek: 'Ἐν ἀρχῇ ἦν ὁ Λόγος, καὶ ὁ Λόγος ἦν πρὸς τὸν Θεόν, καὶ Θεὸς ἦν ὁ Λόγος', en: 'John 1:1 — memorize this verse this week.' }, isJohn: true, johnRef: '1:1-18', mounceCh: '15', maintainModern: true },
+  { topic: 'John 1:19-51 · The Witness & First Disciples', why: 'Narrative Greek begins. You\'re reading a story now.', focus: 'John 1:19-51. Mounce ch. 16 (passive voice).', creedLine: { greek: 'Ἴδε ὁ ἀμνὸς τοῦ Θεοῦ', en: 'John 1:29 — "Behold, the Lamb of God."' }, isJohn: true, johnRef: '1:19-51', mounceCh: '16', maintainModern: true },
+  { topic: 'John 2 · Cana & Cleansing of the Temple', why: 'Two foundational scenes. Memorable Greek.', focus: 'John 2:1-25. Mounce ch. 17 (third declension).', creedLine: { greek: 'τί ἐμοὶ καὶ σοί, γύναι;', en: 'John 2:4 — "What is that to you and me, woman?"' }, isJohn: true, johnRef: '2', mounceCh: '17', maintainModern: true },
+  { topic: 'Month 17 · John 3 · Nicodemus', why: 'John 3:16 in original Greek — yours.', focus: 'John 3:1-21. The most famous verses in Christianity. Mounce ch. 18 (first declension nouns).', creedLine: { greek: 'οὕτως γὰρ ἠγάπησεν ὁ Θεὸς τὸν κόσμον', en: 'John 3:16 — memorize this passage entire.' }, isJohn: true, johnRef: '3:1-21', mounceCh: '18', maintainModern: true, milestone: 'Recite John 3:16 from memory in Greek.' },
+  { topic: 'John 4 · The Samaritan Woman', why: 'A long dialogue. Conversational Koine.', focus: 'John 4:1-42. The conversation at the well. Mounce ch. 19 (perfect tense).', creedLine: { greek: 'πνεῦμα ὁ Θεός', en: 'John 4:24 — "God is Spirit."' }, isJohn: true, johnRef: '4', mounceCh: '19', maintainModern: true },
+  { topic: 'REVIEW WEEK · John 1-4', why: 'Re-read what you\'ve covered. Watch comprehension grow.', focus: 'No new chapters. Re-read John 1-4 entire. Drill perfect tense paradigm.', creedLine: { greek: 'Ζῶν γὰρ ὁ λόγος τοῦ Θεοῦ', en: 'Hebrews 4:12 — "For the word of God is living."' }, isReview: true, maintainModern: true },
+  { topic: 'John 5 · The Healing at Bethesda', why: 'Jesus\'s first major discourse. Theological depth.', focus: 'John 5:1-47. Mounce ch. 20 (participles intro).', creedLine: { greek: 'θέλεις ὑγιὴς γενέσθαι;', en: 'John 5:6 — "Do you want to be made well?"' }, isJohn: true, johnRef: '5', mounceCh: '20', maintainModern: true },
+  { topic: 'Month 18 · John 6 · The Bread of Life', why: 'Eucharistic Greek. The vocabulary of the Liturgy you hear weekly.', focus: 'John 6:1-71. The Bread of Life discourse. Mounce ch. 21 (more participles).', creedLine: { greek: 'ἐγώ εἰμι ὁ ἄρτος τῆς ζωῆς', en: 'John 6:35 — "I am the bread of life."' }, isJohn: true, johnRef: '6', mounceCh: '21', maintainModern: true, milestone: 'Read all of John 6 in one sitting (with English alongside as needed).' },
+  { topic: 'John 7-8 · Conflict in Jerusalem', why: 'Polemical Greek. Different rhythm than the discourses.', focus: 'John 7:1 - 8:59. Two long chapters. Mounce ch. 22 (aorist participles).', creedLine: { greek: 'ἐγὼ τὸ φῶς εἰμι τοῦ κόσμου', en: 'John 8:12 — "I am the light of the world."' }, isJohn: true, johnRef: '7-8', mounceCh: '22', maintainModern: true },
+  { topic: 'John 9-10 · Light & The Good Shepherd', why: 'Two of the I AM statements. Iconographic Greek.', focus: 'John 9-10. The man born blind + the Good Shepherd. Mounce ch. 23 (perfect participles).', creedLine: { greek: 'ἐγώ εἰμι ὁ ποιμὴν ὁ καλός', en: 'John 10:11 — "I am the good shepherd."' }, isJohn: true, johnRef: '9-10', mounceCh: '23', maintainModern: true },
+  { topic: 'John 11-12 · Lazarus & The Approach to Pascha', why: 'Resurrection language in original Greek. Powerful.', focus: 'John 11-12. The raising of Lazarus + the entry into Jerusalem. Mounce ch. 24 (subjunctive).', creedLine: { greek: 'ἐγώ εἰμι ἡ ἀνάστασις καὶ ἡ ζωή', en: 'John 11:25 — "I am the resurrection and the life."' }, isJohn: true, johnRef: '11-12', mounceCh: '24', maintainModern: true },
+  { topic: 'Month 19 · John 13-17 · The Last Discourse', why: 'The longest sustained teaching in the Gospels. Linguistically rich.', focus: 'John 13-17. The footwashing through the High Priestly Prayer. Mounce ch. 25-26.', creedLine: { greek: 'ἐγώ εἰμι ἡ ὁδὸς καὶ ἡ ἀλήθεια καὶ ἡ ζωή', en: 'John 14:6 — "I am the way, the truth, and the life."' }, isJohn: true, johnRef: '13-17', mounceCh: '25-26', maintainModern: true, milestone: 'Memorize John 14:6 in Greek.' },
+  { topic: 'John 18-21 · Passion & Resurrection · Phase Capstone', why: 'You will read the Resurrection account in original Greek.', focus: 'John 18-21. The Passion narrative + Resurrection appearances. Mounce ch. 27 (imperatives).', creedLine: { greek: 'ὁ Κύριός μου καὶ ὁ Θεός μου', en: 'John 20:28 — "My Lord and my God."' }, isJohn: true, johnRef: '18-21', mounceCh: '27', maintainModern: true, milestone: 'GOSPEL OF JOHN COMPLETE in Greek. The first NT book is yours.' }
+];
+
+// PHASE 7 — THE APOSTOLIC FATHERS · Holmes (Weeks 79-91)
+const P7_THEMES = [
+  { topic: 'Holmes · Didache 1-6 · The Two Ways', why: 'Your first non-NT Greek text. The earliest Christian catechism.', focus: 'Holmes p. ~344 onward. Didache ch. 1-6. Read Greek side; check Holmes\'s English when stuck.', creedLine: { greek: 'Ὁδοὶ δύο εἰσί', en: 'Didache 1:1 — "There are two ways."' }, isHolmes: true, holmesText: 'Didache 1-6', mounceCh: '28', maintainModern: true },
+  { topic: 'Didache 7-16 · Liturgy & Eschatology', why: 'The earliest Christian liturgical instructions.', focus: 'Didache 7-16. Baptism, Eucharist, weekly worship, end times. Mounce ch. 29 (infinitives).', creedLine: { greek: 'Ὡσαννά, τῷ Θεῷ Δαυίδ', en: 'Didache 10:6 — "Hosanna to the God of David."' }, isHolmes: true, holmesText: 'Didache 7-16', mounceCh: '29', maintainModern: true },
+  { topic: 'Month 20 · 1 Clement 1-20', why: 'A bishop of Rome writes to Corinth — circa AD 96. Living history.', focus: 'Holmes · 1 Clement ch. 1-20. Long, dignified Greek. Mounce ch. 30 (indicative review).', creedLine: { greek: 'ἀγάπη πάντα ποιεῖ', en: '1 Clement 49:5 — "Love does all things."' }, isHolmes: true, holmesText: '1 Clement 1-20', mounceCh: '30', maintainModern: true, milestone: 'Read 1 Clement\'s opening (1:1-2:1) aloud. Notice it\'s easier than you expected.' },
+  { topic: '1 Clement 21-44', why: 'Theological reasoning in early Christian Greek.', focus: 'Holmes · 1 Clement ch. 21-44. Argumentation about church order. Mounce ch. 31.', creedLine: { greek: 'πίστις καὶ φιλοξενία', en: '1 Clement 10:7 — "faith and hospitality"' }, isHolmes: true, holmesText: '1 Clement 21-44', mounceCh: '31', maintainModern: true },
+  { topic: '1 Clement 45-65 · Conclusion', why: 'Finish your second Apostolic Father text.', focus: 'Holmes · 1 Clement ch. 45-65. The hymn-like ending (ch. 59-61) — beautiful Greek prayers.', creedLine: { greek: 'ἡ φωνὴ αὐτοῦ ἤκουσται', en: '1 Clement 27:7 — "His voice has been heard."' }, isHolmes: true, holmesText: '1 Clement 45-65', mounceCh: 'review', maintainModern: true },
+  { topic: 'REVIEW WEEK · Mid-Phase 7', why: 'You\'ve read Didache and Clement. Pause and absorb.', focus: 'Re-read your favorite passages. Drill new Patristic vocabulary in Anki.', creedLine: { greek: 'πάντα δοκιμάζετε', en: '1 Thess 5:21 — "Test all things."' }, isReview: true, maintainModern: true },
+  { topic: 'Month 21 · Ignatius · Ephesians', why: 'A martyr writes on his way to die. Urgent, lyrical Greek.', focus: 'Holmes · Ignatius to the Ephesians. ~14 chapters. Heavy Christology.', creedLine: { greek: 'Θεοῦ φωνή', en: 'Ignatius, Eph. 6:1 — "The voice of God."' }, isHolmes: true, holmesText: 'Ignatius · Ephesians', maintainModern: true, milestone: 'Identify 5 Christological titles Ignatius uses for Christ.' },
+  { topic: 'Ignatius · Magnesians + Trallians', why: 'Two short letters. Bishop, presbyter, deacon — the threefold ministry in original Greek.', focus: 'Holmes · Ignatius to the Magnesians + to the Trallians.', creedLine: { greek: 'εἷς ἐπίσκοπος, μετὰ τοῦ πρεσβυτερίου καὶ τῶν διακόνων', en: 'Magnesians 6:1 — "One bishop, with the presbyterate and deacons."' }, isHolmes: true, holmesText: 'Magnesians + Trallians', maintainModern: true },
+  { topic: 'Ignatius · Romans', why: 'The most famous Ignatian letter. He begs them not to prevent his martyrdom.', focus: 'Holmes · Ignatius to the Romans. Read slowly — every line is weighted.', creedLine: { greek: 'σῖτός εἰμι Θεοῦ', en: 'Romans 4:1 — "I am the wheat of God."' }, isHolmes: true, holmesText: 'Ignatius · Romans', maintainModern: true },
+  { topic: 'Ignatius · Philadelphians + Smyrnaeans', why: 'Eucharistic theology in some of the earliest Christian Greek.', focus: 'Holmes · Philadelphians + Smyrnaeans. The "one Eucharist" passage in Smyrn. 8.', creedLine: { greek: 'ἕνωσις σαρκὸς καὶ πνεύματος', en: 'Magnesians 1:2 — "union of flesh and spirit"' }, isHolmes: true, holmesText: 'Philadelphians + Smyrnaeans', maintainModern: true },
+  { topic: 'Ignatius · Polycarp + Polycarp · Philippians', why: 'Bishop to bishop. Then the Smyrnean bishop himself.', focus: 'Holmes · Ignatius to Polycarp + Polycarp to the Philippians.', creedLine: { greek: 'στῆθι ἑδραῖος', en: 'Ignatius to Polycarp 3:1 — "Stand firm."' }, isHolmes: true, holmesText: 'Ignatius to Polycarp + Polycarp to the Philippians', maintainModern: true },
+  { topic: 'Month 22 · Martyrdom of Polycarp', why: 'The earliest detailed account of a Christian martyrdom — in Greek.', focus: 'Holmes · Martyrdom of Polycarp. ~22 chapters. Read at the pace it deserves.', creedLine: { greek: 'ὀγδοήκοντα καὶ ἓξ ἔτη δουλεύω αὐτῷ', en: 'Mart. Pol. 9:3 — "Eighty-six years I have served Him."' }, isHolmes: true, holmesText: 'Martyrdom of Polycarp', maintainModern: true, milestone: 'Read Mart. Pol. 9 (Polycarp\'s confession) aloud in Greek.' },
+  { topic: 'REVIEW WEEK · Phase 7 Capstone', why: 'You have read the Apostolic Fathers in Greek. Honor it.', focus: 'No new content. Re-read your favorite passages from Didache, Clement, Ignatius, Polycarp. Reflect.', creedLine: { greek: 'τετέλεσται', en: 'John 19:30 — "It is finished."' }, isReview: true, maintainModern: true }
+];
+
+// PHASE 8 — CONSOLIDATION (Weeks 92-104) · Modern Greek C1 push + NT broadening
+const P8_THEMES = [
+  { topic: 'Modern Greek C1 Push · News & Politics', why: 'Year 2 ends with both Greeks active. Modern can\'t decay.', focus: 'Daily Greek news reading. 2x/week tutor. Re-engage native content aggressively.', creedLine: { greek: 'εἰς τοὺς αἰῶνας τῶν αἰώνων', en: '"Forever and ever."' }, isModernPush: true, isTutorWeek: true, tutorFreq: 'weekly', maintainKoine: true },
+  { topic: '1 John in Greek', why: 'Simplest Greek in the NT. A gentle entry into the epistles.', focus: '1 John (5 chapters) in Greek. Easier than the Gospel. Read straight through.', creedLine: { greek: 'ὁ Θεὸς ἀγάπη ἐστίν', en: '1 John 4:8 — "God is love."' }, isNTReading: true, ntRef: '1 John (5 chapters)', isTutorWeek: true, tutorFreq: 'weekly', maintainKoine: true, milestone: 'Memorize 1 John 4:7-8 in Greek.' },
+  { topic: 'Month 23 · Mark in Greek', why: 'Shortest Gospel. Action-driven Greek. The first Synoptic.', focus: 'Begin Mark — aim for chapters 1-8 this week. Different style than John.', creedLine: { greek: 'Ἀρχὴ τοῦ εὐαγγελίου Ἰησοῦ Χριστοῦ', en: 'Mark 1:1 — "The beginning of the Gospel of Jesus Christ."' }, isNTReading: true, ntRef: 'Mark 1-8', isTutorWeek: true, tutorFreq: 'weekly', maintainKoine: true },
+  { topic: 'Mark Continued · 9-16', why: 'The Passion in the earliest Gospel. Stark Greek.', focus: 'Mark 9-16. Note how compressed the Greek is compared to John.', creedLine: { greek: 'πιστεύω, βοήθει μου τῇ ἀπιστίᾳ', en: 'Mark 9:24 — "I believe; help my unbelief."' }, isNTReading: true, ntRef: 'Mark 9-16', isTutorWeek: true, tutorFreq: 'weekly', maintainKoine: true },
+  { topic: 'James in Greek', why: 'Practical, beautiful Greek. Wisdom literature in NT form.', focus: 'James (5 chapters). Concise, vivid, quotable.', creedLine: { greek: 'πᾶν δώρημα τέλειον ἄνωθέν ἐστιν', en: 'James 1:17 — "Every perfect gift is from above."' }, isNTReading: true, ntRef: 'James', isTutorWeek: true, tutorFreq: 'weekly', maintainKoine: true },
+  { topic: 'REVIEW WEEK · Mid-Phase 8', why: 'Late Year 2. Don\'t cram — consolidate.', focus: 'Re-read favorite passages from John, 1 John, James. Drill weak Anki cards.', creedLine: { greek: 'στῆτε οὖν', en: 'Eph 6:14 — "Stand therefore."' }, isReview: true, maintainModern: true, maintainKoine: true },
+  { topic: 'Month 24 · Philippians', why: 'Paul\'s warmest letter. Manageable Greek.', focus: 'Philippians (4 chapters). Read with parallel English; note Paul\'s style.', creedLine: { greek: 'πάντα ἰσχύω ἐν τῷ ἐνδυναμοῦντί με', en: 'Phil 4:13 — "I can do all things through Him who strengthens me."' }, isNTReading: true, ntRef: 'Philippians', isTutorWeek: true, tutorFreq: 'weekly', maintainKoine: true, milestone: 'Memorize Philippians 4:6-7 in Greek.' },
+  { topic: 'Modern Greek Push · Cinema & Long-Form', why: 'Maintain Year 1 fluency. Greek film, podcast, conversation.', focus: 'Watch a Greek film entirely without subtitles. Track comprehension %.', creedLine: { greek: 'καὶ ἀγαπήσεις Κύριον τὸν Θεόν σου', en: 'Mark 12:30 — "And you shall love the Lord your God."' }, isModernPush: true, isTutorWeek: true, tutorFreq: 'weekly' },
+  { topic: 'Ephesians', why: 'Cosmic Christology. Dense, beautiful Greek.', focus: 'Ephesians (6 chapters). Slower reading — Paul\'s sentences are long.', creedLine: { greek: 'τὸ μυστήριον τοῦ θελήματος αὐτοῦ', en: 'Eph 1:9 — "The mystery of His will."' }, isNTReading: true, ntRef: 'Ephesians', isTutorWeek: true, tutorFreq: 'weekly', maintainKoine: true },
+  { topic: 'Pronunciation Audit #3 · Modern + Koine', why: 'Maintain pronunciation in both. Year 3 Patristic reading demands it.', focus: 'Record yourself: Lord\'s Prayer (Koine), then a Modern news paragraph. Compare to natives.', creedLine: { greek: 'φύλασσε τὴν παραθήκην', en: '1 Tim 6:20 — "Guard the deposit."' }, isAudit: true, isTutorWeek: true, tutorFreq: 'weekly', maintainModern: true, maintainKoine: true },
+  { topic: 'Month 25 · Hebrews 1-7', why: 'Some of the most elegant Greek in the NT. Demanding but rewarding.', focus: 'Hebrews 1-7. Take it slow — long sentences, sophisticated style.', creedLine: { greek: 'ὁ Θεὸς ἐλάλησεν ἡμῖν ἐν Υἱῷ', en: 'Heb 1:2 — "God has spoken to us in His Son."' }, isNTReading: true, ntRef: 'Hebrews 1-7', isTutorWeek: true, tutorFreq: 'weekly', maintainKoine: true, milestone: 'Read Hebrews 1:1-4 aloud in Greek — the most beautifully constructed sentence in the NT.' },
+  { topic: 'Hebrews 8-13', why: 'The high-priestly Christology. Liturgical resonance.', focus: 'Hebrews 8-13. Notice the sacrificial vocabulary — much overlaps with the Liturgy.', creedLine: { greek: 'τὸν ἀρχηγὸν καὶ τελειωτὴν τῆς πίστεως', en: 'Heb 12:2 — "The author and perfecter of faith."' }, isNTReading: true, ntRef: 'Hebrews 8-13', isTutorWeek: true, tutorFreq: 'weekly', maintainKoine: true },
+  { topic: 'YEAR 2 CAPSTONE · Both Greeks Active', why: 'Two years. The Bridge is crossed.', focus: 'Reflect, celebrate, look ahead. Year 3 begins next week — Patristic Greek proper.', creedLine: { greek: 'καιρὸς τοῦ γεννηθῆναι', en: 'Eccl 3:2 LXX — "A time to be born."' }, isCapstone: true, isYear2Capstone: true, milestone: 'YEAR 2 COMPLETE. NT readable. Apostolic Fathers read. Modern Greek C1.' }
+];
+
+function buildKoineWeek(weekNum, theme, phaseId) {
+  let days;
+
+  if (theme.isReview) {
+    days = [
+      { d: 'Mon', dur: '40 min', tasks: [
+        { t: 'Anki review — drill weak cards (both Modern and Koine decks)' },
+        { t: 'Re-read this phase\'s strongest passages aloud' },
+        { t: 'No new material today' }
+      ]},
+      { d: 'Tue', dur: '40 min', tasks: [
+        { t: 'Re-read recent Mounce paradigms — recite aloud' },
+        { t: 'Anki review' },
+        { t: 'Modern Greek: 15 min listening (podcast or news)', link: L.greekPodcasts }
+      ]},
+      { d: 'Wed', dur: '40 min', tasks: [
+        { t: 'Re-read your favorite recent NT passage' },
+        { t: 'Anki review' },
+        { t: 'Modern Greek: HelloTalk message in Greek', link: L.helloTalk }
+      ]},
+      { d: 'Thu', dur: '40 min', tasks: [
+        { t: 'Anki review — reset cards that feel off' },
+        { t: 'Re-read this phase\'s liturgical lines' },
+        { t: 'No new content. The bedrock matters.' }
+      ]},
+      { d: 'Fri', dur: '60 min', tasks: [
+        { t: 'TUTOR SESSION (Modern Greek conversation)', link: L.italki },
+        { t: 'Long Anki session — clear backlog' },
+        { t: 'Re-read your Greek journal — note your growth' }
+      ]},
+      { d: 'Sat', dur: '60 min', tasks: [
+        { t: 'Re-read entire phase\'s NT or Apostolic Father text' },
+        { t: 'Anki review' },
+        { t: '200-word reflection in Greek on what you\'ve absorbed' }
+      ]},
+      { d: 'Sun', dur: '50 min', tasks: [
+        { t: 'Liturgy with Greek service book — note new comprehension', link: L.glt },
+        { t: 'Parish partner conversation if available' },
+        { t: 'Rest in the work done' }
+      ]}
+    ];
+  } else if (theme.isAudit) {
+    days = [
+      { d: 'Mon', dur: '40 min', tasks: [
+        { t: 'Record yourself: Lord\'s Prayer (Koine pronunciation) + a paragraph of Modern Greek news' },
+        { t: 'Compare to native speakers; identify drift', link: L.forvo },
+        { t: 'Anki review (both decks)' }
+      ]},
+      { d: 'Tue', dur: '40 min', tasks: [
+        { t: 'Drill the sounds most off — 10 min focused practice each' },
+        { t: 'Pimsleur next lesson (Modern maintenance)', link: L.pimsleur },
+        { t: 'Anki review' }
+      ]},
+      { d: 'Wed', dur: '40 min', tasks: [
+        { t: 'Re-record both readings; compare to Monday' },
+        { t: 'Anki review' },
+        { t: 'HelloTalk: ask a native to comment on accent', link: L.helloTalk }
+      ]},
+      { d: 'Thu', dur: '40 min', tasks: [
+        { t: 'Shadow a Greek news anchor — repeat exactly', link: L.kathimerini },
+        { t: 'Read a NT passage aloud, paying attention to every sound' },
+        { t: 'Anki review' }
+      ]},
+      { d: 'Fri', dur: '75 min', tasks: [
+        { t: 'TUTOR SESSION — focus on pronunciation feedback', link: L.italki },
+        { t: 'Anki review' },
+        { t: 'Re-record Lord\'s Prayer; should feel different' }
+      ]},
+      { d: 'Sat', dur: '60 min', tasks: [
+        { t: 'Long Pimsleur session', link: L.pimsleur },
+        { t: 'Read your liturgy book aloud — focus on Koine pronunciation' },
+        { t: 'Anki review' }
+      ]},
+      { d: 'Sun', dur: '50 min', tasks: [
+        { t: 'Liturgy with Greek service book — feel pronunciation in context', link: L.glt },
+        { t: 'Reflect: which sounds are now natural?' }
+      ]}
+    ];
+  } else if (theme.isYear2Capstone) {
+    days = [
+      { d: 'Mon', dur: '40 min', tasks: [
+        { t: 'Re-read John 1:1-14 aloud — feel how natural it now is' },
+        { t: 'Anki review' },
+        { t: 'Write 500 words in Greek reflecting on Year 2' }
+      ]},
+      { d: 'Tue', dur: '40 min', tasks: [
+        { t: 'Re-read your favorite passage from each Apostolic Father (Holmes)' },
+        { t: 'Anki review' },
+        { t: 'Modern Greek: long HelloTalk voice message about your year', link: L.helloTalk }
+      ]},
+      { d: 'Wed', dur: '45 min', tasks: [
+        { t: 'Read along with the entire Liturgy in Greek', link: L.agesLiturgy },
+        { t: 'Note what you understand now vs. one year ago' },
+        { t: 'Anki review' }
+      ]},
+      { d: 'Thu', dur: '40 min', tasks: [
+        { t: 'Recite from memory: Lord\'s Prayer, full Creed, John 3:16, John 11:25' },
+        { t: 'Anki review' },
+        { t: 'Browse Year 3 plan ahead — Patristic Greek proper begins' }
+      ]},
+      { d: 'Fri', dur: '90 min', tasks: [
+        { t: 'TUTOR SESSION — Year 2 capstone conversation', link: L.italki },
+        { t: 'Discuss Year 3 goals with tutor — Patristic readings, capstone' },
+        { t: 'Anki review' }
+      ]},
+      { d: 'Sat', dur: '90 min', tasks: [
+        { t: 'Long parish partner conversation in Greek' },
+        { t: 'Begin previewing Chrysostom samples for Year 3', link: L.ellopos },
+        { t: 'Reflect: write 500 Greek words on what changed' }
+      ]},
+      { d: 'Sun', dur: '60 min', tasks: [
+        { t: 'YEAR 2 COMPLETE. Both Greeks active.' },
+        { t: 'Liturgy with the Greek service book', link: L.glt },
+        { t: 'Tonight: a real celebration. The Bridge is crossed.' },
+        { t: 'Year 3 begins Monday. The Fathers open.' }
+      ]}
+    ];
+  } else if (theme.isMounce) {
+    const ch = theme.mounceCh;
+    days = [
+      { d: 'Mon', dur: '40 min', tasks: [
+        { t: `Mounce ch. ${ch} · read the chapter (~25 min)`, link: L.mounce },
+        { t: 'Anki review' },
+        { t: 'Modern: Pimsleur lesson (maintenance)', link: L.pimsleur }
+      ]},
+      { d: 'Tue', dur: '40 min', tasks: [
+        { t: `Mounce ch. ${ch} · exercises (write paradigms by hand)` },
+        { t: 'Anki review' },
+        { t: 'Modern: 10 min Easy Greek video', link: L.easyGreek }
+      ]},
+      { d: 'Wed', dur: '40 min', tasks: [
+        { t: 'Mounce: re-read tricky sections' },
+        { t: 'Anki review' },
+        { t: 'Modern: HelloTalk message', link: L.helloTalk }
+      ]},
+      { d: 'Thu', dur: '40 min', tasks: [
+        { t: `Mounce ch. ${ch} · vocabulary list to Anki (Koine deck)` },
+        { t: 'Anki review' },
+        { t: 'Read 3 Greek news headlines aloud', link: L.kathimerini }
+      ]},
+      { d: 'Fri', dur: '60 min', tasks: [
+        { t: 'Mounce: chapter review + harder exercises' },
+        { t: 'TUTOR SESSION — Modern Greek (maintenance)', link: L.italki },
+        { t: 'Anki review' }
+      ]},
+      { d: 'Sat', dur: '70 min', tasks: [
+        { t: 'Read your Greek NT for 20 min — pick a familiar passage' },
+        { t: 'Mounce: any incomplete exercises' },
+        { t: 'Anki review' },
+        { t: 'Modern: a Greek news article', link: L.kathimerini }
+      ]},
+      { d: 'Sun', dur: '60 min', tasks: [
+        { t: 'Liturgy with Greek service book', link: L.glt },
+        { t: 'Parish partner conversation in Greek' },
+        { t: 'Recite this week\'s liturgical line' }
+      ]}
+    ];
+  } else if (theme.isJohn) {
+    const ref = theme.johnRef;
+    days = [
+      { d: 'Mon', dur: '40 min', tasks: [
+        { t: `Read John ${ref} in Greek (Greek side first; check English when stuck) · 25 min` },
+        { t: 'Anki review (Koine deck)' },
+        { t: 'Modern maintenance: Pimsleur lesson', link: L.pimsleur }
+      ]},
+      { d: 'Tue', dur: '40 min', tasks: [
+        { t: `Re-read John ${ref}; mark vocabulary you don\'t know` },
+        { t: 'Add new words to Anki Koine deck' },
+        { t: 'Modern: 10 min Easy Greek', link: L.easyGreek }
+      ]},
+      { d: 'Wed', dur: '40 min', tasks: [
+        { t: theme.mounceCh ? `Mounce ch. ${theme.mounceCh} · read + paradigms` : 'Mounce review (no new chapter)' , link: L.mounce },
+        { t: 'Anki review' },
+        { t: 'Modern: HelloTalk voice message', link: L.helloTalk }
+      ]},
+      { d: 'Thu', dur: '40 min', tasks: [
+        { t: `Read John ${ref} a third time — aloud` },
+        { t: 'Anki review' },
+        { t: 'Note 3 striking phrases in your journal' }
+      ]},
+      { d: 'Fri', dur: '60 min', tasks: [
+        { t: 'TUTOR SESSION — Modern Greek (maintenance)', link: L.italki },
+        { t: `Discuss John ${ref} with tutor if Greek-Christian; otherwise stick to Modern topics` },
+        { t: 'Anki review' }
+      ]},
+      { d: 'Sat', dur: '70 min', tasks: [
+        { t: `Long reading session: John ${ref} once more, then journal entry on what struck you` },
+        { t: 'Mounce review or next exercises' },
+        { t: 'Anki review' },
+        { t: 'Modern: read a Greek article', link: L.kathimerini }
+      ]},
+      { d: 'Sun', dur: '60 min', tasks: [
+        { t: `Read John ${ref} in church if it\'s the lectionary reading, or alongside the Liturgy`, link: L.glt },
+        { t: 'Recite this week\'s liturgical line' },
+        { t: 'Parish partner conversation in Greek' }
+      ]}
+    ];
+  } else if (theme.isHolmes) {
+    const text = theme.holmesText;
+    days = [
+      { d: 'Mon', dur: '40 min', tasks: [
+        { t: `Holmes · Read ${text} in Greek (Greek side) · 25 min` },
+        { t: 'Anki review (Koine deck)' },
+        { t: 'Modern maintenance: Pimsleur lesson', link: L.pimsleur }
+      ]},
+      { d: 'Tue', dur: '40 min', tasks: [
+        { t: `Re-read ${text}; check Holmes English for unclear passages` },
+        { t: 'Add new vocabulary to Anki Koine deck' },
+        { t: 'Modern: 10 min listening', link: L.easyGreek }
+      ]},
+      { d: 'Wed', dur: '40 min', tasks: [
+        { t: theme.mounceCh ? `Mounce ch. ${theme.mounceCh}` : 'Mounce review' , link: L.mounce },
+        { t: 'Anki review' },
+        { t: 'Modern: HelloTalk message', link: L.helloTalk }
+      ]},
+      { d: 'Thu', dur: '40 min', tasks: [
+        { t: `Re-read ${text} aloud — pay attention to rhythm and cadence` },
+        { t: 'Anki review' },
+        { t: 'Note theological vocabulary in your journal' }
+      ]},
+      { d: 'Fri', dur: '60 min', tasks: [
+        { t: 'TUTOR SESSION — Modern Greek conversation (maintenance)', link: L.italki },
+        { t: 'Anki review' },
+        { t: `Read ${text} once more — should feel familiar by now` }
+      ]},
+      { d: 'Sat', dur: '70 min', tasks: [
+        { t: `Long reading: ${text} entire, with Holmes English open` },
+        { t: 'Journal: 200 Greek words on what you read' },
+        { t: 'Anki review' },
+        { t: 'Modern: a Greek news article', link: L.kathimerini }
+      ]},
+      { d: 'Sun', dur: '60 min', tasks: [
+        { t: 'Liturgy with Greek service book', link: L.glt },
+        { t: 'Parish partner conversation' },
+        { t: 'Recite this week\'s liturgical line' }
+      ]}
+    ];
+  } else if (theme.isNTReading) {
+    const ref = theme.ntRef;
+    days = [
+      { d: 'Mon', dur: '40 min', tasks: [
+        { t: `Read ${ref} in Greek (Greek side first) · 25 min` },
+        { t: 'Anki review (Koine deck)' },
+        { t: 'Modern: Pimsleur lesson', link: L.pimsleur }
+      ]},
+      { d: 'Tue', dur: '40 min', tasks: [
+        { t: `Re-read ${ref}; vocabulary mining for Anki` },
+        { t: 'Anki review' },
+        { t: 'Modern: 10 min Easy Greek', link: L.easyGreek }
+      ]},
+      { d: 'Wed', dur: '40 min', tasks: [
+        { t: `Read ${ref} aloud — focus on flow` },
+        { t: 'Anki review' },
+        { t: 'Modern: HelloTalk', link: L.helloTalk }
+      ]},
+      { d: 'Thu', dur: '40 min', tasks: [
+        { t: `Re-read ${ref} once more` },
+        { t: 'Anki review' },
+        { t: 'Modern: read a Greek article', link: L.kathimerini }
+      ]},
+      { d: 'Fri', dur: '75 min', tasks: [
+        { t: 'TUTOR SESSION — Modern Greek (maintenance)', link: L.italki },
+        { t: 'Anki review' },
+        { t: 'Long-form Greek writing: 250 words' }
+      ]},
+      { d: 'Sat', dur: '70 min', tasks: [
+        { t: `Final read of ${ref} — should feel comfortable` },
+        { t: 'Journal entry in Greek about what struck you' },
+        { t: 'Anki review' }
+      ]},
+      { d: 'Sun', dur: '60 min', tasks: [
+        { t: 'Liturgy with Greek service book', link: L.glt },
+        { t: 'Parish conversation in Greek' },
+        { t: 'Recite this week\'s liturgical line' }
+      ]}
+    ];
+  } else if (theme.isModernPush) {
+    days = [
+      { d: 'Mon', dur: '40 min', tasks: [
+        { t: 'Read 2 Greek news articles — full', link: L.kathimerini },
+        { t: 'Anki review (Modern deck heavier today)' },
+        { t: 'Koine maintenance: read 1 NT chapter you know well' }
+      ]},
+      { d: 'Tue', dur: '40 min', tasks: [
+        { t: 'Greek podcast 30 min — no subtitles', link: L.greekPodcasts },
+        { t: 'Anki review' },
+        { t: 'Koine: re-read favorite Apostolic Fathers passage' }
+      ]},
+      { d: 'Wed', dur: '40 min', tasks: [
+        { t: 'HelloTalk voice message — 90+ seconds on a complex topic', link: L.helloTalk },
+        { t: 'Anki review' },
+        { t: 'Koine: Mounce review' }
+      ]},
+      { d: 'Thu', dur: '40 min', tasks: [
+        { t: 'Greek YouTube — 20 min, no subtitles', link: L.doYouSpeakGreek },
+        { t: 'Anki review' },
+        { t: 'Write a 200-word opinion piece in Modern Greek' }
+      ]},
+      { d: 'Fri', dur: '75 min', tasks: [
+        { t: 'TUTOR SESSION — push your output level', link: L.italki },
+        { t: 'Anki review' },
+        { t: 'Bring a complex topic; defend a position' }
+      ]},
+      { d: 'Sat', dur: '70 min', tasks: [
+        { t: 'Greek film with Greek subtitles only — 90 min', link: L.ertflix },
+        { t: 'Anki review' },
+        { t: 'Koine: read 1 NT chapter aloud' }
+      ]},
+      { d: 'Sun', dur: '60 min', tasks: [
+        { t: 'Liturgy with Greek service book', link: L.glt },
+        { t: 'Long parish partner conversation' },
+        { t: 'Recite this week\'s liturgical line' }
+      ]}
+    ];
+  } else {
+    // Generic fallback (shouldn't trigger in Year 2)
+    days = [
+      { d: 'Mon', dur: '40 min', tasks: [{ t: 'Mounce or NT reading per phase' }, { t: 'Anki review' }, { t: 'Modern Greek listening' }]},
+      { d: 'Tue', dur: '40 min', tasks: [{ t: 'Continue current text' }, { t: 'Anki review' }, { t: 'Modern: HelloTalk' }]},
+      { d: 'Wed', dur: '40 min', tasks: [{ t: 'Reading + vocabulary' }, { t: 'Anki review' }, { t: 'Modern listening' }]},
+      { d: 'Thu', dur: '40 min', tasks: [{ t: 'Re-read aloud' }, { t: 'Anki review' }, { t: 'Modern: news' }]},
+      { d: 'Fri', dur: '75 min', tasks: [{ t: 'Tutor session' }, { t: 'Anki review' }, { t: 'Reading' }]},
+      { d: 'Sat', dur: '60 min', tasks: [{ t: 'Long reading' }, { t: 'Journal' }, { t: 'Anki review' }]},
+      { d: 'Sun', dur: '60 min', tasks: [{ t: 'Liturgy' }, { t: 'Parish conversation' }, { t: 'Recite weekly line' }]}
+    ];
+  }
+
+  return {
+    week: weekNum,
+    title: theme.topic,
+    why: theme.why,
+    focus: theme.focus,
+    liturgical: theme.creedLine,
+    milestone: theme.milestone || null,
+    isReview: !!theme.isReview,
+    isCapstone: !!theme.isYear2Capstone,
+    days
+  };
+}
+
+// Build Year 2 weeks 53-104
+P5_THEMES.forEach((theme, i) => WEEKS.push(buildKoineWeek(53 + i, theme, 5)));
+P6_THEMES.forEach((theme, i) => WEEKS.push(buildKoineWeek(66 + i, theme, 6)));
+P7_THEMES.forEach((theme, i) => WEEKS.push(buildKoineWeek(79 + i, theme, 7)));
+P8_THEMES.forEach((theme, i) => WEEKS.push(buildKoineWeek(92 + i, theme, 8)));
+
+// ============= YEAR 3 — WEEKS 105-156 =============
+// Phase 9: Patristic Greek Proper (105-117) · Phase 10: Chrysostom & Cappadocians (118-130)
+// Phase 11: Liturgy & Septuagint (131-143) · Phase 12: The Open Door (144-156)
+
+// PHASE 9 — PATRISTIC GREEK PROPER (Weeks 105-117) · The Fathers begin
+const P9_THEMES = [
+  { topic: 'Year 3 Begins · The Didache as Bridge', why: 'Re-read what you know — but at C1 Patristic level. Notice the difference.', focus: 'Re-read Didache in Holmes. This time, push for native pace — no English crib unless stuck.', creedLine: { greek: 'Δόξα τῷ Θεῷ πάντων ἕνεκεν', en: 'Chrysostom\'s last words — "Glory to God for all things."' }, isPatristic: true, patristicText: 'Holmes · Didache (re-read)', maintainModern: true, maintainKoine: true },
+  { topic: 'St. Basil · On the Holy Spirit · Sample 1', why: 'Your first Cappadocian Father. Theology that shaped the Creed.', focus: 'Read excerpts from Basil\'s De Spiritu Sancto on Ellopos. Start with chapter 9.', creedLine: { greek: 'τὸ Πνεῦμα τῆς ἀληθείας', en: 'John 14:17 — "The Spirit of truth."' }, isPatristic: true, patristicText: 'Basil · De Spiritu Sancto (excerpt)', maintainModern: true, maintainKoine: true },
+  { topic: 'St. Athanasius · On the Incarnation · Sample 1', why: 'The classic Patristic text on Christology — in Athanasius\'s own Greek.', focus: 'Read sections 1-3 of De Incarnatione Verbi on Ellopos. Use English alongside.', creedLine: { greek: 'ὁ γὰρ Θεὸς ἐνηνθρώπησεν, ἵνα ἡμεῖς θεοποιηθῶμεν', en: 'De Inc. 54:3 — "God became man so that we might become god."' }, isPatristic: true, patristicText: 'Athanasius · De Incarnatione 1-3', maintainModern: true, maintainKoine: true },
+  { topic: 'Month 26 · Athanasius · De Incarnatione 4-7', why: 'Sustained Patristic reading. The argument deepens.', focus: 'Read sections 4-7. Note Athanasius\'s rhythmic style.', creedLine: { greek: 'οὐκ ἦν τι λοιπὸν ἢ τὸ φθαρτὸν τοῦτο ἐνδύσασθαι ἀφθαρσίαν', en: 'De Inc. 9 — "Nothing remained but for this corruptible to put on incorruption."' }, isPatristic: true, patristicText: 'Athanasius · De Incarnatione 4-7', maintainModern: true, maintainKoine: true, milestone: 'Read 3 sections of Athanasius without consulting English.' },
+  { topic: 'St. Gregory of Nazianzus · Theological Orations · Sample', why: 'The Theologian himself. Some of the most refined Patristic Greek.', focus: 'Read excerpts from Or. 27 (the First Theological Oration) on Ellopos.', creedLine: { greek: 'περὶ Θεοῦ διαλέγεσθαι μέγα', en: 'Or. 27:3 — "It is a great thing to discourse about God."' }, isPatristic: true, patristicText: 'Gregory Naz. · Oration 27', maintainModern: true, maintainKoine: true },
+  { topic: 'REVIEW WEEK · Patristic Foundation', why: 'Three Fathers in. Re-read your favorite passages, slowly.', focus: 'No new texts. Re-read Athanasius and Gregory Naz selections. Drill new vocabulary.', creedLine: { greek: 'ἡσυχία γὰρ ἀρχὴ καθάρσεως', en: 'Gregory Naz., Or. 27:3 — "Stillness is the beginning of purification."' }, isReview: true, maintainModern: true, maintainKoine: true },
+  { topic: 'St. Gregory of Nyssa · Life of Moses · Prologue', why: 'Allegorical Patristic Greek. The mystical tradition opens.', focus: 'Read the prologue and Book 1 sections of Vita Moysis on Ellopos.', creedLine: { greek: 'ὁ ἀληθινὸς ἰδεῖν Θεὸν ζητεῖ', en: 'Vita Moysis 2:251 — "He who truly seeks to see God."' }, isPatristic: true, patristicText: 'Gregory Nyss. · Vita Moysis (prologue + Bk 1 excerpt)', maintainModern: true, maintainKoine: true },
+  { topic: 'Month 27 · Gregory of Nyssa · Beatitudes Homilies · Sample', why: 'The Beatitudes you memorized in Year 2 — now in a Father\'s commentary.', focus: 'Read Hom. 1 on the Beatitudes. Match Gregory\'s exegesis to Christ\'s words.', creedLine: { greek: 'Μακάριοι οἱ πτωχοὶ τῷ πνεύματι', en: 'Matt 5:3 — "Blessed are the poor in spirit."' }, isPatristic: true, patristicText: 'Gregory Nyss. · Hom. 1 on Beatitudes', maintainModern: true, maintainKoine: true, milestone: 'Read a full homily by a Cappadocian Father.' },
+  { topic: 'St. Maximus the Confessor · A Sample', why: 'The hardest Patristic Greek. A taste only — most readers need years here.', focus: 'Read 1-2 of Maximus\'s Centuries on Charity. Short paragraphs. Dense.', creedLine: { greek: 'ἀγάπη ἐστὶ διάθεσις ψυχῆς ἀγαθή', en: 'Centuries on Charity 1:1 — "Love is a good disposition of the soul."' }, isPatristic: true, patristicText: 'Maximus · Centuries on Charity (sample)', maintainModern: true, maintainKoine: true },
+  { topic: 'St. Symeon the New Theologian · A Hymn', why: 'Mystical theology in poetic Greek.', focus: 'Read one Hymn of Divine Love on Ellopos. Beautiful, accessible Patristic.', creedLine: { greek: 'ἐλθὲ τὸ φῶς τὸ ἀληθινόν', en: 'Hymn 1 — "Come, the true light."' }, isPatristic: true, patristicText: 'Symeon · Hymn of Divine Love', maintainModern: true, maintainKoine: true },
+  { topic: 'St. Isaac the Syrian · A Homily', why: 'Ascetical theology. Deeply influential in Orthodox tradition.', focus: 'Read excerpts from Isaac\'s Ascetical Homilies (Greek translation from Syriac).', creedLine: { greek: 'πένθος γὰρ καρπὸς ἡσυχίας', en: 'Isaac · "Mourning is the fruit of stillness."' }, isPatristic: true, patristicText: 'Isaac the Syrian · Ascetical Homily (sample)', maintainModern: true, maintainKoine: true },
+  { topic: 'Month 28 · Patristic Sampler · Choose Your Father', why: 'Choose where you want to camp. Your own Patristic library begins.', focus: 'Pick the Father whose voice resonated most. Read 30 min daily of that Father.', creedLine: { greek: 'ἕκαστος ἐν τῷ ἰδίῳ τάγματι', en: '1 Cor 15:23 — "Each in his own order."' }, isPatristic: true, patristicText: 'Father of your choosing', maintainModern: true, maintainKoine: true, milestone: 'Identify which Patristic voice will be your personal study companion for life.' },
+  { topic: 'REVIEW WEEK · Phase 9 Capstone', why: 'You\'ve sampled the great Fathers. Phase 10 enters Chrysostom proper.', focus: 'Re-read your strongest Patristic passages. Anki: drill all new Patristic vocabulary.', creedLine: { greek: 'ὁ λόγος γὰρ τοῦ Θεοῦ ζῶν', en: 'Heb 4:12 — "For the word of God is living."' }, isReview: true, maintainModern: true, maintainKoine: true }
+];
+
+// PHASE 10 — CHRYSOSTOM & THE CAPPADOCIANS (Weeks 118-130) · The capstone Father
+const P10_THEMES = [
+  { topic: 'Chrysostom · Hom. on Matthew 1', why: 'Begin the year-three capstone. Chrysostom\'s commentary on the First Gospel.', focus: 'Read Homily 1 on Matthew on Ellopos. Famous opening.', creedLine: { greek: 'καλὸν τὸ τοῦ εὐαγγελίου ὄνομα', en: 'Hom. on Matt. 1:1 — "Beautiful is the name \'gospel.\'"' }, isPatristic: true, patristicText: 'Chrysostom · Hom. 1 on Matthew', maintainModern: true, maintainKoine: true },
+  { topic: 'Chrysostom · Hom. on Matthew 2-3', why: 'The Sermon on the Mount approaches.', focus: 'Read Homilies 2-3. Chrysostom\'s rhetorical style fully visible.', creedLine: { greek: 'οὐκοῦν παιδεύει ταύτην ὁ Χριστός', en: 'Hom. on Matt. — "Christ then forms her [the Church]."' }, isPatristic: true, patristicText: 'Chrysostom · Hom. 2-3 on Matthew', maintainModern: true, maintainKoine: true },
+  { topic: 'Month 29 · Chrysostom · Hom. on Matthew 4-5 · The Beatitudes', why: 'Chrysostom on the Beatitudes — your Year 2 memorization, now exegeted.', focus: 'Read Homilies on Matthew covering the Beatitudes (15th homily, around there).', creedLine: { greek: 'Μακάριοι οἱ καθαροὶ τῇ καρδίᾳ', en: 'Matt 5:8 — "Blessed are the pure in heart."' }, isPatristic: true, patristicText: 'Chrysostom · Beatitudes homilies', maintainModern: true, maintainKoine: true, milestone: 'Read a Chrysostom homily start to finish in Greek.' },
+  { topic: 'Chrysostom · On the Priesthood · Sample', why: 'A different genre — Chrysostom\'s reluctance to be ordained, in dialogue form.', focus: 'Read sections of De Sacerdotio. Argues with his friend Basil.', creedLine: { greek: 'ποιμὴν γὰρ ψυχῶν', en: 'De Sacerdotio 2:2 — "A shepherd of souls."' }, isPatristic: true, patristicText: 'Chrysostom · De Sacerdotio (sample)', maintainModern: true, maintainKoine: true },
+  { topic: 'Chrysostom · Paschal Homily', why: 'The most-read Chrysostom text in Orthodoxy. Read at every Pascha. Yours now in Greek.', focus: 'Read the entire Paschal Homily. Memorize at least the opening.', creedLine: { greek: 'εἴ τις εὐσεβὴς καὶ φιλόθεος', en: 'Paschal Homily — "If anyone is devout and a lover of God."' }, isPatristic: true, patristicText: 'Chrysostom · Paschal Homily', maintainModern: true, maintainKoine: true, milestone: 'Memorize the opening of the Paschal Homily in Greek.' },
+  { topic: 'REVIEW WEEK · Chrysostom Synthesis', why: 'Chrysostom is opening up. Pause and let it settle.', focus: 'Re-read favorite Chrysostom passages. Add to Anki Patristic deck.', creedLine: { greek: 'σιωπὴ γὰρ ἀδελφὴ τοῦ λόγου', en: 'Patristic proverb — "Silence is the sister of the word."' }, isReview: true, maintainModern: true, maintainKoine: true },
+  { topic: 'Month 30 · Basil · Hexaemeron · Sample', why: 'Basil on the Six Days of Creation. Cosmic Greek.', focus: 'Read Hexaemeron Hom. 1 on Ellopos. Magnificent opening.', creedLine: { greek: 'ἐν ἀρχῇ ἐποίησεν ὁ Θεὸς τὸν οὐρανὸν καὶ τὴν γῆν', en: 'Gen 1:1 LXX — "In the beginning God made the heaven and the earth."' }, isPatristic: true, patristicText: 'Basil · Hexaemeron Hom. 1', maintainModern: true, maintainKoine: true, milestone: 'Read Basil for 30 min/day all week.' },
+  { topic: 'Basil · On the Holy Spirit · Sustained', why: 'Return to Basil from Phase 9 — now read at length.', focus: 'Read De Spiritu Sancto chapters 9-15. The pneumatology behind the Creed.', creedLine: { greek: 'τὸ Πνεῦμα τὸ Ἅγιον ζωοποιοῦν', en: 'Creed — "The Holy Spirit, the giver of life."' }, isPatristic: true, patristicText: 'Basil · De Spiritu Sancto 9-15', maintainModern: true, maintainKoine: true },
+  { topic: 'Gregory Naz · Theological Orations · Sustained', why: 'Return to Gregory the Theologian — read the famous Orations 27-31 in earnest.', focus: 'Read Or. 27-28 (the First and Second Theological Orations).', creedLine: { greek: 'οὐ γὰρ τὸ φθάσαι μέγα, ἀλλὰ τὸ μηδαμοῦ καταλιπεῖν', en: 'Or. 28 — "It is not arriving that is great, but never abandoning [the search]."' }, isPatristic: true, patristicText: 'Gregory Naz. · Or. 27-28', maintainModern: true, maintainKoine: true },
+  { topic: 'Gregory Nyss · Life of Moses · Sustained', why: 'Return to Gregory of Nyssa — the full mystical ascent.', focus: 'Read Vita Moysis Book 2 (the contemplative interpretation). Slowly.', creedLine: { greek: 'ἀεὶ διὰ τῶν μειζόνων ὁ ἀνὴρ ἐχώρει', en: 'Vita Moysis 2:227 — "The man advanced ever through greater things."' }, isPatristic: true, patristicText: 'Gregory Nyss. · Vita Moysis Bk 2', maintainModern: true, maintainKoine: true },
+  { topic: 'Chrysostom · Hom. on John 1', why: 'Chrysostom on the Prologue you read in Year 2.', focus: 'Read Chrysostom\'s Homily 1-2 on John. Compare to your own reading.', creedLine: { greek: 'οὐ γὰρ ἁπλῶς εἶπεν "Λόγος" ἀλλὰ "Λόγος" μετὰ ἄρθρου', en: 'Hom. on John 1:1 — "He did not simply say \'Word,\' but \'the Word\' with the article."' }, isPatristic: true, patristicText: 'Chrysostom · Hom. 1-2 on John', maintainModern: true, maintainKoine: true },
+  { topic: 'Month 31 · Chrysostom · Hom. on Romans · Sample', why: 'Chrysostom\'s greatest Pauline commentary. Test yourself.', focus: 'Read Hom. 1 on Romans. Theological depth at sustained pace.', creedLine: { greek: 'οὐ γὰρ ἐπαισχύνομαι τὸ εὐαγγέλιον', en: 'Rom 1:16 — "For I am not ashamed of the Gospel."' }, isPatristic: true, patristicText: 'Chrysostom · Hom. 1 on Romans', maintainModern: true, maintainKoine: true, milestone: 'Read a Chrysostom Pauline homily comfortably.' },
+  { topic: 'REVIEW WEEK · Phase 10 Capstone', why: 'Chrysostom and the Cappadocians — readable. Phase 11 brings Liturgy and Psalter.', focus: 'Re-read your favorite Chrysostom and Cappadocian passages. Drill Anki.', creedLine: { greek: 'πνεῦμα ταπεινώσεως πανταχοῦ διώκει', en: 'Patristic — "The spirit of humility pursues [the Lord] everywhere."' }, isReview: true, maintainModern: true, maintainKoine: true }
+];
+
+// PHASE 11 — LITURGY & SEPTUAGINT (Weeks 131-143) · Daily-life Greek depth
+const P11_THEMES = [
+  { topic: 'The Divine Liturgy · Front to Back', why: 'You\'ve heard it 100+ times. Now read every word in Greek.', focus: 'Read the entire Liturgy of St. John Chrysostom in Greek (your Liturgy book + AGES).', creedLine: { greek: 'Εὐλογημένη ἡ βασιλεία τοῦ Πατρὸς καὶ τοῦ Υἱοῦ καὶ τοῦ Ἁγίου Πνεύματος', en: 'Opening blessing — "Blessed is the Kingdom..."' }, isLiturgy: true, liturgicalText: 'Liturgy of St. John Chrysostom (full)', maintainModern: true, maintainKoine: true },
+  { topic: 'The Anaphora in Depth', why: 'The heart of the Liturgy. The Eucharistic prayer. Sacred Greek.', focus: 'Read the Anaphora prayer 5 times this week — slowly each time.', creedLine: { greek: 'Τὰ σὰ ἐκ τῶν σῶν σοὶ προσφέρομεν', en: 'Anaphora — "Thine own of Thine own we offer Thee."' }, isLiturgy: true, liturgicalText: 'Anaphora prayer (sustained)', maintainModern: true, maintainKoine: true, milestone: 'Recite the Anaphora prayer from memory in Greek.' },
+  { topic: 'Month 32 · Septuagint · Psalm 1', why: 'Begin the Greek Psalter. The Psalms you pray in English — now in their LXX form.', focus: 'Read Psalm 1 LXX. Compare with Hebrew Bible numbering (LXX numbers differ).', creedLine: { greek: 'Μακάριος ἀνήρ, ὃς οὐκ ἐπορεύθη ἐν βουλῇ ἀσεβῶν', en: 'Ps 1:1 LXX — "Blessed is the man who has not walked in the counsel of the ungodly."' }, isLiturgy: true, liturgicalText: 'Septuagint · Psalm 1', maintainModern: true, maintainKoine: true, milestone: 'Read Psalm 1 LXX aloud daily.' },
+  { topic: 'Septuagint · Psalms 22, 50 (LXX 22, 50)', why: 'The Shepherd Psalm and the Penitential Psalm — Orthodox prayer staples.', focus: 'Read Ps 22 (your "23") and Ps 50 (the Penitential, Orthodox 51) LXX. Memorize key verses.', creedLine: { greek: 'Κύριος ποιμαίνει με', en: 'Ps 22:1 LXX — "The Lord shepherds me."' }, isLiturgy: true, liturgicalText: 'Septuagint · Psalms 22, 50', maintainModern: true, maintainKoine: true },
+  { topic: 'Septuagint · Psalms of Hours · Sample', why: 'The Psalms used in monastic Hours. Liturgical Greek in your daily prayer.', focus: 'Read Psalms 62, 90, 102 LXX (used at Orthros, Compline, etc.).', creedLine: { greek: 'Ὁ Θεός, ὁ Θεός μου, πρὸς σὲ ὀρθρίζω', en: 'Ps 62:2 LXX — "O God, my God, I rise early to Thee."' }, isLiturgy: true, liturgicalText: 'Septuagint · Psalms 62, 90, 102', maintainModern: true, maintainKoine: true },
+  { topic: 'REVIEW WEEK · Mid-Phase 11', why: 'Soak in what you\'ve read. The Liturgy is becoming yours.', focus: 'Re-read the Liturgy in Greek. Recite memorized portions aloud.', creedLine: { greek: 'Ἀναξίως μετέχομεν τῶν ἀχράντων μυστηρίων σου', en: 'Liturgy — "Unworthily we partake of Thy most pure mysteries."' }, isReview: true, maintainModern: true, maintainKoine: true },
+  { topic: 'Month 33 · Septuagint · Genesis 1', why: 'The opening of the Bible in the Greek used by the Apostles.', focus: 'Read Genesis 1 LXX. Note differences from the Hebrew you may know.', creedLine: { greek: 'Ἐν ἀρχῇ ἐποίησεν ὁ Θεὸς τὸν οὐρανὸν καὶ τὴν γῆν', en: 'Gen 1:1 LXX — "In the beginning God made heaven and earth."' }, isLiturgy: true, liturgicalText: 'Septuagint · Genesis 1', maintainModern: true, maintainKoine: true, milestone: 'Read Genesis 1:1-2:3 LXX without translation help.' },
+  { topic: 'Septuagint · Isaiah 53 (LXX)', why: 'The Suffering Servant — quoted constantly in the NT. The Apostles\' Bible.', focus: 'Read Isaiah 53 LXX. Compare with Acts 8 (the Ethiopian eunuch reading this very passage).', creedLine: { greek: 'οὗτος τὰς ἁμαρτίας ἡμῶν φέρει', en: 'Is 53:4 LXX — "He bears our sins."' }, isLiturgy: true, liturgicalText: 'Septuagint · Isaiah 53', maintainModern: true, maintainKoine: true },
+  { topic: 'The Akathist Hymn · Greek Original', why: 'The most beloved hymn to the Theotokos. Read in Greek.', focus: 'Read the Akathist of the Theotokos in Greek (your Liturgy book or online).', creedLine: { greek: 'Χαῖρε, νύμφη ἀνύμφευτε', en: 'Akathist refrain — "Rejoice, unwedded Bride."' }, isLiturgy: true, liturgicalText: 'Akathist of the Theotokos', maintainModern: true, maintainKoine: true },
+  { topic: 'Vespers & Orthros · Daily Office in Greek', why: 'The daily round of prayer. Your liturgical companion for life.', focus: 'Pray Vespers or Orthros from your service book in Greek 3x this week.', creedLine: { greek: 'Φῶς ἱλαρὸν ἁγίας δόξης', en: 'Vespers hymn — "O joyful light of holy glory."' }, isLiturgy: true, liturgicalText: 'Vespers + Orthros (Greek)', maintainModern: true, maintainKoine: true },
+  { topic: 'The Trisagion Hymns · Memorized', why: 'The hymns sung at every Liturgy. Now wholly yours.', focus: 'Memorize: Trisagion, Phos Hilaron, Megalynarion. Recite at daily prayer.', creedLine: { greek: 'Ἅγιος ὁ Θεός, Ἅγιος Ἰσχυρός, Ἅγιος Ἀθάνατος, ἐλέησον ἡμᾶς', en: 'Trisagion — "Holy God, Holy Mighty, Holy Immortal, have mercy on us."' }, isLiturgy: true, liturgicalText: 'Trisagion + key hymns memorized', maintainModern: true, maintainKoine: true, milestone: 'Recite Trisagion, Phos Hilaron, Lord\'s Prayer, full Creed from memory.' },
+  { topic: 'Month 34 · Pronunciation Audit #4 · Final', why: 'One last audit before the capstone. Lock in your Greek voice.', focus: 'Record yourself reading Liturgy passages, NT, and Modern news. Compare to baseline.', creedLine: { greek: 'φωνὴ Κυρίου ἐπὶ τῶν ὑδάτων', en: 'Ps 28:3 LXX — "The voice of the Lord upon the waters."' }, isAudit: true, maintainModern: true, maintainKoine: true },
+  { topic: 'REVIEW WEEK · Phase 11 Capstone', why: 'You can pray the Liturgy in Greek. The Psalter is yours. Phase 12 is the open door.', focus: 'Pray Compline (or another short service) entirely in Greek every day this week.', creedLine: { greek: 'εἰς τοὺς αἰῶνας τῶν αἰώνων. Ἀμήν.', en: '"Unto ages of ages. Amen."' }, isReview: true, maintainModern: true, maintainKoine: true }
+];
+
+// PHASE 12 — THE OPEN DOOR (Weeks 144-156) · Self-directed, capstone, lifetime
+const P12_THEMES = [
+  { topic: 'Year 3 Final Stretch · Self-Directed Reading Begins', why: 'You no longer need a curriculum. Choose your text.', focus: 'Pick any Patristic text that calls you. Read 30 min/day, on your own terms.', creedLine: { greek: 'Ἰδοὺ δέδωκα ἐνώπιόν σου θύραν ἀνεῳγμένην', en: 'Rev 3:8 — "Behold, I have set before you an open door."' }, isOpenDoor: true, maintainModern: true, maintainKoine: true },
+  { topic: 'Capstone · Chrysostom · Choose a Sustained Series', why: 'Commit to one Chrysostom series. Read it through.', focus: 'Pick: Hom. on Genesis, on John, on Romans, or on Hebrews. Read 5 homilies this week.', creedLine: { greek: 'ὁ καιρὸς συνεσταλμένος ἐστίν', en: '1 Cor 7:29 — "The time has been shortened."' }, isOpenDoor: true, maintainModern: true, maintainKoine: true, milestone: 'Read 5 Chrysostom homilies in Greek in one week.' },
+  { topic: 'Capstone · Continue Chrysostom Series', why: 'Sustained reading of one Father builds depth no sampler can.', focus: 'Continue your chosen Chrysostom series. 5 more homilies.', creedLine: { greek: 'ὑπομονὴ δοκιμὴν κατεργάζεται', en: 'Rom 5:4 — "Endurance produces character."' }, isOpenDoor: true, maintainModern: true, maintainKoine: true },
+  { topic: 'Month 35 · The Philokalia · Sustained Reading', why: 'The classic Orthodox spiritual anthology. Now in Greek.', focus: 'Pick one Philokalia author (St. Mark the Ascetic, Evagrius, Maximus). Read 30 min daily.', creedLine: { greek: 'πρόσεχε σεαυτῷ', en: 'Patristic exhortation — "Attend to thyself."' }, isOpenDoor: true, maintainModern: true, maintainKoine: true, milestone: 'Read a sustained Philokalia text in Greek.' },
+  { topic: 'A Modern Greek Novel', why: 'Read literature in your second language. Kazantzakis, Cavafy, Seferis.', focus: 'Begin a Greek novel — Kazantzakis\'s Christ Recrucified is accessible. Or Cavafy\'s collected poems.', creedLine: { greek: 'τὰ καινὰ καὶ τὰ παλαιά', en: 'Matt 13:52 — "things new and old"' }, isOpenDoor: true, isModernPush: true, maintainKoine: true },
+  { topic: 'REVIEW WEEK · Pre-Capstone', why: 'One year of Year 3. Pause before the final ascent.', focus: 'Re-read your favorite Patristic and NT passages. Recite memorized prayers and Scripture.', creedLine: { greek: 'εὐχαριστοῦμέν σοι, Κύριε, ὁ Θεὸς ἡμῶν', en: 'Liturgy — "We give thanks to Thee, O Lord our God."' }, isReview: true, maintainModern: true, maintainKoine: true },
+  { topic: 'Month 36 · The Capstone Begins · Personal Choice', why: 'Your final 6 weeks. Read what will define your post-Παιδεία life.', focus: 'Choose your capstone text. Begin sustained, deep reading. The structure has served its purpose.', creedLine: { greek: 'τετέλεσται', en: 'John 19:30 — "It is finished."' }, isOpenDoor: true, maintainModern: true, maintainKoine: true },
+  { topic: 'Capstone Continued', why: 'Deep reading. No new prescriptions — your formation knows the way.', focus: 'Continue capstone text. Keep journal of insights in Greek.', creedLine: { greek: 'ἁγιασθήτω τὸ ὄνομά σου', en: 'Lord\'s Prayer — "Hallowed be Thy name."' }, isOpenDoor: true, maintainModern: true, maintainKoine: true },
+  { topic: 'Capstone · Week 3', why: 'You\'ve been doing this 36 months. Trust your process.', focus: 'Continue. Add: 1 hour each Saturday for sustained reading session.', creedLine: { greek: 'ἐλθέτω ἡ βασιλεία σου', en: 'Lord\'s Prayer — "Thy kingdom come."' }, isOpenDoor: true, maintainModern: true, maintainKoine: true },
+  { topic: 'Capstone · Week 4 · Begin the Conclusion', why: 'Two weeks left. Begin gathering reflections.', focus: 'Continue capstone. Begin a long reflective journal entry — in Greek — on your three years.', creedLine: { greek: 'γενηθήτω τὸ θέλημά σου', en: 'Lord\'s Prayer — "Thy will be done."' }, isOpenDoor: true, maintainModern: true, maintainKoine: true },
+  { topic: 'Capstone · Week 5 · Year 3 Reflection', why: 'Look back over all three years. Write the story of your formation.', focus: 'Finish capstone reading. Write a 1000-word reflection in Greek on your three years.', creedLine: { greek: 'ἐπὶ τῆς γῆς ὡς ἐν οὐρανῷ', en: 'Lord\'s Prayer — "On earth as in heaven."' }, isOpenDoor: true, maintainModern: true, maintainKoine: true, milestone: 'Write 1000 Greek words on your three-year formation.' },
+  { topic: 'Final Week · The Plan Closes · Παιδεία Continues', why: 'The structured plan ends. Your relationship with Greek is for life.', focus: 'No new prescriptions. Pray. Read. Reflect. Plan year 4 — entirely your own.', creedLine: { greek: 'Δι\' εὐχῶν τῶν ἁγίων Πατέρων ἡμῶν', en: 'Closing prayer — "Through the prayers of our holy fathers..."' }, isOpenDoor: true, maintainModern: true, maintainKoine: true },
+  { topic: 'YEAR 3 CAPSTONE · The Open Door', why: 'Three years. The formation is complete. Greek is yours.', focus: 'Celebrate. Reflect. Choose what comes next — but the door is open. Παιδεία fulfilled.', creedLine: { greek: 'Δόξα Πατρὶ καὶ Υἱῷ καὶ Ἁγίῳ Πνεύματι, καὶ νῦν καὶ ἀεὶ καὶ εἰς τοὺς αἰῶνας τῶν αἰώνων. Ἀμήν.', en: 'Doxology — "Glory to the Father, and to the Son, and to the Holy Spirit, now and ever, and unto ages of ages. Amen."' }, isCapstone: true, isFinalCapstone: true, milestone: 'YEAR 3 COMPLETE. THREE YEARS. THE FATHERS ARE READABLE. THE LITURGY IS HOME. PAIDEIA FULFILLED.' }
+];
+
+function buildPatristicWeek(weekNum, theme, phaseId) {
+  let days;
+
+  if (theme.isReview) {
+    days = [
+      { d: 'Mon', dur: '40 min', tasks: [
+        { t: 'Re-read this phase\'s strongest passages aloud — both NT and Patristic' },
+        { t: 'Anki: drill weak cards (all decks)' },
+        { t: 'No new material today' }
+      ]},
+      { d: 'Tue', dur: '40 min', tasks: [
+        { t: 'Re-read your favorite Father from this phase — 30 min' },
+        { t: 'Anki review' },
+        { t: 'Modern Greek: 15 min listening', link: L.greekPodcasts }
+      ]},
+      { d: 'Wed', dur: '40 min', tasks: [
+        { t: 'Re-read favorite Liturgical / Septuagint passages' },
+        { t: 'Anki review' },
+        { t: 'Modern: HelloTalk message in Greek', link: L.helloTalk }
+      ]},
+      { d: 'Thu', dur: '40 min', tasks: [
+        { t: 'Anki review — reset cards that feel off' },
+        { t: 'Re-read this phase\'s liturgical lines' },
+        { t: 'Pray Trisagion + Lord\'s Prayer + Creed in Greek' }
+      ]},
+      { d: 'Fri', dur: '60 min', tasks: [
+        { t: 'TUTOR SESSION (Modern Greek bi-weekly)', link: L.italki },
+        { t: 'Long Anki session — clear backlog' },
+        { t: 'Re-read your Greek journal entries from this phase' }
+      ]},
+      { d: 'Sat', dur: '60 min', tasks: [
+        { t: 'Long re-reading session of this phase\'s key text' },
+        { t: 'Anki review' },
+        { t: '300-word reflection in Greek on what struck you most' }
+      ]},
+      { d: 'Sun', dur: '50 min', tasks: [
+        { t: 'Liturgy with Greek service book — full attention to Greek', link: L.glt },
+        { t: 'Parish partner conversation' },
+        { t: 'Rest. The work compounds.' }
+      ]}
+    ];
+  } else if (theme.isAudit) {
+    days = [
+      { d: 'Mon', dur: '40 min', tasks: [
+        { t: 'Record yourself: Lord\'s Prayer (Koine), a Liturgy passage, a Modern news paragraph' },
+        { t: 'Compare to natives — note any drift', link: L.forvo },
+        { t: 'Anki review' }
+      ]},
+      { d: 'Tue', dur: '40 min', tasks: [
+        { t: 'Drill problem sounds — 15 min focused practice' },
+        { t: 'Pimsleur (maintenance)', link: L.pimsleur },
+        { t: 'Read a Patristic passage aloud, recording yourself' }
+      ]},
+      { d: 'Wed', dur: '40 min', tasks: [
+        { t: 'Re-record yesterday\'s passages; compare improvement' },
+        { t: 'HelloTalk: ask a native to evaluate accent', link: L.helloTalk },
+        { t: 'Anki review' }
+      ]},
+      { d: 'Thu', dur: '40 min', tasks: [
+        { t: 'Shadow native speakers — Greek news + Liturgy recording' },
+        { t: 'Anki review' },
+        { t: 'Read Septuagint Psalm aloud' }
+      ]},
+      { d: 'Fri', dur: '75 min', tasks: [
+        { t: 'TUTOR SESSION — pronunciation focus this session', link: L.italki },
+        { t: 'Anki review' },
+        { t: 'Read a long Patristic passage aloud' }
+      ]},
+      { d: 'Sat', dur: '60 min', tasks: [
+        { t: 'Final re-recording of audit passages — compare to Monday' },
+        { t: 'Long Pimsleur session', link: L.pimsleur },
+        { t: 'Anki review' }
+      ]},
+      { d: 'Sun', dur: '50 min', tasks: [
+        { t: 'Liturgy with Greek service book — feel pronunciation in context', link: L.glt },
+        { t: 'Reflect: which sounds are now native?' }
+      ]}
+    ];
+  } else if (theme.isFinalCapstone) {
+    days = [
+      { d: 'Mon', dur: '60 min', tasks: [
+        { t: 'Pray the entire Liturgy in Greek (recording or service book)', link: L.agesLiturgy },
+        { t: 'Note: this is the language you started with as foreign letters 156 weeks ago' },
+        { t: 'Anki review' }
+      ]},
+      { d: 'Tue', dur: '60 min', tasks: [
+        { t: 'Read John 1:1-18 in Greek — the Prologue you first read in Year 2' },
+        { t: 'Write a 500-word reflection in Greek: what changed in three years?' },
+        { t: 'Anki review' }
+      ]},
+      { d: 'Wed', dur: '60 min', tasks: [
+        { t: 'Re-read your favorite Chrysostom passage — slowly, savoring' },
+        { t: 'Anki review' },
+        { t: 'HelloTalk: long voice message — your story in Greek', link: L.helloTalk }
+      ]},
+      { d: 'Thu', dur: '60 min', tasks: [
+        { t: 'Recite from memory: Lord\'s Prayer, Trisagion, full Creed, John 3:16, Phaschal Homily opening' },
+        { t: 'Anki review' },
+        { t: 'Pray Compline in Greek' }
+      ]},
+      { d: 'Fri', dur: '90 min', tasks: [
+        { t: 'FINAL TUTOR SESSION — full Greek conversation, deep topics', link: L.italki },
+        { t: 'Discuss with tutor: what are your goals beyond this plan?' },
+        { t: 'Long parish partner conversation' }
+      ]},
+      { d: 'Sat', dur: '120 min', tasks: [
+        { t: 'A full day of Greek: Liturgy recording, Patristic reading, Septuagint Psalms, Greek film' },
+        { t: 'Write the final 1000-word reflection — your story in your second language' },
+        { t: 'Anki review' }
+      ]},
+      { d: 'Sun', dur: '90 min', tasks: [
+        { t: 'YEAR 3 COMPLETE. THREE YEARS. THE FATHERS ARE READABLE.' },
+        { t: 'Liturgy in Greek — full participation', link: L.glt },
+        { t: 'Tonight: real celebration. Παιδεία fulfilled.' },
+        { t: 'Tomorrow: continue. The door is open. The formation is for life.' }
+      ]}
+    ];
+  } else if (theme.isPatristic) {
+    const text = theme.patristicText;
+    days = [
+      { d: 'Mon', dur: '40 min', tasks: [
+        { t: `Read ${text} · 25 min · push for native pace` },
+        { t: 'Anki review (Patristic deck)' },
+        { t: 'Modern maintenance: Pimsleur or news', link: L.pimsleur }
+      ]},
+      { d: 'Tue', dur: '40 min', tasks: [
+        { t: `Re-read ${text}; vocabulary mining for Anki` },
+        { t: 'Anki review' },
+        { t: 'Modern: 10 min listening', link: L.easyGreek }
+      ]},
+      { d: 'Wed', dur: '40 min', tasks: [
+        { t: `Read ${text} aloud — feel the rhythm` },
+        { t: 'Anki review' },
+        { t: 'Koine maintenance: read 1 NT chapter you know' }
+      ]},
+      { d: 'Thu', dur: '40 min', tasks: [
+        { t: `Read ${text} a final time — should feel substantially clearer` },
+        { t: 'Anki review' },
+        { t: 'Modern: HelloTalk message', link: L.helloTalk }
+      ]},
+      { d: 'Fri', dur: '60 min', tasks: [
+        { t: 'Bi-weekly TUTOR SESSION — Modern Greek (Year 3 cadence)', link: L.italki },
+        { t: 'Anki review' },
+        { t: `Long-form journal: 250 Greek words on what struck you in ${text.split('·')[0].trim()}` }
+      ]},
+      { d: 'Sat', dur: '70 min', tasks: [
+        { t: `Long Patristic reading: ${text} or related passages from same Father` },
+        { t: 'Anki review' },
+        { t: 'Modern: a Greek news article', link: L.kathimerini }
+      ]},
+      { d: 'Sun', dur: '60 min', tasks: [
+        { t: 'Liturgy with Greek service book', link: L.glt },
+        { t: 'Parish partner conversation in Greek' },
+        { t: 'Recite this week\'s liturgical line' }
+      ]}
+    ];
+  } else if (theme.isLiturgy) {
+    const text = theme.liturgicalText;
+    days = [
+      { d: 'Mon', dur: '40 min', tasks: [
+        { t: `${text} · read in Greek (25 min)`, link: L.agesLiturgy },
+        { t: 'Anki review' },
+        { t: 'Modern maintenance: Pimsleur', link: L.pimsleur }
+      ]},
+      { d: 'Tue', dur: '40 min', tasks: [
+        { t: `Re-read ${text}; mark what\'s now memorable` },
+        { t: 'Anki review' },
+        { t: 'Modern: 10 min Easy Greek', link: L.easyGreek }
+      ]},
+      { d: 'Wed', dur: '40 min', tasks: [
+        { t: `${text} · read aloud (slowly, prayerfully)` },
+        { t: 'Anki review' },
+        { t: 'Koine: read 1 NT chapter' }
+      ]},
+      { d: 'Thu', dur: '40 min', tasks: [
+        { t: `${text} once more` },
+        { t: 'Anki review' },
+        { t: 'Modern: HelloTalk', link: L.helloTalk }
+      ]},
+      { d: 'Fri', dur: '60 min', tasks: [
+        { t: 'Bi-weekly TUTOR SESSION — Modern Greek', link: L.italki },
+        { t: 'Anki review' },
+        { t: `Final read of ${text}` }
+      ]},
+      { d: 'Sat', dur: '70 min', tasks: [
+        { t: `Long reading: ${text} entire, prayerfully` },
+        { t: '200-word Greek journal entry on what the text means to you' },
+        { t: 'Anki review' }
+      ]},
+      { d: 'Sun', dur: '60 min', tasks: [
+        { t: 'Liturgy with Greek service book — full attention', link: L.glt },
+        { t: 'Parish partner conversation' },
+        { t: 'Recite this week\'s liturgical line from memory' }
+      ]}
+    ];
+  } else if (theme.isOpenDoor) {
+    days = [
+      { d: 'Mon', dur: '40 min', tasks: [
+        { t: 'Self-directed Patristic reading · 30 min · your choice' },
+        { t: 'Anki review' },
+        { t: 'Modern Greek: read or listen — your choice' }
+      ]},
+      { d: 'Tue', dur: '40 min', tasks: [
+        { t: 'Continue your chosen text · 30 min' },
+        { t: 'Anki review' },
+        { t: 'Modern: HelloTalk or news', link: L.helloTalk }
+      ]},
+      { d: 'Wed', dur: '40 min', tasks: [
+        { t: 'Continue reading · 30 min' },
+        { t: 'Anki review' },
+        { t: 'Koine maintenance: any NT or LXX passage' }
+      ]},
+      { d: 'Thu', dur: '40 min', tasks: [
+        { t: 'Continue reading · 30 min' },
+        { t: 'Anki review' },
+        { t: 'Modern listening — your choice' }
+      ]},
+      { d: 'Fri', dur: '60 min', tasks: [
+        { t: 'Bi-weekly TUTOR SESSION (when scheduled)', link: L.italki },
+        { t: 'Anki review' },
+        { t: 'Long-form Greek journal entry' }
+      ]},
+      { d: 'Sat', dur: '90 min', tasks: [
+        { t: 'Long sustained reading session · 60 min · your text' },
+        { t: 'Anki review' },
+        { t: 'Modern: Greek film, news, or book' }
+      ]},
+      { d: 'Sun', dur: '60 min', tasks: [
+        { t: 'Liturgy with Greek service book', link: L.glt },
+        { t: 'Parish partner conversation' },
+        { t: 'Reflect: where is Greek taking you?' }
+      ]}
+    ];
+  } else {
+    // fallback
+    days = [
+      { d: 'Mon', dur: '40 min', tasks: [{ t: 'Patristic reading' }, { t: 'Anki review' }, { t: 'Modern listening' }]},
+      { d: 'Tue', dur: '40 min', tasks: [{ t: 'Continue text' }, { t: 'Anki review' }, { t: 'Modern: HelloTalk' }]},
+      { d: 'Wed', dur: '40 min', tasks: [{ t: 'Reading + vocab' }, { t: 'Anki review' }, { t: 'Koine maintenance' }]},
+      { d: 'Thu', dur: '40 min', tasks: [{ t: 'Re-read aloud' }, { t: 'Anki review' }, { t: 'Modern news' }]},
+      { d: 'Fri', dur: '75 min', tasks: [{ t: 'Tutor session' }, { t: 'Anki review' }, { t: 'Reading' }]},
+      { d: 'Sat', dur: '70 min', tasks: [{ t: 'Long reading' }, { t: 'Greek journal' }, { t: 'Anki review' }]},
+      { d: 'Sun', dur: '60 min', tasks: [{ t: 'Liturgy' }, { t: 'Parish partner' }, { t: 'Recite weekly line' }]}
+    ];
+  }
+
+  return {
+    week: weekNum,
+    title: theme.topic,
+    why: theme.why,
+    focus: theme.focus,
+    liturgical: theme.creedLine,
+    milestone: theme.milestone || null,
+    isReview: !!theme.isReview,
+    isCapstone: !!theme.isFinalCapstone,
+    days
+  };
+}
+
+// Build Year 3 weeks 105-156
+P9_THEMES.forEach((theme, i) => WEEKS.push(buildPatristicWeek(105 + i, theme, 9)));
+P10_THEMES.forEach((theme, i) => WEEKS.push(buildPatristicWeek(118 + i, theme, 10)));
+P11_THEMES.forEach((theme, i) => WEEKS.push(buildPatristicWeek(131 + i, theme, 11)));
+P12_THEMES.forEach((theme, i) => WEEKS.push(buildPatristicWeek(144 + i, theme, 12)));
+
+const RESOURCES = [
+  { group: 'Foundation Essentials', items: [
+    { name: 'Language Transfer · Complete Greek', desc: '120 audio lessons. The bedrock of Phase 1.', link: L.LT, tag: 'Essential', tagClass: 'essential' },
+    { name: 'AnkiMobile (your synced deck)', desc: 'Spaced repetition. Daily, every day. You\'ve set this up.', link: L.anki, tag: 'Owned', tagClass: 'owned' },
+    { name: 'AnkiWeb · 5000 Greek Words deck', desc: 'High-frequency Modern Greek vocabulary. Phase 1 baseline.', link: L.ankiDeck5k, tag: 'Free', tagClass: 'free' },
+    { name: 'Easy Greek (YouTube)', desc: 'Street interviews with subtitles. Best ear training.', link: L.easyGreek, tag: 'Free', tagClass: 'free' }
+  ]},
+  { group: 'Audio Reps', items: [
+    { name: 'Pimsleur Greek', desc: 'Audio for drive-time, walk-time, dish-time. From Week 5.', link: L.pimsleur, tag: 'Paid', tagClass: 'paid' },
+    { name: 'Forvo · Greek pronunciations', desc: 'Native speakers, every word, free.', link: L.forvo, tag: 'Free', tagClass: 'free' },
+    { name: 'GreekPod101 (YouTube)', desc: 'Structured beginner→advanced video lessons.', link: L.greekPod, tag: 'Free', tagClass: 'free' }
+  ]},
+  { group: 'Reading & Native Content', items: [
+    { name: 'LingQ', desc: 'Read native articles with click-to-translate. Phase 2+.', link: L.lingq, tag: 'Paid', tagClass: 'paid' },
+    { name: 'Καθημερινή', desc: 'Major Greek newspaper. Real-world reading.', link: L.kathimerini, tag: 'Free', tagClass: 'free' },
+    { name: 'ERTFLIX', desc: 'Greek public TV. Shows, films, news.', link: L.ertflix, tag: 'Free', tagClass: 'free' },
+    { name: 'Tatoeba', desc: 'Example sentences with audio. Beginner-friendly.', link: L.tatoeba, tag: 'Free', tagClass: 'free' }
+  ]},
+  { group: 'Speaking & Exchange', items: [
+    { name: 'HelloTalk', desc: 'Free language exchange. Larger Greek user base.', link: L.helloTalk, tag: 'Free', tagClass: 'free' },
+    { name: 'Tandem', desc: 'Same idea, slightly different community.', link: L.tandem, tag: 'Free', tagClass: 'free' },
+    { name: 'italki', desc: '$15–25/hr Greek tutors. Bi-weekly from Phase 3, weekly Phase 4.', link: L.italki, tag: 'Paid', tagClass: 'paid' },
+    { name: 'Preply', desc: 'Alternative tutor marketplace.', link: L.preply, tag: 'Paid', tagClass: 'paid' },
+    { name: 'Parish conversation partner', desc: 'Free, weekly, immersive. Ask around Week 40. Tell them you want correction.', tag: 'Free', tagClass: 'free', link: '#' }
+  ]},
+  { group: 'Greek YouTubers', items: [
+    { name: 'Do You Speak Greek?', desc: 'Engaging vlog-style content for learners.', link: L.doYouSpeakGreek, tag: 'Free', tagClass: 'free' },
+    { name: 'Lingua Tree', desc: 'Greek language and culture.', link: L.linguatree, tag: 'Free', tagClass: 'free' },
+    { name: 'r/GREEK', desc: 'Community for learners and natives.', link: L.reddit, tag: 'Free', tagClass: 'free' }
+  ]},
+  { group: 'Liturgical & Patristic (Year 2-3)', items: [
+    { name: 'Your Greek/English Liturgy book', desc: 'Threaded through all 3 years. The constant companion.', tag: 'Owned', tagClass: 'owned', link: '#' },
+    { name: 'Holmes · Apostolic Fathers (Greek-English)', desc: 'Phase 7 (Year 2). Didache → Polycarp → Ignatius.', tag: 'Owned', tagClass: 'owned', link: '#' },
+    { name: 'Your Greek New Testament', desc: 'Year 2 onward. John first, then synoptics, then epistles.', tag: 'Owned', tagClass: 'owned', link: '#' },
+    { name: 'Your Septuagint', desc: 'Year 3. Psalms first — the prayers you already know.', tag: 'Owned', tagClass: 'owned', link: '#' },
+    { name: 'AGES Initiatives · Digital Chant Stand', desc: 'Liturgy in Greek + English parallel. The best online resource.', link: L.agesLiturgy, tag: 'Free', tagClass: 'free' },
+    { name: 'GOARCH Liturgical Texts', desc: 'Daily readings + service texts.', link: L.glt, tag: 'Free', tagClass: 'free' },
+    { name: 'Mounce · Basics of Biblical Greek', desc: 'The standard Koine grammar. Phase 5 (start of Year 2).', link: L.mounce, tag: 'Book', tagClass: 'paid' },
+    { name: 'Ellopos · Patristic Texts', desc: 'Greek Fathers in original + English.', link: L.ellopos, tag: 'Free', tagClass: 'free' },
+    { name: 'SBL Greek New Testament (online)', desc: 'Free Greek NT for reference and reading.', link: L.greekBible, tag: 'Free', tagClass: 'free' },
+    { name: 'Septuagint online (Ellopos)', desc: 'Greek Old Testament, free.', link: L.septuagint, tag: 'Free', tagClass: 'free' },
+    { name: 'Perseus Digital Library', desc: 'Greek lexicon + parsing tool. Year 2-3 reading aid.', link: L.perseus, tag: 'Free', tagClass: 'free' }
+  ]},
+  { group: 'Tools & Reference', items: [
+    { name: 'Lexilogos Greek Keyboard', desc: 'Online Greek keyboard for desktop typing.', link: L.keyboard, tag: 'Free', tagClass: 'free' },
+    { name: 'Glosbe Greek-English', desc: 'Dictionary with examples in context.', link: L.glosbe, tag: 'Free', tagClass: 'free' },
+    { name: 'WordReference Greek', desc: 'Translations + forum for nuance.', link: L.wordreference, tag: 'Free', tagClass: 'free' },
+    { name: 'Wiktionary Greek', desc: 'Verb conjugations, declensions.', link: L.wiktionary, tag: 'Free', tagClass: 'free' }
+  ]}
+];
+
+// State management
+let state = { completed: {}, lastModified: null };
+
+function loadState() {
+  try { const raw = localStorage.getItem(STORAGE_KEY); if (raw) state = JSON.parse(raw); }
+  catch (e) { console.error('Load failed:', e); }
+}
+
+function saveState() {
+  state.lastModified = new Date().toISOString();
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+  catch (e) { console.error('Save failed:', e); }
+}
+
+function dayIndexFor(date) {
+  const ms = date.setHours(0,0,0,0) - new Date(START_DATE).setHours(0,0,0,0);
+  return Math.floor(ms / 86400000);
+}
+
+function dateForDayIndex(idx) {
+  const d = new Date(START_DATE);
+  d.setDate(d.getDate() + idx);
+  return d;
+}
+
+function getCurrentDayIndex() { return dayIndexFor(new Date()); }
+function formatDate(d) { return `${DAY_FULL[d.getDay()]}, ${MONTH_NAMES[d.getMonth()]} ${d.getDate()}`; }
+function formatDateShort(d) { return `${MONTH_NAMES[d.getMonth()]} ${d.getDate()}`; }
+function getWeekData(weekNum) { return WEEKS.find(w => w.week === weekNum); }
+
+function getDayData(idx) {
+  if (idx < 0) return null;
+  const weekNum = Math.floor(idx / 7) + 1;
+  const dayInWeek = idx % 7;
+  const week = getWeekData(weekNum);
+  if (!week) return null;
+  return { week, day: week.days[dayInWeek], weekNum, dayInWeek, date: dateForDayIndex(idx), globalIdx: idx };
+}
+
+function getPhaseForWeek(weekNum) { return PHASES.find(p => weekNum >= p.weekRange[0] && weekNum <= p.weekRange[1]); }
+
+function taskKey(d, t) { return `d${d}t${t}`; }
+function isTaskComplete(d, t) { return !!state.completed[taskKey(d, t)]; }
+function setTaskComplete(d, t, c) {
+  const k = taskKey(d, t);
+  if (c) state.completed[k] = true; else delete state.completed[k];
+  saveState();
+}
+
+function isDayComplete(idx) {
+  const data = getDayData(idx);
+  if (!data || !data.day) return false;
+  return data.day.tasks.every((_, i) => isTaskComplete(idx, i));
+}
+
+function isWeekComplete(weekNum) {
+  const startIdx = (weekNum - 1) * 7;
+  for (let i = 0; i < 7; i++) if (!isDayComplete(startIdx + i)) return false;
+  return true;
+}
+
+function getStreak() {
+  const today = getCurrentDayIndex();
+  if (today < 0) return 0;
+  let streak = 0;
+  let i = today;
+  if (!isDayComplete(today)) i = today - 1;
+  while (i >= 0 && isDayComplete(i)) { streak++; i--; }
+  return streak;
+}
+
+function getTotalTasks() {
+  let total = 0;
+  WEEKS.forEach(w => w.days.forEach(d => total += d.tasks.length));
+  return total;
+}
+
+function getCompletedTasksCount() { return Object.keys(state.completed).length; }
+
+function renderTask(task, idx, ti) {
+  const checked = isTaskComplete(idx, ti);
+  const linkHTML = task.link && task.link !== '#' ? `<a class="task-link" href="${task.link}" target="_blank" rel="noopener">open</a>` : '';
+  return `<li class="task" data-day="${idx}" data-task="${ti}"><input type="checkbox" ${checked ? 'checked' : ''}><div class="task-content"><div class="task-text">${task.t}</div>${linkHTML}</div></li>`;
+}
+
+function renderDay(idx, isToday) {
+  const data = getDayData(idx);
+  if (!data || !data.day) return '';
+  const { day, date } = data;
+  const tasksHTML = day.tasks.map((t, i) => renderTask(t, idx, i)).join('');
+  const todayCls = isToday ? ' is-today' : '';
+  const sundayCls = date.getDay() === 0 ? ' is-sunday' : '';
+  return `<div class="day"><div class="day-head"><span class="day-name${todayCls}${sundayCls}">${DAY_FULL[date.getDay()]}</span><span class="day-date">${formatDateShort(date)}</span></div><div class="day-duration">⏱ ${day.dur}</div><ul class="tasks">${tasksHTML}</ul></div>`;
+}
+
+function renderTodayCard() {
+  const todayIdx = getCurrentDayIndex();
+  const container = document.getElementById('todayContainer');
+
+  if (todayIdx < 0) {
+    const daysUntil = -todayIdx;
+    container.innerHTML = `<div class="today-card"><div class="today-label">Coming Up</div><div class="today-date">Begins Mon, Apr 27, 2026</div><div class="today-meta"><span>${daysUntil}</span> day${daysUntil === 1 ? '' : 's'} until Day 1. Browse the Plan tab to see what's ahead.</div></div>`;
+    return;
+  }
+
+  const data = getDayData(todayIdx);
+  if (!data || !data.day) {
+    container.innerHTML = `<div class="today-card"><div class="today-label">Beyond Year 1</div><div class="today-date">More content coming</div><div class="today-meta">Years 2 and 3 will be added soon. For now, continue with native content, the Liturgy in Greek, and your tutor.</div></div>`;
+    return;
+  }
+
+  const { week, day, date, weekNum, dayInWeek } = data;
+  const tasksHTML = day.tasks.map((t, i) => renderTask(t, todayIdx, i)).join('');
+  const liturgicalHTML = week.liturgical ? `<div class="liturgical"><div class="liturgical-label">This week's bridge</div><div class="liturgical-text"><span class="liturgical-greek">${week.liturgical.greek}</span>${week.liturgical.en}</div></div>` : '';
+  const milestoneHTML = week.milestone && dayInWeek === 6 ? `<div class="milestone"><div class="milestone-label">This week's milestone</div><div class="milestone-text">${week.milestone}</div></div>` : '';
+  const whyHTML = week.why ? `<div class="why-week">${week.why}</div>` : '';
+
+  container.innerHTML = `<div class="today-card"><div class="today-label">Today</div><div class="today-date">${formatDate(date)}</div><div class="today-meta">Week <span>${weekNum}</span> · Day <span>${dayInWeek + 1}</span> · <span>${day.dur}</span><br><em>${week.title}</em></div>${whyHTML}<ul class="tasks">${tasksHTML}</ul>${liturgicalHTML}${milestoneHTML}</div>`;
+}
+
+function renderPhases() {
+  const todayIdx = getCurrentDayIndex();
+  const currentWeek = todayIdx >= 0 ? Math.floor(todayIdx / 7) + 1 : 0;
+
+  const phasesHTML = PHASES.map(phase => {
+    const [startW, endW] = phase.weekRange;
+    const isCurrentPhase = currentWeek >= startW && currentWeek <= endW;
+    let totalTasks = 0, completed = 0, builtWeeks = 0;
+    for (let w = startW; w <= endW; w++) {
+      const wd = getWeekData(w);
+      if (wd) {
+        builtWeeks++;
+        wd.days.forEach((d, di) => {
+          d.tasks.forEach((_, ti) => {
+            totalTasks++;
+            const idx = (w - 1) * 7 + di;
+            if (isTaskComplete(idx, ti)) completed++;
+          });
+        });
+      }
+    }
+    const pct = totalTasks ? Math.round((completed / totalTasks) * 100) : 0;
+    const totalPhaseWeeks = endW - startW + 1;
+    const isBuiltOut = builtWeeks === totalPhaseWeeks;
+
+    const weeksHTML = [];
+    for (let w = startW; w <= endW; w++) {
+      const wd = getWeekData(w);
+      if (!wd) {
+        weeksHTML.push(`<div class="week" style="opacity:0.4"><div class="week-head"><span class="week-num">W${w}</span><div class="week-info"><div class="week-title" style="color:var(--text-faint)">Coming soon</div><div class="week-dates">Built in next phase</div></div><span class="week-status future">Ω</span></div></div>`);
+        continue;
+      }
+      const startIdx = (w - 1) * 7;
+      const startDate = dateForDayIndex(startIdx);
+      const endDate = dateForDayIndex(startIdx + 6);
+      let status = 'future', statusText = 'Ω';
+      if (isWeekComplete(w)) { status = 'complete'; statusText = '✓'; }
+      else if (w === currentWeek) { status = 'active'; statusText = 'Α'; }
+      else if (w < currentWeek) { status = 'complete'; statusText = '✓'; }
+      const reviewCls = wd.isReview ? ' review-week' : '';
+      const reviewBanner = wd.isReview ? `<div class="review-week-banner">✦ Review Week — Consolidate, Don't Add ✦</div>` : '';
+      const milestoneHTML = wd.milestone ? `<div class="milestone"><div class="milestone-label">This week's milestone</div><div class="milestone-text">${wd.milestone}</div></div>` : '';
+      const daysHTML = wd.days.map((_, i) => renderDay(startIdx + i, startIdx + i === todayIdx)).join('');
+      const litHTML = wd.liturgical ? `<div class="liturgical" style="margin: 0 0 14px 0"><div class="liturgical-label">Bridge</div><div class="liturgical-text"><span class="liturgical-greek">${wd.liturgical.greek}</span>${wd.liturgical.en}</div></div>` : '';
+      const whyHTML = wd.why ? `<div class="why-week">${wd.why}</div>` : '';
+      weeksHTML.push(`<div class="week${reviewCls}" data-week="${w}"><div class="week-head"><span class="week-num">W${w}</span><div class="week-info"><div class="week-title">${wd.title}</div><div class="week-dates">${formatDateShort(startDate)} – ${formatDateShort(endDate)}</div></div><span class="week-status ${status}">${statusText}</span></div><div class="week-body">${reviewBanner}${whyHTML}<div class="week-focus">${wd.focus}</div>${litHTML}${milestoneHTML}${daysHTML}</div></div>`);
+    }
+
+    const quoteHTML = phase.quote ? `<div class="phase-quote"><span class="greek">${phase.quote.greek}</span>${phase.quote.en}<span class="source">— ${phase.quote.source}</span></div>` : '';
+
+    return `<div class="phase${isCurrentPhase ? ' open current' : ''}" data-phase="${phase.id}"><div class="phase-head"><div class="phase-title-row"><span class="phase-num">Phase ${phase.id} · ${phase.months}</span><span class="phase-toggle">▾</span></div><div class="phase-title">${phase.name}</div><div class="phase-subtitle">${phase.subtitle}</div>${quoteHTML}<div class="phase-progress-row"><div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div><span class="phase-percent">${pct}%</span></div></div><div class="phase-body">${weeksHTML.join('')}</div></div>`;
+  }).join('');
+
+  document.getElementById('phasesContainer').innerHTML = phasesHTML;
+}
+
+function renderFocusBlock() {
+  const todayIdx = getCurrentDayIndex();
+  const currentWeek = todayIdx >= 0 ? Math.floor(todayIdx / 7) + 1 : 1;
+  const phase = getPhaseForWeek(currentWeek);
+  const week = getWeekData(currentWeek);
+
+  if (!phase || !week) {
+    document.getElementById('focusBlock').innerHTML = '';
+    return;
+  }
+
+  let focusItems = [];
+  if (phase.id === 1) {
+    focusItems = ['<strong>Language Transfer</strong> — your daily anchor', '<strong>Anki</strong> — synced across devices', 'Your <strong>Liturgy book</strong> for weekend reading'];
+  } else if (phase.id === 2) {
+    focusItems = ['<strong>Pimsleur Greek</strong> — drive-time / walk-time', '<strong>LingQ</strong> — start with mini-stories', '<strong>Easy Greek</strong> — daily listening', '<strong>Anki</strong> — keep adding theme vocabulary'];
+  } else if (phase.id === 3) {
+    focusItems = ['<strong>italki tutor</strong> — bi-weekly sessions', '<strong>HelloTalk</strong> — daily voice messages', '<strong>LingQ + native podcasts</strong> — input volume', '<strong>Anki</strong> — drill weak cards weekly'];
+  } else if (phase.id === 4) {
+    focusItems = ['<strong>italki tutor</strong> — weekly now', '<strong>Parish conversation partner</strong> — weekly', '<strong>Greek news + podcasts</strong> — daily', 'Your <strong>Liturgy book</strong> — front-to-back this phase'];
+  }
+
+  document.getElementById('focusBlock').innerHTML = `<div class="focus-block"><div class="focus-block-label">This Phase · Open These</div>${focusItems.map(item => `<div class="focus-block-text">${item}</div>`).join('')}</div>`;
+}
+
+function renderResources() {
+  const html = RESOURCES.map(g => `<div class="res-group"><div class="res-group-title">${g.group}</div>${g.items.map(item => `<a class="res-item" href="${item.link || '#'}" target="${item.link && item.link !== '#' ? '_blank' : '_self'}" rel="noopener"><div class="res-name">${item.name}${item.tag ? `<span class="res-tag ${item.tagClass || ''}">${item.tag}</span>` : ''}</div><div class="res-desc">${item.desc}</div></a>`).join('')}</div>`).join('');
+  document.getElementById('resourcesContainer').innerHTML = html;
+}
+
+function renderStats() {
+  const todayIdx = getCurrentDayIndex();
+  const dayCount = todayIdx >= 0 ? `${todayIdx + 1}` : '—';
+  const total = getTotalTasks();
+  const done = getCompletedTasksCount();
+  const pct = total ? Math.round((done / total) * 100) : 0;
+  document.getElementById('dayCount').textContent = dayCount;
+  document.getElementById('streakCount').textContent = getStreak();
+  document.getElementById('percentDone').textContent = `${pct}%`;
+  document.getElementById('overallProgress').style.width = `${pct}%`;
+  const currentWeek = todayIdx >= 0 ? Math.floor(todayIdx / 7) + 1 : 1;
+  const phase = getPhaseForWeek(currentWeek);
+  document.getElementById('currentPhaseLabel').innerHTML = phase && todayIdx >= 0
+    ? `<strong>Phase ${phase.id}</strong> · ${phase.name} · Week ${currentWeek} of 156`
+    : todayIdx < 0 ? `Plan begins Mon, Apr 27, 2026` : `Beyond the structured plan · keep going`;
+}
+
+function renderAll() {
+  renderStats(); renderTodayCard(); renderPhases(); renderFocusBlock(); renderResources(); attachListeners();
+}
+
+function attachListeners() {
+  document.querySelectorAll('.task').forEach(taskEl => {
+    taskEl.addEventListener('click', e => {
+      if (e.target.tagName === 'A') return;
+      const cb = taskEl.querySelector('input[type="checkbox"]');
+      const dayIdx = parseInt(taskEl.dataset.day);
+      const taskIdx = parseInt(taskEl.dataset.task);
+      const newState = !cb.checked;
+      cb.checked = newState;
+      setTaskComplete(dayIdx, taskIdx, newState);
+      renderStats();
+      updateWeekStatus(Math.floor(dayIdx / 7) + 1);
+      e.preventDefault();
+    });
+  });
+  document.querySelectorAll('.phase-head').forEach(head => {
+    head.addEventListener('click', () => head.parentElement.classList.toggle('open'));
+  });
+  document.querySelectorAll('.week-head').forEach(head => {
+    head.addEventListener('click', () => head.parentElement.classList.toggle('open'));
+  });
+}
+
+function updateWeekStatus(weekNum) {
+  const weekEl = document.querySelector(`.week[data-week="${weekNum}"] .week-status`);
+  if (!weekEl) return;
+  const todayIdx = getCurrentDayIndex();
+  const currentWeek = Math.floor(todayIdx / 7) + 1;
+  let status = 'future', txt = 'Ω';
+  if (isWeekComplete(weekNum)) { status = 'complete'; txt = '✓'; }
+  else if (weekNum === currentWeek) { status = 'active'; txt = 'Α'; }
+  else if (weekNum < currentWeek) { status = 'complete'; txt = '✓'; }
+  weekEl.className = `week-status ${status}`;
+  weekEl.textContent = txt;
+}
+
+const tabBtns = document.querySelectorAll('.tab-btn');
+const tabViews = document.querySelectorAll('.tab-view');
+tabBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = btn.dataset.view;
+    tabBtns.forEach(b => b.classList.toggle('active', b.dataset.view === target));
+    tabViews.forEach(v => v.classList.toggle('active', v.id === `view-${target}`));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+
+const jumpBtn = document.getElementById('jumpBtn');
+window.addEventListener('scroll', () => {
+  const planView = document.getElementById('view-plan');
+  const inPlan = planView.classList.contains('active');
+  jumpBtn.classList.toggle('visible', inPlan && window.scrollY > 400);
+});
+jumpBtn.addEventListener('click', () => document.querySelector('[data-view="today"]').click());
+
+const modal = document.getElementById('settingsModal');
+document.getElementById('settingsBtn').addEventListener('click', () => modal.classList.add('open'));
+document.getElementById('closeSettings').addEventListener('click', () => modal.classList.remove('open'));
+modal.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('open'); });
+
+document.getElementById('exportBtn').addEventListener('click', () => {
+  const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `paideia-${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+});
+
+document.getElementById('importBtn').addEventListener('click', () => document.getElementById('importFile').click());
+document.getElementById('importFile').addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try {
+      const imported = JSON.parse(ev.target.result);
+      if (imported.completed) {
+        state = imported;
+        saveState();
+        renderAll();
+        modal.classList.remove('open');
+        alert('Progress imported successfully.');
+      }
+    } catch (err) { alert('Failed to parse file.'); }
+  };
+  reader.readAsText(file);
+});
+
+document.getElementById('resetBtn').addEventListener('click', () => {
+  if (!confirm('Reset ALL progress? This cannot be undone.')) return;
+  if (!confirm('Are you absolutely sure? Export your progress first if you want a backup.')) return;
+  state = { completed: {}, lastModified: null };
+  saveState();
+  renderAll();
+  modal.classList.remove('open');
+});
+
+loadState();
+renderAll();
+</script>
+</body>
+</html>
