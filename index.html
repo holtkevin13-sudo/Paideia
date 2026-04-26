@@ -283,6 +283,98 @@
   .today-meta span { color: var(--text-soft); }
   .today-meta em { color: var(--text-soft); font-family: var(--serif); font-style: italic; font-size: 1.05em; }
 
+  .today-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin: 12px 0 4px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+
+  .nav-btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s;
+    font-family: var(--sans);
+  }
+
+  .nav-btn:active { background: var(--surface-2); color: var(--gold); transform: scale(0.92); }
+  .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+  .nav-center {
+    flex: 1;
+    text-align: center;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-weight: 600;
+  }
+
+  .nav-center.is-today { color: var(--gold); }
+
+  .return-today {
+    display: inline-block;
+    font-size: 0.65rem;
+    color: var(--aegean);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    text-decoration: none;
+    margin-top: 3px;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    font-family: var(--sans);
+  }
+
+  .all-done-banner {
+    background: linear-gradient(135deg, rgba(127, 199, 127, 0.16) 0%, var(--gold-soft) 100%);
+    border: 1px solid var(--success);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-top: 16px;
+    text-align: center;
+  }
+
+  .all-done-text {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--success);
+    font-size: 1.05rem;
+    margin-bottom: 6px;
+  }
+
+  .all-done-link {
+    display: inline-block;
+    font-size: 0.78rem;
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--gold);
+    padding-bottom: 1px;
+    font-weight: 600;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    border-bottom: 1px dotted var(--gold);
+    font-family: var(--sans);
+    letter-spacing: 0.02em;
+  }
+
+  .all-done-link::after { content: ' →'; }
+
   .why-week {
     font-family: var(--serif);
     font-style: italic;
@@ -1492,10 +1584,13 @@ const WEEKS = [
         { t: 'Practice full Lord\'s Prayer through this week\'s line' },
         { t: 'Watch a Greek news clip; identify 5 known words', link: L.kathimerini }
       ]},
-      { d: 'Sun', dur: '45 min', tasks: [
-        { t: 'Re-listen to LT 46–55' },
+      { d: 'Sun', dur: '60 min', tasks: [
+        { t: 'MID-PHASE-1 CONSOLIDATION · Halfway through Language Transfer' },
+        { t: 'Re-listen to LT Lessons 1, 15, 30, 45 — feel how easy they\'ve become' },
+        { t: 'Anki review — drill any cards you keep missing' },
+        { t: 'Recite the Lord\'s Prayer through this week\'s line aloud, slowly' },
         { t: 'Read along with Psalm 50/51 in Greek (the Penitential Psalm)' },
-        { t: 'Anki review' }
+        { t: 'Write 5 sentences in Greek about what feels different than week 1' }
       ]}
     ]
   },
@@ -1760,9 +1855,12 @@ const WEEKS = [
       ]},
       { d: 'Sun', dur: '90 min', tasks: [
         { t: 'Language Transfer · Lessons 119 + 120 — THE FINAL TWO', link: L.LT },
-        { t: 'YOU HAVE COMPLETED LANGUAGE TRANSFER COMPLETE GREEK.' },
-        { t: 'Read along with Compline or another short service in Greek + English', link: L.agesLiturgy },
-        { t: 'Phase 1 complete. Tonight: Greek wine. A celebration.' }
+        { t: 'YOU HAVE COMPLETED LANGUAGE TRANSFER COMPLETE GREEK' },
+        { t: 'Re-listen to Lesson 1 — feel how impossibly different it sounds now' },
+        { t: 'Recite from memory: Lord\'s Prayer + first paragraph of the Creed' },
+        { t: 'Write a 200-word reflection in Greek: where you were on Apr 27, where you are today' },
+        { t: 'Read along with Compline (or another short service) in Greek + English', link: L.agesLiturgy },
+        { t: 'Phase 1 complete. Tonight: Greek wine. A real celebration.' }
       ]}
     ]
   }
@@ -2911,12 +3009,34 @@ function isWeekComplete(weekNum) {
 }
 
 function getStreak() {
+  // Humane streak: allows 1 grace day per rolling 7-day window.
+  // Walks backward from today through completed days; permits one gap per 7 consecutive days.
   const today = getCurrentDayIndex();
   if (today < 0) return 0;
   let streak = 0;
   let i = today;
+  // If today not yet complete, start from yesterday so we don't penalize a partial day
   if (!isDayComplete(today)) i = today - 1;
-  while (i >= 0 && isDayComplete(i)) { streak++; i--; }
+  let graceUsedInWindow = 0;
+  let daysWalked = 0;
+  while (i >= 0) {
+    if (isDayComplete(i)) {
+      streak++;
+    } else {
+      // Allow up to 1 missed day per rolling 7-day window
+      if (graceUsedInWindow < 1) {
+        graceUsedInWindow++;
+        // grace day still counts toward the streak
+        streak++;
+      } else {
+        break;
+      }
+    }
+    daysWalked++;
+    // Reset grace allowance every 7 days walked
+    if (daysWalked % 7 === 0) graceUsedInWindow = 0;
+    i--;
+  }
   return streak;
 }
 
@@ -2944,30 +3064,76 @@ function renderDay(idx, isToday) {
   return `<div class="day"><div class="day-head"><span class="day-name${todayCls}${sundayCls}">${DAY_FULL[date.getDay()]}</span><span class="day-date">${formatDateShort(date)}</span></div><div class="day-duration">⏱ ${day.dur}</div><ul class="tasks">${tasksHTML}</ul></div>`;
 }
 
+// Today card view offset: 0 = today, +1 = tomorrow preview, -1 = yesterday review
+let todayViewOffset = 0;
+
 function renderTodayCard() {
-  const todayIdx = getCurrentDayIndex();
+  const realTodayIdx = getCurrentDayIndex();
   const container = document.getElementById('todayContainer');
 
-  if (todayIdx < 0) {
-    const daysUntil = -todayIdx;
+  if (realTodayIdx < 0) {
+    const daysUntil = -realTodayIdx;
     container.innerHTML = `<div class="today-card"><div class="today-label">Coming Up</div><div class="today-date">Begins Mon, Apr 27, 2026</div><div class="today-meta"><span>${daysUntil}</span> day${daysUntil === 1 ? '' : 's'} until Day 1. Browse the Plan tab to see what's ahead.</div></div>`;
     return;
   }
 
-  const data = getDayData(todayIdx);
+  const viewIdx = realTodayIdx + todayViewOffset;
+  const data = getDayData(viewIdx);
+
   if (!data || !data.day) {
-    container.innerHTML = `<div class="today-card"><div class="today-label">Beyond Year 1</div><div class="today-date">More content coming</div><div class="today-meta">Years 2 and 3 will be added soon. For now, continue with native content, the Liturgy in Greek, and your tutor.</div></div>`;
+    if (viewIdx > realTodayIdx) {
+      // Beyond plan when navigating forward
+      container.innerHTML = `<div class="today-card"><div class="today-label">Beyond the Plan</div><div class="today-date">No more weeks</div><div class="today-meta">You\'ve reached the end of the structured 156-week plan. <button class="return-today" onclick="resetTodayView()">← Back to today</button></div></div>`;
+      return;
+    }
+    container.innerHTML = `<div class="today-card"><div class="today-label">Beyond Year 1</div><div class="today-date">More content coming</div><div class="today-meta">For now, continue with native content, the Liturgy in Greek, and your tutor.</div></div>`;
     return;
   }
 
   const { week, day, date, weekNum, dayInWeek } = data;
-  const tasksHTML = day.tasks.map((t, i) => renderTask(t, todayIdx, i)).join('');
+  const tasksHTML = day.tasks.map((t, i) => renderTask(t, viewIdx, i)).join('');
   const liturgicalHTML = week.liturgical ? `<div class="liturgical"><div class="liturgical-label">This week's bridge</div><div class="liturgical-text"><span class="liturgical-greek">${week.liturgical.greek}</span>${week.liturgical.en}</div></div>` : '';
   const milestoneHTML = week.milestone && dayInWeek === 6 ? `<div class="milestone"><div class="milestone-label">This week's milestone</div><div class="milestone-text">${week.milestone}</div></div>` : '';
   const whyHTML = week.why ? `<div class="why-week">${week.why}</div>` : '';
 
-  container.innerHTML = `<div class="today-card"><div class="today-label">Today</div><div class="today-date">${formatDate(date)}</div><div class="today-meta">Week <span>${weekNum}</span> · Day <span>${dayInWeek + 1}</span> · <span>${day.dur}</span><br><em>${week.title}</em></div>${whyHTML}<ul class="tasks">${tasksHTML}</ul>${liturgicalHTML}${milestoneHTML}</div>`;
+  // Determine label based on offset
+  let label, labelExtra = '';
+  if (todayViewOffset === 0) label = 'Today';
+  else if (todayViewOffset === 1) label = 'Tomorrow';
+  else if (todayViewOffset === -1) label = 'Yesterday';
+  else if (todayViewOffset > 0) label = `+${todayViewOffset} days`;
+  else label = `${todayViewOffset} days ago`;
+
+  if (todayViewOffset !== 0) {
+    labelExtra = `<button class="return-today" onclick="resetTodayView()">↩ Back to today</button>`;
+  }
+
+  // Navigation arrows
+  const canGoBack = viewIdx > 0;
+  const canGoForward = getDayData(viewIdx + 1) !== null;
+  const navHTML = `<div class="today-nav">
+    <button class="nav-btn" onclick="shiftTodayView(-1)" ${!canGoBack ? 'disabled' : ''} aria-label="Previous day">←</button>
+    <div class="nav-center ${todayViewOffset === 0 ? 'is-today' : ''}">${label}${labelExtra ? '<br>' + labelExtra : ''}</div>
+    <button class="nav-btn" onclick="shiftTodayView(1)" ${!canGoForward ? 'disabled' : ''} aria-label="Next day">→</button>
+  </div>`;
+
+  // All-done banner: if viewing today and all tasks complete, suggest tomorrow
+  const allDone = todayViewOffset === 0 && day.tasks.every((_, i) => isTaskComplete(viewIdx, i));
+  const allDoneHTML = allDone && getDayData(viewIdx + 1) ? `<div class="all-done-banner"><div class="all-done-text">Today is complete. Beautifully done.</div><button class="all-done-link" onclick="shiftTodayView(1)">Preview tomorrow</button></div>` : '';
+
+  container.innerHTML = `<div class="today-card">${navHTML}<div class="today-label">${label === 'Today' ? 'Today' : label}</div><div class="today-date">${formatDate(date)}</div><div class="today-meta">Week <span>${weekNum}</span> · Day <span>${dayInWeek + 1}</span> · <span>${day.dur}</span><br><em>${week.title}</em></div>${whyHTML}<ul class="tasks">${tasksHTML}</ul>${liturgicalHTML}${milestoneHTML}${allDoneHTML}</div>`;
 }
+
+// Expose for inline onclick handlers
+window.shiftTodayView = function(delta) {
+  todayViewOffset += delta;
+  renderTodayCard();
+};
+
+window.resetTodayView = function() {
+  todayViewOffset = 0;
+  renderTodayCard();
+};
 
 function renderPhases() {
   const todayIdx = getCurrentDayIndex();
@@ -3036,18 +3202,164 @@ function renderFocusBlock() {
     return;
   }
 
+  // Build week-specific focus items based on what this week actually demands
   let focusItems = [];
+
+  // Phase-1 base: Language Transfer is the anchor every week
   if (phase.id === 1) {
-    focusItems = ['<strong>Language Transfer</strong> — your daily anchor', '<strong>Anki</strong> — synced across devices', 'Your <strong>Liturgy book</strong> for weekend reading'];
-  } else if (phase.id === 2) {
-    focusItems = ['<strong>Pimsleur Greek</strong> — drive-time / walk-time', '<strong>LingQ</strong> — start with mini-stories', '<strong>Easy Greek</strong> — daily listening', '<strong>Anki</strong> — keep adding theme vocabulary'];
-  } else if (phase.id === 3) {
-    focusItems = ['<strong>italki tutor</strong> — bi-weekly sessions', '<strong>HelloTalk</strong> — daily voice messages', '<strong>LingQ + native podcasts</strong> — input volume', '<strong>Anki</strong> — drill weak cards weekly'];
-  } else if (phase.id === 4) {
-    focusItems = ['<strong>italki tutor</strong> — weekly now', '<strong>Parish conversation partner</strong> — weekly', '<strong>Greek news + podcasts</strong> — daily', 'Your <strong>Liturgy book</strong> — front-to-back this phase'];
+    if (currentWeek === 1) {
+      focusItems = ['<strong>Greek alphabet videos</strong> — start here, today', '<strong>Anki</strong> — set up but no cards yet', '<strong>A notebook</strong> for handwriting practice'];
+    } else if (currentWeek <= 4) {
+      focusItems = ['<strong>Language Transfer</strong> on SoundCloud — 1-2 lessons/day', '<strong>Anki</strong> — 5 new cards/day', '<strong>Easy Greek (YouTube)</strong> — weekend listening'];
+    } else if (currentWeek <= 7) {
+      focusItems = ['<strong>Language Transfer</strong> — keep daily pace', '<strong>Pimsleur Greek</strong> — drive/walk time (just started)', '<strong>Anki</strong> — daily reviews', 'Your <strong>Liturgy book</strong> — weekly Lord\'s Prayer practice'];
+    } else if (currentWeek <= 10) {
+      focusItems = ['<strong>Language Transfer</strong> — final third', '<strong>Pimsleur</strong> — weekly companion', '<strong>HelloTalk or Tandem</strong> — first messages going out', '<strong>Anki</strong> — daily'];
+    } else {
+      focusItems = ['<strong>Language Transfer</strong> — finishing this phase', '<strong>Pimsleur</strong> — daily', '<strong>HelloTalk</strong> — pushing voice messages', 'Your <strong>Liturgy book</strong> — Creed begins this phase'];
+    }
+  }
+  // Phase 2: vocabulary explosion + Pimsleur as primary
+  else if (phase.id === 2) {
+    focusItems = ['<strong>Pimsleur Greek</strong> — your daily anchor now', '<strong>LingQ</strong> — mini-stories + imported articles', '<strong>Easy Greek</strong> — themed videos this week', `Today's grammar focus: <strong>${week.focus.split('.')[0]}</strong>`, '<strong>Anki</strong> — theme vocabulary'];
+  }
+  // Phase 3: tutor enters, output volume
+  else if (phase.id === 3) {
+    const tutorThisWeek = week.title.toLowerCase().includes('tutor') || (currentWeek - 27) % 2 === 0;
+    focusItems = [
+      tutorThisWeek ? '<strong>italki tutor</strong> — session this Friday' : '<strong>HelloTalk/Tandem</strong> — extra voice exchange (no tutor this week)',
+      '<strong>LingQ + Greek podcasts</strong> — daily input',
+      '<strong>Greek YouTubers</strong> — Do You Speak Greek, Lingua Tree',
+      '<strong>Anki</strong> — drill weak cards'
+    ];
+  }
+  // Phase 4: weekly tutor, parish partner, push to B2
+  else if (phase.id === 4) {
+    focusItems = [
+      '<strong>italki tutor</strong> — weekly session',
+      '<strong>Parish conversation partner</strong> — recruit if not yet',
+      '<strong>Greek news (Καθημερινή)</strong> — daily',
+      '<strong>ERTFLIX</strong> — Greek shows/films',
+      'Your <strong>Liturgy book</strong> — front-to-back this phase'
+    ];
+  }
+  // Phase 5: Mounce begins, Modern maintenance
+  else if (phase.id === 5) {
+    const ch = week.title.match(/Ch\. ([\d-]+)/) ? week.title.match(/Ch\. ([\d-]+)/)[1] : 'current';
+    focusItems = [
+      `<strong>Mounce · Basics of Biblical Greek</strong> — ch. ${ch}`,
+      'Your <strong>Greek New Testament</strong> — preview ahead',
+      '<strong>Pimsleur</strong> — Modern Greek maintenance',
+      '<strong>Anki</strong> — start a separate Koine deck',
+      '<strong>Easy Greek</strong> — Modern listening continues'
+    ];
+  }
+  // Phase 6: Gospel of John
+  else if (phase.id === 6) {
+    const johnRef = week.title.match(/John ([\d:\-,\s]+)/) ? week.title.match(/John ([\d:\-,\s]+)/)[1].trim() : 'current chapter';
+    focusItems = [
+      `Your <strong>Greek New Testament</strong> — John ${johnRef} this week`,
+      '<strong>Mounce</strong> — paired chapter',
+      '<strong>Anki</strong> — Koine deck (NT vocabulary)',
+      '<strong>Easy Greek / HelloTalk</strong> — Modern maintenance'
+    ];
+  }
+  // Phase 7: Apostolic Fathers (Holmes)
+  else if (phase.id === 7) {
+    let holmesText = 'current text';
+    if (week.title.includes('Didache')) holmesText = 'Didache';
+    else if (week.title.includes('1 Clement')) holmesText = '1 Clement';
+    else if (week.title.includes('Ignatius')) holmesText = 'Ignatius letters';
+    else if (week.title.includes('Polycarp')) holmesText = 'Polycarp';
+    else if (week.title.includes('Martyrdom')) holmesText = 'Martyrdom of Polycarp';
+    focusItems = [
+      `Your <strong>Holmes Apostolic Fathers</strong> — ${holmesText} this week`,
+      '<strong>Anki</strong> — Patristic vocabulary deck',
+      'Your <strong>Greek NT</strong> — keep one chapter/week for maintenance',
+      '<strong>italki tutor</strong> — Modern Greek maintenance',
+      '<strong>Greek news/podcasts</strong> — Modern input continues'
+    ];
+  }
+  // Phase 8: Consolidation, NT broadening, Modern C1 push
+  else if (phase.id === 8) {
+    let ntFocus = 'current NT reading';
+    if (week.title.includes('1 John')) ntFocus = '1 John';
+    else if (week.title.includes('Mark')) ntFocus = 'Mark';
+    else if (week.title.includes('James')) ntFocus = 'James';
+    else if (week.title.includes('Philippians')) ntFocus = 'Philippians';
+    else if (week.title.includes('Ephesians')) ntFocus = 'Ephesians';
+    else if (week.title.includes('Hebrews')) ntFocus = 'Hebrews';
+    focusItems = [
+      `Your <strong>Greek NT</strong> — ${ntFocus} this week`,
+      '<strong>italki tutor</strong> — weekly, push for C1',
+      '<strong>Greek news + ERTFLIX</strong> — Modern maintenance',
+      '<strong>Anki</strong> — both decks',
+      'Your <strong>Liturgy book</strong> — Sundays'
+    ];
+  }
+  // Phase 9: Patristic Greek begins
+  else if (phase.id === 9) {
+    let father = 'this week\'s Father';
+    if (week.title.includes('Didache')) father = 'Didache (re-read)';
+    else if (week.title.includes('Basil')) father = 'St. Basil';
+    else if (week.title.includes('Athanasius')) father = 'St. Athanasius';
+    else if (week.title.includes('Gregory of Naz')) father = 'St. Gregory of Nazianzus';
+    else if (week.title.includes('Gregory of Nyss')) father = 'St. Gregory of Nyssa';
+    else if (week.title.includes('Maximus')) father = 'St. Maximus the Confessor';
+    else if (week.title.includes('Symeon')) father = 'St. Symeon the New Theologian';
+    else if (week.title.includes('Isaac')) father = 'St. Isaac the Syrian';
+    focusItems = [
+      `<strong>Ellopos · Patristic texts</strong> — ${father}`,
+      '<strong>Anki</strong> — Patristic deck',
+      'Your <strong>Greek NT</strong> — daily maintenance',
+      '<strong>Pimsleur / Modern listening</strong> — Modern maintenance',
+      '<strong>italki tutor</strong> — bi-weekly'
+    ];
+  }
+  // Phase 10: Chrysostom & Cappadocians
+  else if (phase.id === 10) {
+    let father = 'Chrysostom';
+    if (week.title.includes('Basil')) father = 'St. Basil';
+    else if (week.title.includes('Gregory Naz')) father = 'St. Gregory of Nazianzus';
+    else if (week.title.includes('Gregory Nyss')) father = 'St. Gregory of Nyssa';
+    focusItems = [
+      `<strong>Ellopos</strong> — ${father} this week`,
+      '<strong>Anki</strong> — Patristic deck (deeper)',
+      'Your <strong>Liturgy book</strong> — Sundays',
+      '<strong>Modern Greek</strong> — bi-weekly tutor + podcasts',
+      'Memorize the <strong>Paschal Homily</strong> opening this phase'
+    ];
+  }
+  // Phase 11: Liturgy & Septuagint
+  else if (phase.id === 11) {
+    let text = 'this week\'s text';
+    if (week.title.includes('Liturgy')) text = 'Divine Liturgy in Greek';
+    else if (week.title.includes('Anaphora')) text = 'Anaphora prayer';
+    else if (week.title.includes('Psalm')) text = 'Septuagint Psalms';
+    else if (week.title.includes('Genesis')) text = 'Genesis 1 LXX';
+    else if (week.title.includes('Isaiah')) text = 'Isaiah 53 LXX';
+    else if (week.title.includes('Akathist')) text = 'Akathist Hymn';
+    else if (week.title.includes('Vespers') || week.title.includes('Orthros')) text = 'Vespers + Orthros';
+    else if (week.title.includes('Trisagion')) text = 'Memorize key hymns';
+    focusItems = [
+      `Your <strong>Liturgy book</strong> + <strong>AGES Initiatives</strong> — ${text}`,
+      'Your <strong>Septuagint</strong> — daily Psalm reading',
+      '<strong>Anki</strong> — liturgical vocabulary',
+      '<strong>Modern Greek</strong> — maintenance via podcasts/news'
+    ];
+  }
+  // Phase 12: Open door, self-directed
+  else if (phase.id === 12) {
+    focusItems = [
+      '<strong>Your chosen capstone text</strong> — Patristic, of your picking',
+      '<strong>Ellopos / Philokalia</strong> — sustained reading',
+      'Your <strong>Liturgy book + Septuagint</strong> — daily',
+      '<strong>A Modern Greek novel</strong> — Cavafy, Kazantzakis, Seferis',
+      '<strong>italki tutor</strong> — bi-weekly maintenance'
+    ];
   }
 
-  document.getElementById('focusBlock').innerHTML = `<div class="focus-block"><div class="focus-block-label">This Phase · Open These</div>${focusItems.map(item => `<div class="focus-block-text">${item}</div>`).join('')}</div>`;
+  document.getElementById('focusBlock').innerHTML = `<div class="focus-block"><div class="focus-block-label">Week ${currentWeek} · Open These</div>${focusItems.map(item => `<div class="focus-block-text">${item}</div>`).join('')}</div>`;
 }
 
 function renderResources() {
@@ -3082,10 +3394,16 @@ function renderAll() {
   renderStats(); renderTodayCard(); renderPhases(); renderFocusBlock(); renderResources(); attachListeners();
 }
 
+// Event delegation: single document-level handler, immune to re-renders
+let listenersInitialized = false;
 function attachListeners() {
-  document.querySelectorAll('.task').forEach(taskEl => {
-    taskEl.addEventListener('click', e => {
-      if (e.target.tagName === 'A') return;
+  if (listenersInitialized) return;
+  listenersInitialized = true;
+
+  document.body.addEventListener('click', e => {
+    // Task checkboxes
+    const taskEl = e.target.closest('.task');
+    if (taskEl && e.target.tagName !== 'A') {
       const cb = taskEl.querySelector('input[type="checkbox"]');
       const dayIdx = parseInt(taskEl.dataset.day);
       const taskIdx = parseInt(taskEl.dataset.task);
@@ -3094,14 +3412,26 @@ function attachListeners() {
       setTaskComplete(dayIdx, taskIdx, newState);
       renderStats();
       updateWeekStatus(Math.floor(dayIdx / 7) + 1);
+      // If toggled task is on currently-shown today card, re-render to update all-done banner
+      const realToday = getCurrentDayIndex();
+      if (dayIdx === realToday + todayViewOffset) {
+        renderTodayCard();
+      }
       e.preventDefault();
-    });
-  });
-  document.querySelectorAll('.phase-head').forEach(head => {
-    head.addEventListener('click', () => head.parentElement.classList.toggle('open'));
-  });
-  document.querySelectorAll('.week-head').forEach(head => {
-    head.addEventListener('click', () => head.parentElement.classList.toggle('open'));
+      return;
+    }
+    // Phase expand/collapse
+    const phaseHead = e.target.closest('.phase-head');
+    if (phaseHead) {
+      phaseHead.parentElement.classList.toggle('open');
+      return;
+    }
+    // Week expand/collapse
+    const weekHead = e.target.closest('.week-head');
+    if (weekHead) {
+      weekHead.parentElement.classList.toggle('open');
+      return;
+    }
   });
 }
 
