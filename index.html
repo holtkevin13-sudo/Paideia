@@ -3617,13 +3617,22 @@ function renderTodayCard() {
   const realTodayIdx = getCurrentDayIndex();
   const container = document.getElementById('todayContainer');
 
-  if (realTodayIdx < 0) {
-    const daysUntil = -realTodayIdx;
-    container.innerHTML = `<div class="today-card"><div class="today-label">Coming Up</div><div class="today-date">Begins Mon, Apr 27, 2026</div><div class="today-meta"><span>${daysUntil}</span> day${daysUntil === 1 ? '' : 's'} until Day 1. Browse the Plan tab to see what's ahead.</div></div>`;
+  const viewIdx = realTodayIdx + todayViewOffset;
+
+  // Special case: viewing a date BEFORE the plan starts (April 27, 2026)
+  if (viewIdx < 0) {
+    const daysUntil = -viewIdx;
+    const canGoForward = true; // always can step forward toward Day 1
+    const canGoBack = false;  // no real plan content before Day 1
+    const navHTML = `<div class="today-nav">
+      <button class="nav-btn" onclick="shiftTodayView(-1)" disabled aria-label="Previous day">←</button>
+      <div class="nav-center ${todayViewOffset === 0 ? 'is-today' : ''}">${todayViewOffset === 0 ? 'Today' : 'Earlier'}${todayViewOffset !== 0 ? '<br><button class="return-today" onclick="resetTodayView()">↩ Back to today</button>' : ''}</div>
+      <button class="nav-btn" onclick="shiftTodayView(1)" aria-label="Next day">→</button>
+    </div>`;
+    container.innerHTML = `<div class="today-card">${navHTML}<div class="today-label">Coming Up</div><div class="today-date">Plan begins Mon, Apr 27, 2026</div><div class="today-meta"><span>${daysUntil}</span> day${daysUntil === 1 ? '' : 's'} until Day 1.<br>Tap <strong>→</strong> to preview Day 1.</div></div>`;
     return;
   }
 
-  const viewIdx = realTodayIdx + todayViewOffset;
   const data = getDayData(viewIdx);
 
   if (!data || !data.day) {
@@ -4056,8 +4065,16 @@ function attachListeners() {
       const cb = taskEl.querySelector('input[type="checkbox"]');
       const dayIdx = parseInt(taskEl.dataset.day);
       const taskIdx = parseInt(taskEl.dataset.task);
-      const newState = !cb.checked;
-      cb.checked = newState;
+      let newState;
+      if (e.target === cb) {
+        // Click landed on the checkbox itself — browser already toggled cb.checked.
+        // Just read the new state; don't re-toggle.
+        newState = cb.checked;
+      } else {
+        // Click on the row (not the box) — toggle programmatically
+        newState = !cb.checked;
+        cb.checked = newState;
+      }
       setTaskComplete(dayIdx, taskIdx, newState);
       renderStats();
       updateWeekStatus(Math.floor(dayIdx / 7) + 1);
@@ -4066,7 +4083,8 @@ function attachListeners() {
       if (dayIdx === realToday + todayViewOffset) {
         renderTodayCard();
       }
-      e.preventDefault();
+      // Don't preventDefault when click was on checkbox — let browser keep its toggle
+      if (e.target !== cb) e.preventDefault();
       return;
     }
     // Phase expand/collapse
