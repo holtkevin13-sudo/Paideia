@@ -1285,6 +1285,163 @@
 
   .focus-block-text strong { color: var(--gold); font-weight: 600; }
 
+  /* ============================================
+     LIBRARY · Tutor Prep, Prayer Rule, Anki Journey
+     ============================================ */
+  .library-card {
+    background: linear-gradient(135deg, var(--bg-2) 0%, var(--surface) 100%);
+    border: 1px solid var(--gold-soft);
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 14px;
+  }
+
+  .library-card-title {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    color: var(--gold);
+    margin-bottom: 4px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .library-card-title::before {
+    content: '✦';
+    font-size: 0.85em;
+    color: var(--gold);
+    opacity: 0.7;
+  }
+
+  .library-card-sub {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+    font-style: italic;
+    font-family: var(--serif);
+  }
+
+  .lib-section {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .lib-section:last-child { border-bottom: none; padding-bottom: 0; }
+  .lib-section:first-of-type { padding-top: 0; }
+
+  .lib-section-label {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--aegean);
+    font-weight: 700;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .lib-section-label .lib-section-time {
+    color: var(--text-muted);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+  }
+
+  .lib-section-text {
+    font-size: 0.86rem;
+    color: var(--text-soft);
+    line-height: 1.55;
+  }
+
+  .lib-section-text strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* Prayer Rule — Greek/English bilingual rendering */
+  .prayer-block {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .prayer-block:last-child { border-bottom: none; padding-bottom: 0; }
+  .prayer-block:first-of-type { padding-top: 4px; }
+
+  .prayer-name {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--aegean);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .prayer-greek {
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: var(--gold);
+    line-height: 1.55;
+    margin-bottom: 4px;
+  }
+
+  .prayer-english {
+    font-size: 0.78rem;
+    color: var(--text-soft);
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  /* Anki Journey — compact 12-phase overview */
+  .anki-journey-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .anki-journey-row:last-child { border-bottom: none; }
+
+  .anki-journey-num {
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    border-radius: 4px;
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    color: var(--text-muted);
+    font-family: var(--serif);
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+  }
+
+  .anki-journey-row.done .anki-journey-num {
+    background: linear-gradient(135deg, var(--gold), #b8902f);
+    color: #fff;
+    border-color: var(--gold);
+  }
+  .anki-journey-row.current .anki-journey-num {
+    background: linear-gradient(135deg, var(--aegean), #3a7ba8);
+    color: #fff;
+    border-color: var(--aegean);
+  }
+
+  .anki-journey-name {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.3;
+  }
+
+  .anki-journey-decks {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+    margin-top: 2px;
+  }
+
   .phase {
     background: var(--bg-2);
     border: 1px solid var(--border-soft);
@@ -1881,7 +2038,10 @@
     <h2 class="section-title">Library</h2>
     <div id="focusBlock"></div>
     <div id="memoryWall"></div>
+    <div id="tutorPrep"></div>
+    <div id="prayerRule"></div>
     <div id="resourcesContainer"></div>
+    <div id="ankiJourney"></div>
     <div class="footer-quote">
       <span class="greek">Παιδεία ἐστὶ θησαυρὸς ἀναφαίρετος</span>
       Education is a treasure that cannot be taken away.
@@ -2000,7 +2160,9 @@ const L = {
   grammarRef: 'http://www.kypros.org/LearnGreek/',
   greekBible: 'https://www.biblegateway.com/passage/?search=John+1&version=SBLGNT',
   septuagint: 'https://www.ellopos.net/elpenor/greek-texts/septuagint/',
-  perseus: 'https://www.perseus.tufts.edu/hopper/'
+  perseus: 'https://www.perseus.tufts.edu/hopper/',
+  biblehub: 'https://biblehub.com/interlinear/john/1.htm',
+  orthodoxwiki: 'https://orthodoxwiki.org/'
 };
 
 const PHASES = [
@@ -3691,7 +3853,9 @@ const RESOURCES = [
     { name: 'Ellopos · Patristic Texts', desc: 'Greek Fathers in original + English.', link: L.ellopos, tag: 'Free', tagClass: 'free' },
     { name: 'SBL Greek New Testament (online)', desc: 'Free Greek NT for reference and reading.', link: L.greekBible, tag: 'Free', tagClass: 'free' },
     { name: 'Septuagint online (Ellopos)', desc: 'Greek Old Testament, free.', link: L.septuagint, tag: 'Free', tagClass: 'free' },
-    { name: 'Perseus Digital Library', desc: 'Greek lexicon + parsing tool. Year 2-3 reading aid.', link: L.perseus, tag: 'Free', tagClass: 'free' }
+    { name: 'Perseus Digital Library', desc: 'Greek lexicon + parsing tool. Year 2-3 reading aid.', link: L.perseus, tag: 'Free', tagClass: 'free' },
+    { name: 'BibleHub Interlinear (Greek NT)', desc: 'Greek text with parsing under each word. Saves 20 min when stuck on a verse.', link: L.biblehub, tag: 'Free', tagClass: 'free' },
+    { name: 'OrthodoxWiki', desc: 'Patristic context, theological terms, Church history reference.', link: L.orthodoxwiki, tag: 'Free', tagClass: 'free' }
   ]},
   { group: 'Tools & Reference', items: [
     { name: 'Lexilogos Greek Keyboard', desc: 'Online Greek keyboard for desktop typing.', link: L.keyboard, tag: 'Free', tagClass: 'free' },
@@ -4546,6 +4710,154 @@ function renderResources() {
   document.getElementById('resourcesContainer').innerHTML = html;
 }
 
+// ============================================================================
+// Tutor Session Prep — 60-min structured session template
+// ============================================================================
+function renderTutorPrep() {
+  const html = `<div class="library-card">
+    <div class="library-card-title">Tutor Session · Structure</div>
+    <div class="library-card-sub">A 60-minute session, structured. Bring this to every meeting from Phase 3 onward.</div>
+
+    <div class="lib-section">
+      <div class="lib-section-label">Before the session <span class="lib-section-time">· 10 min, on your own</span></div>
+      <div class="lib-section-text">
+        Pick <strong>one specific topic</strong> for output (e.g., "what I did this weekend", "my parish", "a recent hike").
+        Write 5–8 sentences in Greek about it. Note 3 words you didn't know how to say — these become questions for the tutor.
+        Open Anki: review for 5 min so you arrive warm.
+      </div>
+    </div>
+
+    <div class="lib-section">
+      <div class="lib-section-label">Open <span class="lib-section-time">· 5 min</span></div>
+      <div class="lib-section-text">
+        Greet in Greek. <strong>Καλησπέρα! Πώς είστε;</strong> Small talk in Greek only.
+        If you stumble, the tutor lets you stumble — that's the point.
+      </div>
+    </div>
+
+    <div class="lib-section">
+      <div class="lib-section-label">Output <span class="lib-section-time">· 20 min</span></div>
+      <div class="lib-section-text">
+        Speak about your prepared topic. <strong>You speak; the tutor listens.</strong>
+        Tutor takes notes on errors but does not interrupt unless you stall completely.
+        Ask your 3 prepared "how do I say X" questions.
+      </div>
+    </div>
+
+    <div class="lib-section">
+      <div class="lib-section-label">Correction <span class="lib-section-time">· 15 min</span></div>
+      <div class="lib-section-text">
+        Tutor walks through their notes. The 3–5 most important errors only — not a comprehensive list.
+        For each: <em>why</em> it was wrong, the correct form, one example sentence.
+        Add these as Anki cloze cards before the session ends.
+      </div>
+    </div>
+
+    <div class="lib-section">
+      <div class="lib-section-label">Lesson <span class="lib-section-time">· 15 min</span></div>
+      <div class="lib-section-text">
+        Tutor introduces one focused grammar/vocabulary point. Aligned with this week's topic where possible.
+        Prefer concrete examples to grammar tables. Try producing 3 sentences using the new structure.
+      </div>
+    </div>
+
+    <div class="lib-section">
+      <div class="lib-section-label">Close <span class="lib-section-time">· 5 min</span></div>
+      <div class="lib-section-text">
+        Agree on the topic for next session. Tutor sends 1 short text/article in Greek for you to read before then.
+        End in Greek: <strong>Ευχαριστώ πολύ! Καλή εβδομάδα!</strong>
+      </div>
+    </div>
+  </div>`;
+  const el = document.getElementById('tutorPrep');
+  if (el) el.innerHTML = html;
+}
+
+// ============================================================================
+// Daily Prayer Rule — Orthodox morning/evening prayer rule in Greek
+// Use the Greek you've memorized in actual daily prayer
+// ============================================================================
+function renderPrayerRule() {
+  const html = `<div class="library-card">
+    <div class="library-card-title">Daily Prayer Rule · Καθημερινὴ Προσευχή</div>
+    <div class="library-card-sub">When you can pray these in Greek without thinking, the formation is working.</div>
+
+    <div class="prayer-block">
+      <div class="prayer-name">Trisagion Prayers · Τρισάγιον (start every prayer time)</div>
+      <div class="prayer-greek">Εἰς τὸ ὄνομα τοῦ Πατρὸς καὶ τοῦ Υἱοῦ καὶ τοῦ Ἁγίου Πνεύματος. Ἀμήν.<br><br>Ἅγιος ὁ Θεός, Ἅγιος Ἰσχυρός, Ἅγιος Ἀθάνατος, ἐλέησον ἡμᾶς. <em>(3x)</em><br><br>Δόξα Πατρὶ καὶ Υἱῷ καὶ Ἁγίῳ Πνεύματι, καὶ νῦν καὶ ἀεὶ καὶ εἰς τοὺς αἰῶνας τῶν αἰώνων. Ἀμήν.</div>
+      <div class="prayer-english">In the name of the Father, and of the Son, and of the Holy Spirit. Amen. / Holy God, Holy Mighty, Holy Immortal, have mercy on us. (3x) / Glory to the Father and to the Son and to the Holy Spirit, both now and ever and unto ages of ages. Amen.</div>
+    </div>
+
+    <div class="prayer-block">
+      <div class="prayer-name">Lord's Prayer · Πάτερ ἡμῶν</div>
+      <div class="prayer-greek">Πάτερ ἡμῶν ὁ ἐν τοῖς οὐρανοῖς, ἁγιασθήτω τὸ ὄνομά σου· ἐλθέτω ἡ βασιλεία σου· γενηθήτω τὸ θέλημά σου, ὡς ἐν οὐρανῷ καὶ ἐπὶ τῆς γῆς. Τὸν ἄρτον ἡμῶν τὸν ἐπιούσιον δὸς ἡμῖν σήμερον· καὶ ἄφες ἡμῖν τὰ ὀφειλήματα ἡμῶν, ὡς καὶ ἡμεῖς ἀφίεμεν τοῖς ὀφειλέταις ἡμῶν· καὶ μὴ εἰσενέγκῃς ἡμᾶς εἰς πειρασμόν, ἀλλὰ ῥῦσαι ἡμᾶς ἀπὸ τοῦ πονηροῦ. Ἀμήν.</div>
+      <div class="prayer-english">Our Father, who art in the heavens, hallowed be Thy name. Thy kingdom come. Thy will be done on earth as it is in heaven. Give us this day our daily bread; and forgive us our trespasses, as we forgive those who trespass against us; and lead us not into temptation, but deliver us from the evil one. Amen.</div>
+    </div>
+
+    <div class="prayer-block">
+      <div class="prayer-name">Theotokos Petition · Θεοτοκίον</div>
+      <div class="prayer-greek">Διὰ πρεσβειῶν τῆς Θεοτόκου, Σῶτερ, σῶσον ἡμᾶς.</div>
+      <div class="prayer-english">Through the intercessions of the Theotokos, Saviour, save us.</div>
+    </div>
+
+    <div class="prayer-block">
+      <div class="prayer-name">Morning addition · Πρωϊνή</div>
+      <div class="prayer-greek">Δόξα σοι, ὁ Θεὸς ἡμῶν, δόξα σοι.<br>Δόξα τῷ Θεῷ πάντων ἕνεκεν.</div>
+      <div class="prayer-english">Glory to Thee, our God, glory to Thee. / Glory to God for all things. <em>(St. John Chrysostom's last words)</em></div>
+    </div>
+
+    <div class="prayer-block">
+      <div class="prayer-name">Evening addition · Ἑσπερινή</div>
+      <div class="prayer-greek">Κύριε, ἐλέησον. <em>(12x)</em><br><br>Εἰς χεῖράς σου, Κύριε, παρατίθεμαι τὸ πνεῦμά μου.</div>
+      <div class="prayer-english">Lord, have mercy. (12x) / Into Thy hands, O Lord, I commend my spirit.</div>
+    </div>
+
+    <div class="prayer-block">
+      <div class="prayer-name">After Phase 4 · add</div>
+      <div class="prayer-greek">The Symbol of Faith — Πιστεύω εἰς ἕνα Θεόν...</div>
+      <div class="prayer-english">Once you have memorized the full Nicene Creed (Phase 4 milestone), pray it daily as part of the rule.</div>
+    </div>
+  </div>`;
+  const el = document.getElementById('prayerRule');
+  if (el) el.innerHTML = html;
+}
+
+// ============================================================================
+// Anki Journey — full 12-phase deck progression overview
+// ============================================================================
+function renderAnkiJourney() {
+  const todayIdx = getCurrentDayIndex();
+  const currentWeek = todayIdx >= 0 ? Math.floor(todayIdx / 7) + 1 : 1;
+  const currentPhase = getPhaseForWeek(currentWeek);
+  const currentId = currentPhase ? currentPhase.id : 0;
+
+  const rows = PHASES.map(p => {
+    const sched = ANKI_SCHEDULE[p.id];
+    let cls = 'anki-journey-row';
+    if (p.id < currentId) cls += ' done';
+    else if (p.id === currentId && todayIdx >= 0) cls += ' current';
+
+    const newDecks = sched && sched.new ? sched.new.slice(0, 3).map(d => d.deck.replace(/ \(.+\)$/, '')).join(' · ') : '';
+
+    return `<div class="${cls}">
+      <div class="anki-journey-num">${p.id}</div>
+      <div>
+        <div class="anki-journey-name">${p.name}</div>
+        <div class="anki-journey-decks">${newDecks || 'maintenance only'}</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  const html = `<div class="library-card">
+    <div class="library-card-title">Anki Journey · 12 Phases</div>
+    <div class="library-card-sub">Your full deck progression. Past phases keep coming back as reviews — formation accumulates.</div>
+    ${rows}
+  </div>`;
+
+  const el = document.getElementById('ankiJourney');
+  if (el) el.innerHTML = html;
+}
+
 function renderStats() {
   const todayIdx = getCurrentDayIndex();
   const dayCount = todayIdx >= 0 ? `${todayIdx + 1}` : '—';
@@ -4635,7 +4947,7 @@ function renderStats() {
 }
 
 function renderAll() {
-  renderStats(); renderTodayCard(); renderPhases(); renderFocusBlock(); renderMemoryWall(); renderResources(); attachListeners();
+  renderStats(); renderTodayCard(); renderPhases(); renderFocusBlock(); renderMemoryWall(); renderTutorPrep(); renderPrayerRule(); renderResources(); renderAnkiJourney(); attachListeners();
 }
 
 // Event delegation: single document-level handler, immune to re-renders
