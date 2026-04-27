@@ -191,103 +191,211 @@
     font-weight: 500;
   }
 
-  .stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 8px;
-    padding: 18px 16px 8px;
+  /* ============================================
+     JOURNEY · Unified progress visualization
+     12-phase path + current phase card + stats
+     ============================================ */
+
+  .journey {
+    padding: 14px 14px 8px;
   }
 
-  .stat {
+  /* The 12-stone path */
+  .journey-path {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    margin-bottom: 12px;
+    padding: 0 2px;
+  }
+
+  .path-stone {
+    flex: 1;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--text-muted);
     background: var(--surface);
     border: 1px solid var(--border-soft);
-    border-radius: 12px;
-    padding: 14px 8px;
-    text-align: center;
+    border-radius: 4px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    cursor: default;
   }
 
-  .stat-value {
+  .path-stone.done {
+    background: linear-gradient(135deg, var(--gold), #b8902f);
+    color: #fff;
+    border-color: var(--gold);
+    box-shadow: 0 1px 4px rgba(212, 169, 67, 0.25);
+  }
+
+  .path-stone.current {
+    background: linear-gradient(135deg, var(--aegean), #3a7ba8);
+    color: #fff;
+    border-color: var(--aegean);
+    height: 32px;
+    font-size: 0.78rem;
+    box-shadow: 0 0 14px rgba(95, 163, 209, 0.5);
+    animation: stone-pulse 2.4s ease-in-out infinite;
+    z-index: 2;
+  }
+
+  @keyframes stone-pulse {
+    0%, 100% { box-shadow: 0 0 12px rgba(95, 163, 209, 0.4); }
+    50%      { box-shadow: 0 0 20px rgba(95, 163, 209, 0.7); }
+  }
+
+  /* The current phase card */
+  .journey-card {
+    background: linear-gradient(135deg,
+      rgba(212, 169, 67, 0.05) 0%,
+      rgba(95, 163, 209, 0.04) 100%);
+    border: 1px solid var(--border-soft);
+    border-radius: 14px;
+    padding: 16px 16px 12px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5),
+                0 2px 12px rgba(13, 26, 48, 0.04);
+  }
+
+  .journey-eyebrow {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--text-muted);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .journey-eyebrow-divider {
+    margin: 0 6px;
+    opacity: 0.5;
+  }
+
+  .journey-phase-name {
     font-family: var(--serif);
-    font-size: 1.8rem;
-    font-weight: 600;
+    font-size: 1.45rem;
     color: var(--gold);
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-
-  .stat-label {
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    color: var(--text-muted);
     font-weight: 600;
+    margin: 0 0 14px 0;
+    line-height: 1.15;
+    letter-spacing: 0.005em;
   }
 
-  .progress-section { padding: 8px 18px 12px; }
-
-  .progress-row {
-    margin-bottom: 8px;
-  }
-  .progress-row:last-of-type { margin-bottom: 0; }
-
-  .progress-label {
+  /* Bars */
+  .journey-bars {
     display: flex;
-    justify-content: space-between;
-    align-items: baseline;
+    flex-direction: column;
+    gap: 7px;
+    margin-bottom: 14px;
+  }
+
+  .bar-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .bar-label {
     font-size: 0.66rem;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    margin-bottom: 4px;
-    font-weight: 600;
-  }
-
-  .progress-label-name {
+    font-weight: 700;
     color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    min-width: 62px;
   }
 
-  .progress-label-pct {
-    font-family: var(--serif);
-    font-size: 0.95rem;
-    font-weight: 600;
-    text-transform: none;
-    letter-spacing: 0;
-  }
-
-  .progress-row.month .progress-label-pct { color: var(--aegean); }
-  .progress-row.phase .progress-label-pct { color: var(--gold); }
-
-  .progress-track {
-    height: 4px;
+  .bar-track {
+    flex: 1;
+    height: 6px;
     background: var(--surface);
-    border-radius: 2px;
+    border-radius: 3px;
     overflow: hidden;
     border: 1px solid var(--border-soft);
   }
 
-  .progress-row.month .progress-track {
-    height: 3px;
+  .bar-track.thin {
+    height: 4px;
   }
 
-  .progress-fill {
+  .bar-fill {
     height: 100%;
+    border-radius: 3px;
+    transition: width 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .bar-fill.gold {
     background: linear-gradient(90deg, var(--aegean), var(--gold));
-    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 0 12px var(--gold-glow);
+    box-shadow: 0 0 10px rgba(212, 169, 67, 0.5);
   }
 
-  .progress-row.month .progress-fill {
+  .bar-fill.aegean {
     background: var(--aegean);
-    box-shadow: 0 0 8px rgba(95, 163, 209, 0.4);
+    box-shadow: 0 0 6px rgba(95, 163, 209, 0.4);
   }
 
-  .phase-label {
-    font-size: 0.78rem;
-    color: var(--text-soft);
-    text-align: center;
-    margin-top: 8px;
+  .bar-pct {
+    font-family: var(--serif);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+    min-width: 38px;
+    text-align: right;
   }
 
-  .phase-label strong { color: var(--gold); font-weight: 600; }
+  /* Stats footer */
+  .journey-stats {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding-top: 10px;
+    border-top: 1px solid var(--border-soft);
+  }
+
+  .js-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    flex: 1;
+  }
+
+  .js-num {
+    font-family: var(--serif);
+    font-size: 1.55rem;
+    font-weight: 600;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .js-num-of {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-left: 2px;
+  }
+
+  .js-lab {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-top: 2px;
+  }
+
+  .js-divider {
+    width: 1px;
+    height: 26px;
+    background: linear-gradient(180deg,
+      transparent 0%,
+      var(--border-soft) 50%,
+      transparent 100%);
+  }
 
   .tab-view {
     padding: 14px 16px 20px;
@@ -714,6 +822,134 @@
     font-weight: 600;
   }
 
+  /* ============================================
+     Anki Schedule card · Today view
+     ============================================ */
+  .anki-card {
+    background: linear-gradient(135deg,
+      rgba(26, 58, 92, 0.04) 0%,
+      rgba(212, 169, 67, 0.03) 100%);
+    border: 1px solid var(--border-soft);
+    border-left: 3px solid var(--aegean);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin: 14px 0 4px;
+  }
+
+  .anki-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .anki-card-title {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--aegean);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .anki-card-title::before {
+    content: "✦";
+    font-size: 0.85rem;
+    color: var(--gold);
+  }
+
+  .anki-toggle {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    transition: transform 0.3s;
+  }
+
+  .anki-card.expanded .anki-toggle {
+    transform: rotate(180deg);
+  }
+
+  .anki-summary {
+    font-size: 0.78rem;
+    color: var(--text-soft);
+    font-style: italic;
+    line-height: 1.4;
+  }
+
+  .anki-body {
+    display: none;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border-soft);
+  }
+
+  .anki-card.expanded .anki-body {
+    display: block;
+    animation: fadeIn 0.25s ease-out;
+  }
+
+  .anki-section {
+    margin-bottom: 10px;
+  }
+
+  .anki-section:last-child { margin-bottom: 0; }
+
+  .anki-section-label {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .anki-section.new .anki-section-label { color: var(--gold); }
+  .anki-section.review .anki-section-label { color: var(--aegean); }
+  .anki-section.optional .anki-section-label { color: var(--text-muted); }
+
+  .anki-deck-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .anki-deck-item {
+    padding: 4px 0;
+    font-size: 0.78rem;
+    line-height: 1.45;
+    color: var(--text);
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .anki-deck-item::before {
+    content: "·";
+    color: var(--text-muted);
+    font-weight: 700;
+    margin-top: -1px;
+  }
+
+  .anki-deck-item.custom::before {
+    content: "✦";
+    color: var(--gold);
+    font-size: 0.7rem;
+    margin-top: 2px;
+  }
+
+  .anki-deck-name {
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .anki-deck-pace {
+    color: var(--text-muted);
+    font-size: 0.74rem;
+  }
+
   /* Memory wall in Library */
   .memory-wall {
     background: linear-gradient(135deg, var(--bg-2) 0%, var(--surface) 100%);
@@ -1119,7 +1355,21 @@
   }
 
   .phase-progress-row { display: flex; align-items: center; gap: 12px; }
-  .phase-progress-row .progress-track { flex: 1; }
+  .phase-progress-row .progress-track {
+    flex: 1;
+    height: 4px;
+    background: var(--surface);
+    border-radius: 2px;
+    overflow: hidden;
+    border: 1px solid var(--border-soft);
+  }
+  .phase-progress-row .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--aegean), var(--gold));
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 12px var(--gold-glow);
+    border-radius: 2px;
+  }
 
   .phase-percent {
     font-family: var(--serif);
@@ -1575,28 +1825,47 @@
     <div class="subtitle-en">Paideia · Formation of the Soul through Learning</div>
   </header>
 
-  <section class="stats">
-    <div class="stat"><div class="stat-value" id="dayCount">—</div><div class="stat-label">Day</div></div>
-    <div class="stat"><div class="stat-value" id="streakCount">0</div><div class="stat-label">Streak</div></div>
-    <div class="stat"><div class="stat-value" id="percentDone">0%</div><div class="stat-label">Phase</div></div>
-  </section>
+  <section class="journey">
+    <div class="journey-path" id="journeyPath" aria-label="The 12-phase path"></div>
 
-  <section class="progress-section">
-    <div class="progress-row month">
-      <div class="progress-label">
-        <span class="progress-label-name" id="monthName">Month</span>
-        <span class="progress-label-pct" id="monthPct">0%</span>
+    <div class="journey-card">
+      <div class="journey-eyebrow">
+        <span id="journeyEyebrow">Phase 1 of 12</span>
+        <span class="journey-eyebrow-divider">·</span>
+        <span id="journeyPeriod">Year 1 · Months 1–3</span>
       </div>
-      <div class="progress-track"><div class="progress-fill" id="monthProgress" style="width: 0%"></div></div>
-    </div>
-    <div class="progress-row phase">
-      <div class="progress-label">
-        <span class="progress-label-name" id="phaseName">Phase</span>
-        <span class="progress-label-pct" id="phasePct">0%</span>
+      <h2 class="journey-phase-name" id="journeyPhaseName">Foundation</h2>
+
+      <div class="journey-bars">
+        <div class="bar-row">
+          <span class="bar-label">Phase</span>
+          <div class="bar-track"><div class="bar-fill gold" id="phaseBar" style="width:0%"></div></div>
+          <span class="bar-pct" id="phasePctNew">0%</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Month <span id="monthIdx">1</span></span>
+          <div class="bar-track thin"><div class="bar-fill aegean" id="monthBar" style="width:0%"></div></div>
+          <span class="bar-pct" id="monthPctNew">0%</span>
+        </div>
       </div>
-      <div class="progress-track"><div class="progress-fill" id="overallProgress" style="width: 0%"></div></div>
+
+      <div class="journey-stats">
+        <div class="js-stat">
+          <span class="js-num" id="dayNum">—</span>
+          <span class="js-lab">Day</span>
+        </div>
+        <div class="js-divider"></div>
+        <div class="js-stat">
+          <span class="js-num" id="streakNum">0</span>
+          <span class="js-lab">Streak</span>
+        </div>
+        <div class="js-divider"></div>
+        <div class="js-stat">
+          <span class="js-num"><span id="weekInPhase">1</span><span class="js-num-of">/13</span></span>
+          <span class="js-lab">Week</span>
+        </div>
+      </div>
     </div>
-    <div class="phase-label" id="currentPhaseLabel">—</div>
   </section>
 
   <section class="tab-view active" id="view-today">
@@ -1700,7 +1969,7 @@ const L = {
   LT: 'https://soundcloud.com/languagetransfer/sets/complete-greek-more-audios',
   easyGreek: 'https://www.youtube.com/@EasyGreek',
   greekPod: 'https://www.youtube.com/@GreekPod101',
-  alphabet: 'https://www.youtube.com/results?search_query=greek+alphabet+pronunciation',
+  alphabet: 'https://omniglot.com/writing/greek.htm',
   anki: 'https://apps.ankiweb.net/',
   ankiDeck5k: 'https://ankiweb.net/shared/info/2113078064',
   pimsleur: 'https://www.pimsleur.com/learn-greek',
@@ -1726,7 +1995,9 @@ const L = {
   glosbe: 'https://glosbe.com/en/el',
   wordreference: 'https://www.wordreference.com/engr/',
   wiktionary: 'https://en.wiktionary.org/wiki/Wiktionary:Greek_language',
-  greekPodcasts: 'https://www.youtube.com/results?search_query=podcast+%CF%83%CF%84%CE%B1+%CE%B5%CE%BB%CE%BB%CE%B7%CE%BD%CE%B9%CE%BA%CE%AC',
+  greekPodcasts: 'https://www.easygreek.com',
+  greekHymns: 'https://www.agesinitiatives.com/dcs/public/dcs/dcs.html',
+  grammarRef: 'http://www.kypros.org/LearnGreek/',
   greekBible: 'https://www.biblegateway.com/passage/?search=John+1&version=SBLGNT',
   septuagint: 'https://www.ellopos.net/elpenor/greek-texts/septuagint/',
   perseus: 'https://www.perseus.tufts.edu/hopper/'
@@ -1892,7 +2163,7 @@ const WEEKS = [
       { d: 'Sun', dur: '45 min', tasks: [
         { t: 'Re-listen to LT 8–15 while doing other things' },
         { t: 'Anki review' },
-        { t: 'Listen to a Greek Orthodox hymn on YouTube — read the lyrics if you can find them' }
+        { t: 'Listen to a Greek Orthodox hymn from the AGES Digital Chant Stand — read along with the parallel Greek/English text', link: L.greekHymns }
       ]}
     ]
   },
@@ -2573,7 +2844,7 @@ function buildTemplatedWeek(weekNum, theme, phaseId) {
       { d: 'Tue', dur: '40 min', tasks: [
         { t: 'Pimsleur next lesson', link: L.pimsleur },
         { t: 'Anki review' },
-        { t: `Grammar focus: ${grammar} — find a video or article` }
+        { t: `Grammar focus: ${grammar} — kypros.org Greek lesson`, link: L.grammarRef }
       ]},
       { d: 'Wed', dur: '40 min', tasks: [
         { t: 'LingQ Greek mini-story or imported article (~20 min)', link: L.lingq },
@@ -3430,6 +3701,172 @@ const RESOURCES = [
   ]}
 ];
 
+// ============================================================================
+// ANKI SCHEDULE — what to add new and what to review, by phase
+// Each phase entry has: title, new[], review[], optional[]
+// Custom decks (your 10 Παιδεία decks) are tagged as such; community decks are noted.
+// ============================================================================
+const ANKI_SCHEDULE = {
+  1: {
+    title: 'Phase 1 · Foundation',
+    summary: 'Modern Greek alphabet, sounds, basic vocabulary. Build the daily habit.',
+    new: [
+      { deck: '01 · Alphabet & Diphthongs', pace: 'All cards across weeks 1–2', custom: true },
+      { deck: '02 · Numbers / Days / Time', pace: '~3 new/day from week 3', custom: true },
+      { deck: '05 · Core 100 Phrases', pace: '~2–3 new/day from week 4', custom: true },
+      { deck: '03 · Connectors & Question Words', pace: '~2 new/day from week 6', custom: true },
+      { deck: 'Language Transfer Greek', pace: '~5–8 new/day, sync with LT lessons', custom: false }
+    ],
+    review: [],
+    optional: [
+      { deck: 'Modern Greek A1 Vocabulary', pace: 'Optional: ~5 new/day for ear training' },
+      { deck: 'Glossika Greek Fluency 1', pace: 'Listen-only; weekly batches' }
+    ]
+  },
+  2: {
+    title: 'Phase 2 · Building Blocks',
+    summary: 'Verbs in volume. Listening hours stack up. Grammar instinct forms.',
+    new: [
+      { deck: '04 · Common Verbs (Conjugated)', pace: '~4–5 new/day across phase', custom: true },
+      { deck: 'Modern Greek A1 Vocabulary', pace: '~10 new/day — primary vocabulary', custom: false },
+      { deck: 'Language Transfer Greek', pace: 'Continue ~5/day until done', custom: false }
+    ],
+    review: [
+      { deck: '01–03, 05 (your Phase 1 decks)', pace: 'Maintenance reviews (~50/day)', custom: true }
+    ],
+    optional: [
+      { deck: 'Greek Sentences', pace: 'Sentence mining, ~3/day' }
+    ]
+  },
+  3: {
+    title: 'Phase 3 · Conversation',
+    summary: 'Output begins. Bi-weekly tutor. Cards become the warm-up before talking.',
+    new: [
+      { deck: '04 · Common Verbs', pace: 'Finish remaining', custom: true },
+      { deck: 'Modern Greek A1 Vocabulary', pace: '~10/day, primary', custom: false },
+      { deck: 'Greek Sentences', pace: '~5 new/day', custom: false }
+    ],
+    review: [
+      { deck: '01–05 (your Modern decks)', pace: 'Maintenance', custom: true },
+      { deck: 'Language Transfer Greek', pace: 'Reviews only — finish new', custom: false }
+    ],
+    optional: [
+      { deck: 'Communicate in Greek 1', pace: '~3 new/day if doing the textbook' }
+    ]
+  },
+  4: {
+    title: 'Phase 4 · Travel-Ready',
+    summary: 'Weekly tutor. Modern Greek B1/B2 lock-in. Polish for Greece.',
+    new: [
+      { deck: 'Modern Greek A1 Vocabulary', pace: 'Finish remaining', custom: false },
+      { deck: 'KLIK STA ELLINIKA B2', pace: '~5–7 new/day — B1/B2 push', custom: false },
+      { deck: 'Greek Sentences', pace: '~5/day', custom: false }
+    ],
+    review: [
+      { deck: '01–05 (your Modern decks)', pace: 'Maintenance', custom: true },
+      { deck: 'All earlier community decks', pace: 'Maintenance' }
+    ]
+  },
+  5: {
+    title: 'Phase 5 · Koine Begins',
+    summary: 'Mounce textbook. Bridge from Modern to Koine. Modern goes into maintenance.',
+    new: [
+      { deck: '06 · Mounce / NT Vocabulary', pace: '~3–4 new/day, syncs with Mounce chapters', custom: true },
+      { deck: 'Koine NT Greek 30 Mounce (audio)', pace: 'Audio supplement to Deck 06 — same words, hear them', custom: false }
+    ],
+    review: [
+      { deck: '01–05 (your Modern decks)', pace: 'Light maintenance', custom: true },
+      { deck: 'Modern Greek A1, KLIK B2, Greek Sentences', pace: 'Maintenance reviews' }
+    ],
+    optional: [
+      { deck: 'Reconstructed Koine Pronunciation', pace: 'Only if you want Erasmian alongside Modern' }
+    ]
+  },
+  6: {
+    title: 'Phase 6 · The Gospel of John',
+    summary: 'First sustained NT reading. The Logos in the original.',
+    new: [
+      { deck: '06 · Mounce / NT Vocabulary', pace: 'Continue ~3/day', custom: true },
+      { deck: '07 · Liturgical Greek', pace: 'Cards unlock by week (Memory Wall)', custom: true },
+      { deck: 'Gospel of John - Ancient Greek Vocab', pace: '~5/day — perfect timing for John reading', custom: false }
+    ],
+    review: [
+      { deck: '01–05 (your Modern decks)', pace: 'Maintenance', custom: true },
+      { deck: 'KLIK B2, Greek Sentences', pace: 'Maintenance' }
+    ]
+  },
+  7: {
+    title: 'Phase 7 · The Apostolic Fathers',
+    summary: 'Didache, Polycarp, Ignatius. The generation right after the apostles.',
+    new: [
+      { deck: '08 · Apostolic Fathers (Holmes)', pace: '~5–7 new/day, weekly unlocks', custom: true },
+      { deck: '07 · Liturgical Greek', pace: 'Continue weekly unlocks', custom: true },
+      { deck: '06 · Mounce', pace: 'Finish remaining new cards', custom: true }
+    ],
+    review: [
+      { deck: 'Gospel of John Vocab', pace: 'Wind down — primarily reviews now', custom: false },
+      { deck: 'All Modern decks', pace: 'Light maintenance' }
+    ]
+  },
+  8: {
+    title: 'Phase 8 · Consolidation',
+    summary: 'Modern Greek C1 push alongside NT solidification.',
+    new: [
+      { deck: '08 · Apostolic Fathers', pace: 'Continue weekly unlocks', custom: true },
+      { deck: '07 · Liturgical Greek', pace: 'Continue weekly unlocks', custom: true },
+      { deck: 'KLIK STA ELLINIKA B2', pace: 'Aggressive new cards — C1 push', custom: false }
+    ],
+    review: [
+      { deck: '06 · Mounce', pace: 'Maintenance', custom: true },
+      { deck: 'All earlier community decks', pace: 'Maintenance' }
+    ]
+  },
+  9: {
+    title: 'Phase 9 · Patristic Greek Proper',
+    summary: 'First sustained Patristic readings. The Fathers begin.',
+    new: [
+      { deck: '09 · Patristic (Chrysostom & Cappadocians)', pace: '~7–10 new/day initially, weekly unlocks', custom: true }
+    ],
+    review: [
+      { deck: '06, 07, 08 (your Year-2 foundation)', pace: 'Maintain — these are your scaffold', custom: true },
+      { deck: 'All Modern decks', pace: 'Light maintenance' }
+    ]
+  },
+  10: {
+    title: 'Phase 10 · Chrysostom & Cappadocians',
+    summary: 'The giants. Homiletic gold.',
+    new: [
+      { deck: '09 · Patristic', pace: 'Continue weekly unlocks (~5–7/day)', custom: true }
+    ],
+    review: [
+      { deck: '06, 07, 08', pace: 'Maintain', custom: true },
+      { deck: 'All Modern decks', pace: 'Light maintenance' }
+    ]
+  },
+  11: {
+    title: 'Phase 11 · Liturgy & Septuagint',
+    summary: 'Full liturgical depth. Psalms in Greek — the prayer book of the Church.',
+    new: [
+      { deck: '10 · Septuagint Psalms', pace: '~5 new/day, weekly unlocks', custom: true },
+      { deck: 'LXX High Frequency Vocabulary', pace: '~3/day supplement', custom: false }
+    ],
+    review: [
+      { deck: '06–09 (NT, Liturgical, AF, Patristic)', pace: 'Maintain', custom: true },
+      { deck: 'All Modern decks', pace: 'Light maintenance' }
+    ]
+  },
+  12: {
+    title: 'Phase 12 · The Open Door',
+    summary: 'Capstone. The work continues for life.',
+    new: [
+      { deck: '10 · Septuagint Psalms', pace: 'Finish remaining unlocks', custom: true }
+    ],
+    review: [
+      { deck: 'ALL DECKS', pace: 'Maintenance forever — formation never ends', custom: true }
+    ]
+  }
+};
+
 // State management
 let state = { completed: {}, lastModified: null };
 
@@ -3666,6 +4103,41 @@ function renderWeekReview(weekNum, viewIdx) {
   </div>`;
 }
 
+function renderAnkiSchedule(phaseId, expanded) {
+  const sched = ANKI_SCHEDULE[phaseId];
+  if (!sched) return '';
+
+  const renderSection = (items, cls, label) => {
+    if (!items || !items.length) return '';
+    const list = items.map(it => {
+      const customCls = it.custom ? ' custom' : '';
+      return `<li class="anki-deck-item${customCls}"><div><span class="anki-deck-name">${it.deck}</span><br><span class="anki-deck-pace">${it.pace}</span></div></li>`;
+    }).join('');
+    return `<div class="anki-section ${cls}"><div class="anki-section-label">${label}</div><ul class="anki-deck-list">${list}</ul></div>`;
+  };
+
+  const newSection = renderSection(sched.new, 'new', 'New cards');
+  const revSection = renderSection(sched.review, 'review', 'Review (maintenance)');
+  const optSection = renderSection(sched.optional, 'optional', 'Optional');
+
+  return `<div class="anki-card${expanded ? ' expanded' : ''}" id="ankiCard">
+    <div class="anki-card-header" onclick="toggleAnkiCard()">
+      <div class="anki-card-title">Anki today · ${sched.title}</div>
+      <span class="anki-toggle">▾</span>
+    </div>
+    <div class="anki-summary">${sched.summary}</div>
+    <div class="anki-body">${newSection}${revSection}${optSection}</div>
+  </div>`;
+}
+
+window.toggleAnkiCard = function() {
+  const card = document.getElementById('ankiCard');
+  if (card) {
+    const isOpen = card.classList.toggle('expanded');
+    try { localStorage.setItem('paideia-anki-expanded', isOpen ? '1' : '0'); } catch(e) {}
+  }
+};
+
 function renderTodayCard() {
   const realTodayIdx = getCurrentDayIndex();
   const container = document.getElementById('todayContainer');
@@ -3742,7 +4214,13 @@ function renderTodayCard() {
   // Sunday week review — appears above today's task card every Sunday
   const reviewHTML = dayInWeek === 6 ? renderWeekReview(weekNum, viewIdx) : '';
 
-  container.innerHTML = reviewHTML + `<div class="today-card">${navHTML}<div class="today-label">${label === 'Today' ? 'Today' : label}</div><div class="today-date">${formatDate(date)}</div><div class="today-meta">Week <span>${weekNum}</span> · Day <span>${dayInWeek + 1}</span> · <span>${day.dur}</span><br><em>${week.title}</em></div>${counterHTML}${whyHTML}<ul class="tasks">${tasksHTML}</ul>${liturgicalHTML}${milestoneHTML}${allDoneHTML}</div>`;
+  // Anki schedule card — phase-specific, between why and tasks
+  const phaseForToday = getPhaseForWeek(weekNum);
+  let ankiExpanded = false;
+  try { ankiExpanded = localStorage.getItem('paideia-anki-expanded') === '1'; } catch(e) {}
+  const ankiHTML = phaseForToday ? renderAnkiSchedule(phaseForToday.id, ankiExpanded) : '';
+
+  container.innerHTML = reviewHTML + `<div class="today-card">${navHTML}<div class="today-label">${label === 'Today' ? 'Today' : label}</div><div class="today-date">${formatDate(date)}</div><div class="today-meta">Week <span>${weekNum}</span> · Day <span>${dayInWeek + 1}</span> · <span>${day.dur}</span><br><em>${week.title}</em></div>${counterHTML}${whyHTML}${ankiHTML}<ul class="tasks">${tasksHTML}</ul>${liturgicalHTML}${milestoneHTML}${allDoneHTML}</div>`;
 }
 
 // Expose for inline onclick handlers
@@ -4072,12 +4550,14 @@ function renderStats() {
   const todayIdx = getCurrentDayIndex();
   const dayCount = todayIdx >= 0 ? `${todayIdx + 1}` : '—';
   const currentWeek = todayIdx >= 0 ? Math.floor(todayIdx / 7) + 1 : 1;
-  const phase = getPhaseForWeek(currentWeek);
+  const phase = getPhaseForWeek(currentWeek) || PHASES[0];
 
-  // Compute PHASE progress (across all 13 weeks of the current phase)
+  // ===== Phase progress (across 13 weeks of current phase) =====
   let phasePct = 0;
+  let weekInPhase = 1;
   if (phase) {
     const [startW, endW] = phase.weekRange;
+    weekInPhase = todayIdx >= 0 ? Math.max(1, currentWeek - startW + 1) : 1;
     let phaseTotal = 0, phaseDone = 0;
     for (let w = startW; w <= endW; w++) {
       const wd = getWeekData(w);
@@ -4092,17 +4572,15 @@ function renderStats() {
     phasePct = phaseTotal ? Math.round((phaseDone / phaseTotal) * 100) : 0;
   }
 
-  // Compute MONTH progress
-  // Each phase has 3 months: month-in-phase 1 = weeks 1-4, 2 = weeks 5-8, 3 = weeks 9-13
-  // Plan-month number = (phase.id - 1) * 3 + monthInPhase  (1..36)
+  // ===== Month progress (3 months per phase: weeks 1-4, 5-8, 9-13) =====
   let monthPct = 0, monthNum = 1, monthInPhase = 1;
   let monthStartWeek = 1, monthEndWeek = 4;
   if (phase) {
     const phaseStart = phase.weekRange[0];
-    const weeksIntoPhase = currentWeek - phaseStart; // 0..12
-    if (weeksIntoPhase < 4) { monthInPhase = 1; monthStartWeek = phaseStart; monthEndWeek = phaseStart + 3; }
+    const weeksIntoPhase = currentWeek - phaseStart;
+    if (weeksIntoPhase < 4)      { monthInPhase = 1; monthStartWeek = phaseStart;     monthEndWeek = phaseStart + 3; }
     else if (weeksIntoPhase < 8) { monthInPhase = 2; monthStartWeek = phaseStart + 4; monthEndWeek = phaseStart + 7; }
-    else { monthInPhase = 3; monthStartWeek = phaseStart + 8; monthEndWeek = phaseStart + 12; }
+    else                         { monthInPhase = 3; monthStartWeek = phaseStart + 8; monthEndWeek = phaseStart + 12; }
     monthNum = (phase.id - 1) * 3 + monthInPhase;
 
     let monthTotal = 0, monthDone = 0;
@@ -4119,22 +4597,41 @@ function renderStats() {
     monthPct = monthTotal ? Math.round((monthDone / monthTotal) * 100) : 0;
   }
 
-  document.getElementById('dayCount').textContent = dayCount;
-  document.getElementById('streakCount').textContent = getStreak();
-  document.getElementById('percentDone').textContent = `${phasePct}%`;
-  document.getElementById('overallProgress').style.width = `${phasePct}%`;
+  // ===== Render the 12-stone path =====
+  const pathEl = document.getElementById('journeyPath');
+  if (pathEl) {
+    pathEl.innerHTML = PHASES.map(p => {
+      let cls = 'path-stone';
+      if (p.id < phase.id) cls += ' done';
+      else if (p.id === phase.id && todayIdx >= 0) cls += ' current';
+      return `<span class="${cls}" title="Phase ${p.id}: ${p.name}">${p.id}</span>`;
+    }).join('');
+  }
 
-  // Update dual-bar labels
-  document.getElementById('monthName').textContent = `Month ${monthNum} of 36`;
-  document.getElementById('monthPct').textContent = `${monthPct}%`;
-  document.getElementById('monthProgress').style.width = `${monthPct}%`;
+  // ===== Render the journey card =====
+  const eyebrow = document.getElementById('journeyEyebrow');
+  const period = document.getElementById('journeyPeriod');
+  const phaseNameEl = document.getElementById('journeyPhaseName');
+  const phaseBar = document.getElementById('phaseBar');
+  const phasePctEl = document.getElementById('phasePctNew');
+  const monthIdx = document.getElementById('monthIdx');
+  const monthBar = document.getElementById('monthBar');
+  const monthPctEl = document.getElementById('monthPctNew');
+  const dayNum = document.getElementById('dayNum');
+  const streakNum = document.getElementById('streakNum');
+  const weekInPhaseEl = document.getElementById('weekInPhase');
 
-  document.getElementById('phaseName').textContent = phase ? `Phase ${phase.id} · ${phase.name}` : 'Phase';
-  document.getElementById('phasePct').textContent = `${phasePct}%`;
-
-  document.getElementById('currentPhaseLabel').innerHTML = phase && todayIdx >= 0
-    ? `Week ${currentWeek} of 156 · Day ${todayIdx + 1}`
-    : todayIdx < 0 ? `Plan begins Mon, Apr 27, 2026` : `Beyond the structured plan · keep going`;
+  if (eyebrow) eyebrow.textContent = `Phase ${phase.id} of 12`;
+  if (period) period.textContent = phase.months;
+  if (phaseNameEl) phaseNameEl.textContent = phase.name;
+  if (phaseBar) phaseBar.style.width = `${phasePct}%`;
+  if (phasePctEl) phasePctEl.textContent = `${phasePct}%`;
+  if (monthIdx) monthIdx.textContent = monthNum;
+  if (monthBar) monthBar.style.width = `${monthPct}%`;
+  if (monthPctEl) monthPctEl.textContent = `${monthPct}%`;
+  if (dayNum) dayNum.textContent = dayCount;
+  if (streakNum) streakNum.textContent = getStreak();
+  if (weekInPhaseEl) weekInPhaseEl.textContent = todayIdx >= 0 ? weekInPhase : '—';
 }
 
 function renderAll() {
